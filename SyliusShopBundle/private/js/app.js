@@ -56,4 +56,10 @@ $(document).ready(() => {
 
   // Product images for variants
   $(document).variantImages();
+
+  // Loadable forms
+  $('form.loadable').append($('[data-js-loading-overlay]'));
+  $('form.loadable button[type=submit]').on('click', (event) => {
+    $(event.currentTarget).closest('form').addClass('loading');
+  });
 });

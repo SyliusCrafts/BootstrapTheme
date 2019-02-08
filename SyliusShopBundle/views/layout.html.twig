@@ -85,5 +85,12 @@
 {% endblock %}
 
 {{ sonata_block_render_event('sylius.shop.layout.after_body') }}
+
+<div class="loading-overlay" data-js-loading-overlay>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
 </body>
 </html>
