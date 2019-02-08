@@ -1,0 +1,6 @@
+{% import '@SyliusShop/Common/Macro/sectionHeaders.html.twig' as headers %}
+
+{{ headers.default(product_association.type.name) }}
+<div>
+    {% include '@SyliusShop/Product/_horizontalList.html.twig' with {'products': product_association.associatedProducts} %}
+</div>

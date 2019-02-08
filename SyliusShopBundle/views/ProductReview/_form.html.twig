@@ -1,0 +1,20 @@
+<div class="form-group">
+    {% include '@SyliusShop/Common/_rating.html.twig' with {'average': 0, 'viewonly': 'false'} %}
+
+    {{ form_errors(form.rating) }}
+    {{ form_widget(form.rating, {'attr': {'style': 'display: none'} }) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form.title, {'attr': {'placeholder': 'sylius.ui.title'|trans} }) }}
+    {{ form_errors(form.title) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form.comment, {'attr': {'placeholder': 'sylius.ui.write_your_own_review'|trans} }) }}
+    {{ form_errors(form.comment) }}
+</div>
+{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+    <div class="form-group">
+        {{ form_widget(form.author.email, {'attr': {'placeholder': 'sylius.ui.email'|trans}}) }}
+        {{ form_errors(form.author.email) }}
+    </div>
+{% endif %}

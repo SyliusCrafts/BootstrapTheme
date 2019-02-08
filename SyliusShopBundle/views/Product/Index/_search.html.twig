@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-body">
+        <form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="loadable">
+            <div class="row">
+                <div class="col">
+                    {% for filter in products.definition.enabledFilters %}
+                        {{ sylius_grid_render_filter(products, filter) }}
+                    {% endfor %}
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">{{ 'sylius.ui.search'|trans }}</button>
+                    <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="btn btn-link">
+                        {{ 'sylius.ui.clear'|trans }}
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

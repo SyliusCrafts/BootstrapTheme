@@ -1,0 +1,30 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-md-4">
+            {{ sonata_block_render_event('sylius.shop.product_review.index.before_product_box', {'product_reviews': product_reviews}) }}
+
+            {{
+                render(url('sylius_shop_partial_product_show_by_slug', {
+                    'slug': app.request.attributes.get('slug'),
+                    'template': '@SyliusShop/Product/_box.html.twig'
+                }))
+            }}
+
+            {{ sonata_block_render_event('sylius.shop.product_review.index.after_product_box', {'product_reviews': product_reviews}) }}
+        </div>
+        <div class="col-12 col-md-8">
+            <div>
+                {{ sonata_block_render_event('sylius.shop.product_review.index.before_list', {'product_reviews': product_reviews}) }}
+
+                {% include '@SyliusShop/ProductReview/_list.html.twig' %}
+
+                {{ sonata_block_render_event('sylius.shop.product_review.index.after_list', {'product_reviews': product_reviews}) }}
+                <a class="btn btn-primary" href="{{ path('sylius_shop_product_review_create', {'slug': app.request.get('slug')}) }}">
+                    {{ 'sylius.ui.add_your_review'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

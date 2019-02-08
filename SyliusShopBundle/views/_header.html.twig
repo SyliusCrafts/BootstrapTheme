@@ -1,0 +1,27 @@
+<div class="row align-items-center no-gutters">
+    <div class="col">
+        <a href="{{ path('sylius_shop_homepage') }}"><img class="logo" src="{{ asset('bootstrap-theme/images/sylius-logo.png', 'bootstrapTheme') }}" alt="Sylius logo" /></a>
+    </div>
+    <div class="col-auto">
+        {{ sonata_block_render_event('sylius.shop.layout.header') }}
+    </div>
+    <div class="col-auto d-flex align-items-center">
+        <div class="d-none d-md-block text-right">
+            {{ sonata_block_render_event('sylius.shop.layout.before_security_widget') }}
+
+            {{ render(controller('sylius.controller.shop.security_widget:renderAction')) }}
+
+            {{ sonata_block_render_event('sylius.shop.layout.after_security_widget') }}
+        </div>
+        <div class="ml-4">
+            {{ render(url('sylius_shop_partial_cart_summary', {'template': '@SyliusShop/Cart/_widget.html.twig'})) }}
+        </div>
+    </div>
+    <div class="col-auto d-lg-none ml-2">
+        <div class="navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</div>

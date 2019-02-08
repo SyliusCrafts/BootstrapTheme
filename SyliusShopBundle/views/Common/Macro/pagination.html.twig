@@ -1,0 +1,19 @@
+{% macro simple(paginator, options) %}
+    {% if paginator.haveToPaginate() %}
+        {{ pagerfanta(paginator, 'twitter_bootstrap4_translated', options|default({})) }}
+    {% endif %}
+{% endmacro %}
+
+{% macro perPage(paginator, paginationLimits) %}
+    <div class="dropdown">
+        <button class="btn btn-link dropdown-toggle" type="button">
+            {{ 'sylius.ui.show'|trans }} {{ paginator.maxPerPage }}
+        </button>
+        <div class="dropdown-menu">
+        {% for limit in paginationLimits if limit != paginator.maxPerPage %}
+            {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query)|merge({'limit': limit})) %}
+            <a class="dropdown-item" href="{{ path }}">{{ limit }}</a>
+        {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

@@ -1,0 +1,73 @@
+// Color system
+
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000;
+
+$primary: #1abb9c;
+
+
+// Body
+
+$body-bg: $white;
+$body-color: $gray-600;
+
+
+// Fonts
+
+$font-size-base: .88rem;
+
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$line-height-base: 1.7;
+
+$h1-font-size: $font-size-base * 2;
+$h2-font-size: $font-size-base * 1.8;
+$h3-font-size: $font-size-base * 1.6;
+$h4-font-size: $font-size-base * 1.4;
+$h5-font-size: $font-size-base * 1.2;
+$h6-font-size: $font-size-base;
+
+$headings-color: $gray-900;
+
+$text-muted: $gray-500;
+
+
+// Breadcrumbs
+
+$breadcrumb-padding-y: 0;
+$breadcrumb-padding-x: 0;
+$breadcrumb-margin-bottom: 2rem;
+
+$breadcrumb-bg: transparent;
+$breadcrumb-divider-color: $gray-300;
+
+
+// Navs
+
+$nav-link-padding-y: .8rem;
+
+
+// Navbar
+
+$navbar-padding-y: 0;
+$navbar-padding-x: 0;
+
+$navbar-nav-link-padding-x: 20px;
+
+$navbar-toggler-padding-y: .4rem;
+$navbar-light-toggler-border-color: transparent;
+
+
+// Alerts
+
+$alert-bg-level: -12;

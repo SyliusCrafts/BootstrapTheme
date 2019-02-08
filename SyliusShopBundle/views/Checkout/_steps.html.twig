@@ -1,0 +1,64 @@
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% if active is not defined or active == 'address' %}
+    {% set steps = {'address': 'active', 'select_shipping': 'disabled', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+{% elseif active == 'select_shipping' %}
+    {% set steps = {'address': 'completed', 'select_shipping': 'active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+{% elseif active == 'select_payment' %}
+    {% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'active', 'complete': 'disabled'} %}
+{% else %}
+    {% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
+{% endif %}
+
+{% set order_requires_payment = sylius_is_payment_required(order) %}
+{% set order_requires_shipping = sylius_is_shipping_required(order) %}
+
+{% set steps_count = 'four' %}
+{% if not order_requires_payment and not order_requires_shipping %}
+    {% set steps_count = 'two' %}
+{% elseif not order_requires_payment or not order_requires_shipping %}
+    {% set steps_count = 'three' %}
+{% endif %}
+
+<div class="nav nav-pills nav-justified mb-3 bg-light {{ steps_count }}">
+    <a class="nav-item nav-link {{ steps['address'] }}" href="{{ path('sylius_shop_checkout_address') }}">
+        <div class="text-left">
+            <div class="d-flex align-items-center">
+                <span class="pr-2">{{ icons.address() }}</span>
+                {{ 'sylius.ui.address'|trans }}
+            </div>
+            <small>{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</small>
+        </div>
+    </a>
+    {% if order_requires_shipping %}
+    <a class="nav-item nav-link {{ steps['select_shipping'] }}" href="{{ path('sylius_shop_checkout_select_shipping') }}">
+        <div class="text-left">
+            <div class="d-flex align-items-center">
+                <span class="pr-2">{{ icons.transport() }}</span>
+                {{ 'sylius.ui.shipping'|trans }}
+            </div>
+            <small>{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</small>
+        </div>
+    </a>
+    {% endif %}
+    {% if order_requires_payment %}
+    <a class="nav-item nav-link {{ steps['select_payment'] }}" href="{{ path('sylius_shop_checkout_select_payment') }}">
+        <div class="text-left">
+            <div class="d-flex align-items-center">
+                <span class="pr-2">{{ icons.creditCard() }}</span>
+                {{ 'sylius.ui.payment'|trans }}
+            </div>
+            <small>{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</small>
+        </div>
+    </a>
+    {% endif %}
+    <a class="nav-item nav-link {{ steps['complete'] }}" href="{{ path('sylius_shop_checkout_complete') }}">
+        <div class="text-left">
+            <div class="d-flex align-items-center">
+                <span class="pr-2">{{ icons.flag() }}</span>
+                {{ 'sylius.ui.complete'|trans }}
+            </div>
+            <small>{{ 'sylius.ui.review_and_confirm_your_order'|trans }}</small>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,51 @@
+{% macro default(text) %}
+    <span class="badge badge-secondary">{{ text|trans }}</span>
+{% endmacro %}
+
+{% macro status(status) %}
+    {% import _self as labels %}
+
+    {% if status %}
+        {{ labels.enabled() }}
+    {% else %}
+        {{ labels.disabled() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro enabled() %}
+    <span class="badge badge-info">
+        <i class="fas fa-check"></i>
+        {{ 'sylius.ui.enabled'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro disabled() %}
+    <span class="badge badge-danger">
+        <i class="fas fa-times"></i>
+        {{ 'sylius.ui.disabled'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro yesNo(value) %}
+    {% import _self as labels %}
+
+    {% if value %}
+        {{ labels.yes() }}
+    {% else %}
+        {{ labels.no() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro yes() %}
+    <span class="badge badge-primary">
+        <i class="fas fa-check"></i>
+        {{ 'sylius.ui.yes_label'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro no() %}
+    <span class="badge badge-primary">
+        <i class="fas fa-times"></i>
+        {{ 'sylius.ui.no_label'|trans }}
+    </span>
+{% endmacro %}

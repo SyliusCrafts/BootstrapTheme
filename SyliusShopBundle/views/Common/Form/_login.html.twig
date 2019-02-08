@@ -1,0 +1,13 @@
+<div data-js-login>
+    {{ form_errors(form.email) }}
+    {{ form_row(form.email, {'attr': {'data-js-login': 'email', 'data-js-login-check-email-url': path('sylius_shop_ajax_user_check_action')}}) }}
+
+    <div data-js-login="form" class="mb-3 d-none">
+        <input class="form-control" type="password" placeholder="{{ 'sylius.ui.password'|trans }}">
+        <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
+        <button class="btn btn-primary mt-3" data-js-login-url="{{ path('sylius_shop_login_check') }}" type="button">
+            {{ 'sylius.ui.sign_in'|trans }}
+        </button>
+    </div>
+    <div class="alert alert-danger d-none"></div>
+</div>

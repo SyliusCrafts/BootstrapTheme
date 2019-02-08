@@ -1,0 +1,20 @@
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{{ sonata_block_render_event('sylius.shop.product.index.before_vertical_menu', {'taxon': taxon}) }}
+
+<div class="card mb-4">
+    <div class="card-header">{{ taxon.name }}</div>
+    <div class="list-group list-group-flush">
+        {% if taxon.parent is not empty and not taxon.parent.isRoot() %}
+            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.parent.slug, '_locale': taxon.parent.translation.locale}) }}" class="list-group-item list-group-item-action">
+                {{ icons.arrowUp }}{{ 'sylius.ui.go_level_up'|trans }}
+            </a>
+        {% endif %}
+
+        {% for child in taxon.children %}
+            <a href="{{ path('sylius_shop_product_index', {'slug': child.slug, '_locale': child.translation.locale}) }}" class="list-group-item list-group-item-action">{{ child.name }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+{{ sonata_block_render_event('sylius.shop.product.index.after_vertical_menu', {'taxon': taxon}) }}

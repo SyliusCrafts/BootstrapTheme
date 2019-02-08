@@ -1,0 +1,31 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% set product = item.product %}
+{% set product_variant = item.variant %}
+
+<tr>
+    <td>
+        <button type="button"
+                data-js-remove-from-cart-button
+                data-js-remove-from-cart-redirect-url="{{ path('sylius_shop_cart_summary') }}"
+                data-js-remove-from-cart-csrf-token="{{ csrf_token(item.id) }}"
+                data-js-remove-from-cart-api-url="{{ path('sylius_shop_ajax_cart_item_remove', {'id': item.id}) }}"
+                class="btn btn-sm btn-link text-danger">{{ icons.times() }}</button>
+    </td>
+    <td>
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
+    </td>
+    <td class="text-center">
+        {% if item.unitPrice != item.discountedUnitPrice %}
+            <span>{{ money.convertAndFormat(item.unitPrice) }}</span>
+        {% endif %}
+        <span>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
+    </td>
+    <td class="text-center">
+        <span>{{ form_widget(form.quantity) }}</span>
+    </td>
+    <td class="text-right">
+        <span>{{ money.convertAndFormat(item.subtotal) }}</span>
+    </td>
+</tr>

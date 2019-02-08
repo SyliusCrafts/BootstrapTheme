@@ -1,0 +1,39 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        {{ 'sylius.ui.summary'|trans }}
+    </div>
+    {{ sonata_block_render_event('sylius.shop.cart.summary.totals', {'cart': cart}) }}
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ 'sylius.ui.tax'|trans }}:
+            <span>{{ money.convertAndFormat(cart.taxTotal) }}</span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ 'sylius.ui.shipping'|trans }}:
+            <span>{{ money.convertAndFormat(cart.shippingTotal) }}</span>
+        </li>
+
+        {% if cart.orderPromotionTotal %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ 'sylius.ui.discount'|trans }}:
+            <span>{{ money.convertAndFormat(cart.orderPromotionTotal) }}</span>
+        </li>
+        {% endif %}
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>{{ 'sylius.ui.order_total'|trans }}:</strong>
+            <span class="h3">{{ money.convertAndFormat(cart.total) }}</span>
+        </li>
+
+        {% if cart.currencyCode is not same as(sylius.currencyCode) %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ 'sylius.ui.base_currency_order_total'|trans }}:
+            <span>{{ money.format(cart.total, cart.currencyCode) }}</span>
+        </li>
+        {% endif %}
+    </ul>
+</div>

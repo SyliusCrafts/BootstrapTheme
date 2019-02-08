@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="{{ app.request.locale|slice(0, 2) }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Sylius{% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block metatags %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app', null, 'bootstrapTheme') }}
+
+        {{ sonata_block_render_event('sylius.shop.layout.stylesheets') }}
+    {% endblock %}
+
+    {{ sonata_block_render_event('sylius.shop.layout.head') }}
+</head>
+
+<body>
+{{ sonata_block_render_event('sylius.shop.layout.before_body') }}
+
+{% block top %}
+    <div class="bg-dark">
+        <div class="container">
+            <div class="d-flex">
+                {{ sonata_block_render_event('sylius.shop.layout.before_currency_switcher') }}
+
+                {{ render(controller('sylius.controller.shop.currency_switch:renderAction')) }}
+
+                {{ render(controller('sylius.controller.shop.locale_switch:renderAction')) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block header %}
+    <div class="mb-2">
+        <div class="container">
+            <header class="my-4">
+                {% include '@SyliusShop/_header.html.twig' %}
+
+                {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
+            </header>
+        </div>
+
+        <div class="border-top border-bottom bg-light">
+            <div class="container">
+                {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<div class="main-content container">
+    {% include '@SyliusShop/_flashes.html.twig' %}
+
+    {{ sonata_block_render_event('sylius.shop.layout.before_content') }}
+
+    {% block content %}
+    {% endblock %}
+
+    {{ sonata_block_render_event('sylius.shop.layout.after_content') }}
+</div>
+
+{% block footer %}
+    <div class="bg-light border-top py-5 mt-5">
+        <div class="container">
+            {% include '@SyliusShop/_footer.html.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {{ encore_entry_script_tags('app', null, 'bootstrapTheme') }}
+
+    {{ sonata_block_render_event('sylius.shop.layout.javascripts') }}
+{% endblock %}
+
+{{ sonata_block_render_event('sylius.shop.layout.after_body') }}
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% macro item(taxon, isChild) %}
+    {% import _self as macros %}
+
+    {% if taxon.children|length > 0 %}
+        <span class="nav-item dropdown" href="#">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                {{ taxon.name }}
+            </a>
+            <div class="dropdown-menu">
+                {% for childTaxon in taxon.children %}
+                    {{ macros.item(childTaxon, true) }}
+                {% endfor %}
+            </div>
+        </span>
+    {% else %}
+        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"
+           class="{% if isChild %}dropdown-item{% else %}nav-item nav-link{% endif %}">{{ taxon.name }}</a>
+    {% endif %}
+{% endmacro %}
+
+{% import _self as macros %}
+
+{% if taxons|length > 0 %}
+    <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+            <div class="navbar-nav py-1">
+                {% for taxon in taxons %}
+                    {{ macros.item(taxon) }}
+                {% endfor %}
+            </div>
+            <div class="d-md-none py-3 border-top">
+                {{ sonata_block_render_event('sylius.shop.layout.before_security_widget') }}
+
+                {{ render(controller('sylius.controller.shop.security_widget:renderAction')) }}
+
+                {{ sonata_block_render_event('sylius.shop.layout.after_security_widget') }}
+            </div>
+        </div>
+    </nav>
+{% endif %}

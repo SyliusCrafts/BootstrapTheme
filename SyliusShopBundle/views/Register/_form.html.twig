@@ -1,0 +1,15 @@
+<h4>{{ 'sylius.ui.personal_information'|trans }}</h4>
+
+<div class="row">
+    <div class="col">{{ form_row(form.firstName) }}</div>
+    <div class="col">{{ form_row(form.lastName) }}</div>
+</div>
+
+{{ form_row(form.email) }}
+{{ form_row(form.phoneNumber) }}
+{{ form_row(form.subscribedToNewsletter) }}
+
+<h4 class="mt-5">{{ 'sylius.ui.account_credentials'|trans }}</h4>
+
+{{ form_row(form.user.plainPassword.first) }}
+{{ form_row(form.user.plainPassword.second) }}

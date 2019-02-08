@@ -1,0 +1,12 @@
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% for shipment in order.shipments %}
+    <div class="card bg-light">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="pr-3" style="font-size:2rem;">{{ icons.transport() }}</div>
+                <div><strong>{{ shipment.method }}</strong></div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,16 @@
+{% if locales|length > 1 %}
+    <div class="dropdown">
+        <button class="btn btn-sm btn-dark text-muted dropdown-toggle" type="button" data-toggle="dropdown">
+            {{ active|sylius_locale_name }}
+        </button>
+        <div class="dropdown-menu">
+            {% for code in locales %}
+                {% if code is not same as(active) %}
+                    <a class="dropdown-item" href="{{ path('sylius_shop_switch_locale', {'code': code}) }}">
+                        {{ code|sylius_locale_name }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

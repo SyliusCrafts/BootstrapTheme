@@ -1,0 +1,8 @@
+<div class="input-group">
+    {{ form_widget(form, {'attr': {'placeholder': 'sylius.ui.enter_your_code'|trans~'...'}}) }}
+    <div class="input-group-append">
+        <button type="submit" class="btn btn-primary">{{ 'sylius.ui.apply_coupon'|trans }}</button>
+    </div>
+</div>
+
+<div>{{ form_errors(form) }}</div>

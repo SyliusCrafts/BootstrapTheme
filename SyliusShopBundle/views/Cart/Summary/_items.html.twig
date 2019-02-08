@@ -1,0 +1,43 @@
+<div class="card">
+    {{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
+        {{ form_errors(form) }}
+        <input type="hidden" name="_method" value="PATCH"/>
+
+        {{ sonata_block_render_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
+
+        <table class="table">
+            <thead class="card-header">
+                <tr>
+                    <th class="border-0"></th>
+                    <th class="border-0 text-nowrap">{{ 'sylius.ui.item'|trans }}</th>
+                    <th class="border-0 text-nowrap text-center">{{ 'sylius.ui.unit_price'|trans }}</th>
+                    <th class="border-0 text-nowrap text-center">{{ 'sylius.ui.qty'|trans }}</th>
+                    <th class="border-0 text-nowrap text-right">{{ 'sylius.ui.total'|trans }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, item in cart.items %}
+                    {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key]} %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="card-body">
+            <div class="row">
+                {% if form.promotionCoupon is defined %}
+                    <div class="col">
+                        {{ sonata_block_render_event('sylius.shop.cart.summary.before_coupon', {'cart': cart, 'form': form}) }}
+
+                        {% include '@SyliusShop/Cart/Summary/_coupon.html.twig' with {'form': form.promotionCoupon} %}
+
+                        {{ sonata_block_render_event('sylius.shop.cart.summary.after_coupon', {'cart': cart, 'form': form}) }}
+                    </div>
+                {% endif %}
+
+                <div class="col text-right">
+                    {% include '@SyliusShop/Cart/Summary/_update.html.twig' %}
+                </div>
+            </div>
+        </div>
+        {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

@@ -1,0 +1,27 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            {{ headers.default('sylius.ui.contact_us'|trans, '', 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans) }}
+
+            {{ sonata_block_render_event('sylius.shop.contact.request.after_content_header') }}
+
+            <div>
+                {{ form_start(form, {'action': path('sylius_shop_contact_request'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.message) }}
+
+                {{ sonata_block_render_event('sylius.shop.contact.request.form', {'form': form}) }}
+
+                {{ form_row(form._token) }}
+                <button type="submit" class="btn btn-primary">{{ 'sylius.ui.send'|trans }}</button>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+{% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+
+<div class="row">
+    <div class="col-12 col-md-6 mb-5">
+        <div class="pr-3">
+            {{ sonata_block_render_event('sylius.shop.product.show.before_images', {'product': product}) }}
+
+            {% include '@SyliusShop/Product/Show/_images.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.product.show.after_images', {'product': product}) }}
+        </div>
+    </div>
+    <div class="col-12 col-md-6 mb-5">
+        {% include '@SyliusShop/Product/Show/_header.html.twig' %}
+
+        {{ sonata_block_render_event('sylius.shop.product.show.after_product_header', {'product': product}) }}
+
+        <div class="mb-3">
+            {% include '@SyliusShop/Product/Show/_reviews.html.twig' %}
+
+            {{ sonata_block_render_event('sylius.shop.product.show.after_reviews', {'product': product}) }}
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            {% if not product.variants.empty() %}
+                {% include '@SyliusShop/Product/Show/_price.html.twig' %}
+            {% endif %}
+            <small class="text-muted">{{ product.code }}</small>
+        </div>
+
+        {{ sonata_block_render_event('sylius.shop.product.show.after_price', {'product': product}) }}
+
+        <p class="pb-4">{{ product.shortDescription }}</p>
+
+        {{ sonata_block_render_event('sylius.shop.product.show.after_description', {'product': product}) }}
+
+        {% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' and not product.variants.empty() %}
+            {% include '@SyliusShop/Product/Show/_variantsPricing.html.twig' with {'pricing': sylius_product_variant_prices(product, sylius.channel)} %}
+        {% endif %}
+        {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
+
+        {{ sonata_block_render_event('sylius.shop.product.show.after_add_to_cart', {'product': product}) }}
+    </div>
+</div>
+
+{{ sonata_block_render_event('sylius.shop.product.show.before_tabs', {'product': product}) }}
+
+<div class="mb-5">
+    {% include '@SyliusShop/Product/Show/_tabs.html.twig' %}
+</div>
+
+{{ sonata_block_render_event('sylius.shop.product.show.before_associations', {'product': product}) }}
+
+{% include '@SyliusShop/Product/Show/_associations.html.twig' %}
+{% endblock %}

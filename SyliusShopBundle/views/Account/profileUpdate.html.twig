@@ -1,0 +1,45 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+
+{% block breadcrumb %}
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('sylius_shop_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a></li>
+            <li class="breadcrumb-item active">{{ 'sylius.ui.personal_information'|trans }}</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block subcontent %}
+    <div>
+        {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
+
+        {{ headers.default('sylius.ui.your_profile'|trans, '', 'sylius.ui.edit_your_personal_information'|trans) }}
+
+        {{ sonata_block_render_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
+
+        <input type="hidden" name="_method" value="PUT" />
+
+        <div class="row">
+            <div class="col">{{ form_row(form.firstName) }}</div>
+            <div class="col">{{ form_row(form.lastName) }}</div>
+        </div>
+        {{ form_row(form.email) }}
+        <div class="row">
+            <div class="col">{{ form_row(form.birthday) }}</div>
+            <div class="col">{{ form_row(form.gender) }}</div>
+        </div>
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.subscribedToNewsletter) }}
+
+        {{ sonata_block_render_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
+
+        <button type="submit" class="btn btn-primary">{{ 'sylius.ui.save_changes'|trans }}</button>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

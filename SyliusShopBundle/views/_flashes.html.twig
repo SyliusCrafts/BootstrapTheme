@@ -1,0 +1,35 @@
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% if app.session is not null and app.session.started %}
+    {% for type in ['success', 'error', 'info', 'warning'] %}
+        {% for flash in app.session.flashbag.get(type) %}
+            {% if 'error' == type %}
+                {% set result = 'danger' %}
+                {% set icon = icons.danger() %}
+            {% endif %}
+            {% if 'info' == type %}
+                {% set result = 'info' %}
+                {% set icon = icons.info() %}
+            {% endif %}
+            <div class="alert alert-{{ result|default('success') }} alert-dismissible fade show">
+                <div class="d-flex align-items-center">
+                    <span class="pr-3 fa-2x">
+                        {{ icon|default(icons.success()) }}
+                    </span>
+                    <strong>
+                        {% set header = 'sylius.ui.'~type %}
+                        {{ header|trans }}&nbsp;
+                    </strong>
+                    {% if flash is iterable %}
+                        {{ flash.message|trans(flash.parameters, 'flashes') }}
+                    {% else %}
+                        {{ flash|trans({}, 'flashes') }}
+                    {% endif %}
+                </div>
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

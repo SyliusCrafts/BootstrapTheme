@@ -1,0 +1,14 @@
+{{ sonata_block_render_event('sylius.shop.product.show.tab_attributes', {'product': product}) }}
+
+<table class="table border-bottom">
+    <tbody>
+    {% for attribute in product.getAttributesByLocale(configuration.request.locale, configuration.request.defaultLocale, sylius_base_locale)|sort_by('attribute.position') %}
+        <tr>
+            <td class="text-dark"><strong>{{ attribute.name }}</strong></td>
+            <td class="">
+                {% include [('@SyliusAttribute/Types/'~attribute.attribute.type~'.html.twig'), '@SyliusAttribute/Types/default.html.twig'] with {'attribute': attribute, 'locale': configuration.request.locale, 'fallbackLocale': configuration.request.defaultLocale} %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+<div data-js-address-book="sylius-shipping-address">
+    <div class="mb-3">
+        {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
+    </div>
+    <h3>{{ 'sylius.ui.shipping_address'|trans }}</h3>
+    {% if form.customer is defined %}
+        {% include '@SyliusShop/Common/Form/_login.html.twig' with {'form': form.customer} %}
+    {% endif %}
+    {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order} %}
+    {{ form_row(form.differentBillingAddress, {'attr': {'data-js-toggle': '[data-js-address-book="sylius-billing-address"]'}}) }}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
+</div>
+
+<div data-js-address-book="sylius-billing-address">
+    <div class="mb-3">
+        {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
+    </div>
+    <h3>{{ 'sylius.ui.billing_address'|trans }}</h3>
+    {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order} %}
+
+    {{ sonata_block_render_event('sylius.shop.checkout.address.billing_address_form', {'order': order}) }}
+</div>

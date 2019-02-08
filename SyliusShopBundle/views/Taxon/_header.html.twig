@@ -1,0 +1,8 @@
+{% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+{% include '@SyliusShop/Taxon/_breadcrumb.html.twig' %}
+
+{{ sonata_block_render_event('sylius.shop.taxon.header.before', {'taxon': taxon}) }}
+
+{{ headers.default(taxon.name, '', taxon.description) }}
+
+{{ sonata_block_render_event('sylius.shop.taxon.header.after', {'taxon': taxon}) }}

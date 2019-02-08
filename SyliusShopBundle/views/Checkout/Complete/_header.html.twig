@@ -1,0 +1,4 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+{% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+
+{{ headers.default('sylius.ui.summary_of_your_order'|trans, '', order.currencyCode ~ ' | ' ~ flags.fromLocaleCode(sylius.localeCode) ~ sylius.localeCode|locale) }}

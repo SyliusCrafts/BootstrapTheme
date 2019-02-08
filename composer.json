@@ -1,0 +1,14 @@
+{
+    "name": "sylius/bootstrap-theme",
+    "authors": [
+        {
+            "name": "Szymon Kulczyński",
+            "email": "szymon.kulczynski@sylius.com"
+        }
+    ],
+    "extra": {
+        "sylius-theme": {
+            "title": "Sylius Bootstrap Theme"
+        }
+    }
+}

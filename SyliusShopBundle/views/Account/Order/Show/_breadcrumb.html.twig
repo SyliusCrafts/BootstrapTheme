@@ -1,0 +1,8 @@
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('sylius_shop_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ path('sylius_shop_account_order_index') }}">{{ 'sylius.ui.order_history'|trans }}</a></li>
+        <li class="breadcrumb-item active">{{ 'sylius.ui.order'|trans }} <span>#{{ order.number }}</span></li>
+    </ol>
+</nav>

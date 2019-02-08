@@ -1,0 +1,9 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% import '@SyliusShop/Common/Macro/sectionHeaders.html.twig' as headers %}
+
+{% block content %}
+    {{ headers.default('sylius.ui.latest_products'|trans) }}
+
+    {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_horizontalList.html.twig'})) }}
+{% endblock %}

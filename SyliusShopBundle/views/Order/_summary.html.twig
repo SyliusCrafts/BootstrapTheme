@@ -1,0 +1,20 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+
+{{ headers.default('sylius.ui.summary_of_your_order'|trans ~ ' #' ~ order.number) }}
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex">
+            <div>
+                {{ order.checkoutCompletedAt|date }}
+            </div>
+            <div class="pl-2">
+                {{ money.convertAndFormat(order.total) }}
+            </div>
+            <div class="pl-2">
+                {{ order.totalQuantity }} {{ 'sylius.ui.items'|trans|lower }}
+            </div>
+        </div>
+    </div>
+</div>
