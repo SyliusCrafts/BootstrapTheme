@@ -20,12 +20,12 @@
     {% set steps_count = 'three' %}
 {% endif %}
 
-<div class="nav nav-pills nav-justified mb-3 bg-light {{ steps_count }}">
+<div class="nav nav-pills nav-justified mt-4 mb-5 bg-light {{ steps_count }}">
     <a class="nav-item nav-link {{ steps['address'] }}" href="{{ path('sylius_shop_checkout_address') }}">
         <div class="text-left">
             <div class="d-flex align-items-center">
                 <span class="pr-2">{{ icons.address() }}</span>
-                {{ 'sylius.ui.address'|trans }}
+                <strong>{{ 'sylius.ui.address'|trans }}</strong>
             </div>
             <small>{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</small>
         </div>
@@ -35,7 +35,7 @@
         <div class="text-left">
             <div class="d-flex align-items-center">
                 <span class="pr-2">{{ icons.transport() }}</span>
-                {{ 'sylius.ui.shipping'|trans }}
+                <strong>{{ 'sylius.ui.shipping'|trans }}</strong>
             </div>
             <small>{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</small>
         </div>
@@ -46,7 +46,7 @@
         <div class="text-left">
             <div class="d-flex align-items-center">
                 <span class="pr-2">{{ icons.creditCard() }}</span>
-                {{ 'sylius.ui.payment'|trans }}
+                <strong>{{ 'sylius.ui.payment'|trans }}</strong>
             </div>
             <small>{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</small>
         </div>
@@ -56,7 +56,7 @@
         <div class="text-left">
             <div class="d-flex align-items-center">
                 <span class="pr-2">{{ icons.flag() }}</span>
-                {{ 'sylius.ui.complete'|trans }}
+                <strong>{{ 'sylius.ui.complete'|trans }}</strong>
             </div>
             <small>{{ 'sylius.ui.review_and_confirm_your_order'|trans }}</small>
         </div>

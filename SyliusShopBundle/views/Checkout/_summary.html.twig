@@ -1,26 +1,24 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <div class="card">
-    <div class="card-body">
-        <table class="table">
-            <thead>
+    <table class="table">
+        <thead class="card-header">
             <tr>
-                <th>{{ 'sylius.ui.item'|trans }}</th>
-                <th>{{ 'sylius.ui.quantity'|trans }}</th>
-                <th>{{ 'sylius.ui.subtotal'|trans }}</th>
+                <th class="border-0">{{ 'sylius.ui.item'|trans }}</th>
+                <th class="border-0 text-right">{{ 'sylius.ui.quantity'|trans }}</th>
+                <th class="border-0 text-right">{{ 'sylius.ui.subtotal'|trans }}</th>
             </tr>
-            </thead>
-            <tbody>
-            {% for item in order.items %}
-                <tr>
-                    <td>{{ item.getVariant.product.name }}</td>
-                    <td>
-                        {{ item.quantity }}
-                    </td>
-                    <td>{{ money.convertAndFormat(item.subtotal) }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        </thead>
+        <tbody>
+        {% for item in order.items %}
+            <tr>
+                <td class="text-dark">{{ item.getVariant.product.name }}</td>
+                <td class="text-right">
+                    {{ item.quantity }}
+                </td>
+                <td class="text-right">{{ money.convertAndFormat(item.subtotal) }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
