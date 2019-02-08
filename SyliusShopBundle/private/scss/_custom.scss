@@ -1,0 +1,23 @@
+.navbar a.nav-link {
+    text-transform: uppercase;
+    color: $headings-color;
+    font-weight: 500;
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.logo {
+    @include media-breakpoint-up(md) {
+        width: 160px;
+    }
+
+    @include media-breakpoint-down(sm) {
+        width: 130px;
+    }
+}
+
+.main-content > :first-child:not(nav):not(.nav) {
+    margin-top: map-get($spacers, 4);
+}
