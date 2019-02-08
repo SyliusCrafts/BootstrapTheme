@@ -71,3 +71,23 @@ Installation
     ```
 
 7. Change theme in the admin panel
+
+Screenshots
+-----------
+
+#### Homepage
+
+![Homepage](docs/homepage.png)
+
+#### Product show
+
+![Product page](docs/product-page.png)
+
+
+#### Cart
+
+![Cart page](docs/cart.png)
+
+#### Checkout bar
+
+![Checkout bar](docs/checkout-bar.png)
