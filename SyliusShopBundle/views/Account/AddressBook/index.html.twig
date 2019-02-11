@@ -22,13 +22,13 @@
             {% set default_address = (sylius.customer.defaultAddress) %}
 
             {% if default_address is not null %}
-                <div class="col-12 col-md-6 mb-3">
+                <div class="col-12 col-lg-6 mb-3">
                     {% include '@SyliusShop/Account/AddressBook/_defaultAddress.html.twig' with {'address': default_address} %}
                 </div>
             {% endif %}
 
             {% for address in addresses if default_address is null or address.id != default_address.id %}
-                <div class="col-12 col-md-6 mb-3">
+                <div class="col-12 col-lg-6 mb-3">
                     {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
                 </div>
             {% endfor %}

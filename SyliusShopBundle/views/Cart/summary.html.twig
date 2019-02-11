@@ -15,7 +15,7 @@
         {{ sonata_block_render_event('sylius.shop.cart.summary.after_content_header', {'cart': cart}) }}
 
         <div class="row mb-5">
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-lg-8 mb-4">
                 {{ sonata_block_render_event('sylius.shop.cart.summary.before_items', {'cart': cart}) }}
 
                 {% include '@SyliusShop/Cart/Summary/_items.html.twig' %}

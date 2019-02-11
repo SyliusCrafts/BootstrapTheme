@@ -5,14 +5,14 @@
     {% endblock %}
 
     <div class="row">
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-4 col-lg-3 mb-4">
             {{ sonata_block_render_event('sylius.shop.account.layout.before_menu') }}
 
             {{ knp_menu_render('sylius.shop.account', {'template': '@SyliusShop/Menu/simple.html.twig'}) }}
 
             {{ sonata_block_render_event('sylius.shop.account.layout.after_menu') }}
         </div>
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-8 col-lg-9">
             {{ sonata_block_render_event('sylius.shop.account.layout.before_subcontent') }}
 
             {% block subcontent %}

@@ -8,7 +8,7 @@
     {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.after_steps', {'order': order}) }}
 
     <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-lg-8 mb-5">
             <div class="">
                 <div class="">
                     {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.before_form', {'order': order}) }}
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-lg-4">
             {{ sonata_block_render_event('sylius.shop.checkout.select_shipping.before_summary', {'order': order}) }}
 
             {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}

@@ -8,7 +8,7 @@
     {{ sonata_block_render_event('sylius.shop.checkout.address.after_steps', {'order': order}) }}
 
     <div class="row">
-        <div class="col-12 col-md-8">
+        <div class="col-12 col-lg-8 mb-5">
             {{ sonata_block_render_event('sylius.shop.checkout.address.before_form', {'order': order}) }}
 
             {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
@@ -24,7 +24,7 @@
                 {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
         </div>
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-lg-4">
             {{ sonata_block_render_event('sylius.shop.checkout.address.before_summary', {'order': order}) }}
 
             {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
