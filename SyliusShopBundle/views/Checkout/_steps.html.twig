@@ -20,45 +20,37 @@
     {% set steps_count = 'three' %}
 {% endif %}
 
-<div class="nav nav-pills nav-justified mt-4 mb-5 bg-light {{ steps_count }}">
-    <a class="nav-item nav-link {{ steps['address'] }}" href="{{ path('sylius_shop_checkout_address') }}">
-        <div class="text-left">
-            <div class="d-flex align-items-center">
-                <span class="pr-2">{{ icons.address() }}</span>
-                <strong>{{ 'sylius.ui.address'|trans }}</strong>
-            </div>
-            <small>{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</small>
+<div class="steps mb-5 {{ steps_count }}">
+    <a class="steps-item {{ steps['address'] }}" href="{{ path('sylius_shop_checkout_address') }}">
+        <div class="steps-icon">{{ icons.address() }}</div>
+        <div class="steps-content">
+            <h6 class="steps-title">{{ 'sylius.ui.address'|trans }}</h6>
+            <div class="steps-text">{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</div>
         </div>
     </a>
     {% if order_requires_shipping %}
-    <a class="nav-item nav-link {{ steps['select_shipping'] }}" href="{{ path('sylius_shop_checkout_select_shipping') }}">
-        <div class="text-left">
-            <div class="d-flex align-items-center">
-                <span class="pr-2">{{ icons.transport() }}</span>
-                <strong>{{ 'sylius.ui.shipping'|trans }}</strong>
-            </div>
-            <small>{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</small>
+    <a class="steps-item {{ steps['select_shipping'] }}" href="{{ path('sylius_shop_checkout_select_shipping') }}">
+        <div class="steps-icon">{{ icons.transport() }}</div>
+        <div class="steps-content">
+            <h6 class="steps-title">{{ 'sylius.ui.shipping'|trans }}</h6>
+            <div class="steps-text">{{ 'sylius.ui.choose_how_your_goods_will_be_delivered'|trans }}</div>
         </div>
     </a>
     {% endif %}
     {% if order_requires_payment %}
-    <a class="nav-item nav-link {{ steps['select_payment'] }}" href="{{ path('sylius_shop_checkout_select_payment') }}">
-        <div class="text-left">
-            <div class="d-flex align-items-center">
-                <span class="pr-2">{{ icons.creditCard() }}</span>
-                <strong>{{ 'sylius.ui.payment'|trans }}</strong>
-            </div>
-            <small>{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</small>
+    <a class="steps-item {{ steps['select_payment'] }}" href="{{ path('sylius_shop_checkout_select_payment') }}">
+        <div class="steps-icon">{{ icons.creditCard() }}</div>
+        <div class="steps-content">
+            <h6 class="steps-title">{{ 'sylius.ui.payment'|trans }}</h6>
+            <div class="steps-text">{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</div>
         </div>
     </a>
     {% endif %}
-    <a class="nav-item nav-link {{ steps['complete'] }}" href="{{ path('sylius_shop_checkout_complete') }}">
-        <div class="text-left">
-            <div class="d-flex align-items-center">
-                <span class="pr-2">{{ icons.flag() }}</span>
-                <strong>{{ 'sylius.ui.complete'|trans }}</strong>
-            </div>
-            <small>{{ 'sylius.ui.review_and_confirm_your_order'|trans }}</small>
+    <a class="steps-item {{ steps['complete'] }}" href="{{ path('sylius_shop_checkout_complete') }}">
+        <div class="steps-icon">{{ icons.flag() }}</div>
+        <div class="steps-content">
+            <h6 class="steps-title">{{ 'sylius.ui.complete'|trans }}</h6>
+            <div class="steps-text">{{ 'sylius.ui.review_and_confirm_your_order'|trans }}</div>
         </div>
     </a>
 </div>
