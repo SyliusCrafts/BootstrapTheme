@@ -37,3 +37,13 @@
 }
 
 .loadable.loading .loading-overlay { display: flex; }
+
+
+label.required {
+    &::after {
+        content: '*';
+        display: inline-block;
+        padding-left: 4px;
+        color: $danger;
+    }
+}
