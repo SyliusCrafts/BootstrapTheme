@@ -1,5 +1,3 @@
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
 
-{% if data.paymentState in ['awaiting_payment'] %}
-    <a href="{{ path }}" class="btn btn-primary">{{ action.label|trans }}</a>
-{% endif %}
+<a href="{{ path }}" class="btn btn-primary">{{ action.label|trans }}</a>
