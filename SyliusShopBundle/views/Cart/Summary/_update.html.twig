@@ -1,3 +1,6 @@
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
 <button type="submit" class="btn btn-primary">
+    <span class="btn-icon">{{ icons.reload() }}</span>
     {{ 'sylius.ui.update_cart'|trans }}
 </button>

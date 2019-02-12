@@ -1,6 +1,7 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
 
 {% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
 
 {% block breadcrumb %}
     <nav>
@@ -23,6 +24,7 @@
                 <div>{{ 'sylius.ui.not_verified'|trans }}</div>
                 <form action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">
                     <button type="submit" class="btn btn-primary">
+                        {{ icons.success() }}
                         {{ 'sylius.ui.verify'|trans }}
                     </button>
                 </form>

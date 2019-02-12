@@ -1,7 +1,8 @@
 {% extends '@SyliusShop/Account/AddressBook/layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
 {% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
 
 {% block subcontent %}
     <div class="row">
@@ -11,7 +12,10 @@
             {{ sonata_block_render_event('sylius.shop.account.address_book.index.after_content_header', {'addresses': addresses}) }}
         </div>
         <div class="col-auto">
-            <a href="{{ path('sylius_shop_account_address_book_create') }}" class="btn btn-primary">{{ 'sylius.ui.add_address'|trans }}</a>
+            <a href="{{ path('sylius_shop_account_address_book_create') }}" class="btn btn-primary">
+                {{ icons.plus() }}
+                {{ 'sylius.ui.add_address'|trans }}
+            </a>
 
             {{ sonata_block_render_event('sylius.shop.account.address_book.index.after_add_address_button', {'addresses': addresses}) }}
         </div>
