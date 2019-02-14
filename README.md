@@ -1,7 +1,8 @@
 <p align="center">
     <img width="40%" src="https://sylius.com/wp-content/themes/sylius/assets/img/sylius-bootstrap.png" />
     <h1 align="center">Sylius Bootstrap Theme</h1>
-    <p align="center">Sylius Bootstrap theme with build process based on <a target="_blank" href="https://symfony.com/doc/current/frontend.html">Webpack Encore</a></p>
+    <p align="center">Sylius Bootstrap theme with build process based on <a target="_blank" href="https://symfony.com/doc/current/frontend.html">Webpack Encore.</a></p>
+    It allows to swap to Bootstrap-based theme separately in each channel.
 </p>
 
 Installation
@@ -70,7 +71,7 @@ Installation
     yarn encore production
     ```
 
-7. Change theme in the admin panel
+7. Change theme in the admin panel by visiting the Edit Channel page
 
 Screenshots
 -----------
@@ -91,3 +92,6 @@ Screenshots
 #### Checkout bar
 
 ![Checkout bar](docs/checkout-bar.png)
+
+#### Changing the theme
+![Changing the theme](docs/edit-channel-page.png)
