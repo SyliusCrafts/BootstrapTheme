@@ -56,6 +56,7 @@ $.fn.extend({
                 .replace(`option ${provinceSelectValue}`, `option ${provinceSelectValue}" selected="selected"`)
             ));
 
+            provinceContainer.find('select').addClass('form-control');
             provinceContainer.removeAttr('data-loading');
 
             provinceContainer.fadeIn();
@@ -70,6 +71,7 @@ $.fn.extend({
                 .replace('id="sylius_address_province"', `id="${provinceInputFieldId}"`)
             ));
 
+            provinceContainer.find('input').addClass('form-control');
             provinceContainer.removeAttr('data-loading');
 
             provinceContainer.fadeIn();
