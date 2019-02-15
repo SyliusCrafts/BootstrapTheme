@@ -1,5 +1,7 @@
 {
     "name": "sylius/bootstrap-theme",
+    "description": "Bootstrap Theme for Sylius",
+    "license": "MIT",
     "authors": [
         {
             "name": "Szymon Kulczyński",
