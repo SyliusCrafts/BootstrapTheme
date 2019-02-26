@@ -1,0 +1,13 @@
+// Overriding default Bootstrap variables
+@import "variables";
+
+// All Bootstrap styles
+@import "~bootstrap/scss/bootstrap";
+
+// Custom theme styles
+@import "steps";
+@import "custom";
+
+// Third party components
+@import '~semantic-ui-css/components/flag.min.css';
+@import '~glightbox/dist/css/glightbox.min.css';

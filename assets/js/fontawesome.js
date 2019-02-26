@@ -1,20 +1,3 @@
-// Lightbox
-import GLightbox from 'glightbox';
-const glightbox = GLightbox({ selector: 'glightbox' });
-import 'glightbox/dist/css/glightbox.min.css';
-
-// Sylius scripts
-import './js/app';
-
-// Sylius styles
-import './scss/index.scss';
-
-// Images
-import './media/sylius-logo.png';
-
-// Flags (from semantic UI)
-import 'semantic-ui-css/components/flag.min.css';
-
 // FontAwesome Icons
 // Import icons one by one to reduce size of the output
 import { library, dom } from '@fortawesome/fontawesome-svg-core';

@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+import GLightbox from 'glightbox';
+
 import './sylius-api-login';
 import './sylius-api-toggle';
 import './sylius-add-to-cart';
@@ -20,6 +22,9 @@ import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
 
 $(document).ready(() => {
+  // Lightbox
+  const glightbox = GLightbox({ selector: 'glightbox' });
+
   // Add to cart
   $('[data-js-add-to-cart="form"]').addToCart();
 

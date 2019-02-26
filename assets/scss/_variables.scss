@@ -1,0 +1,73 @@
+// Color system
+
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$primary: #1abb9c !default;
+
+
+// Body
+
+$body-bg: $white !default;
+$body-color: $gray-600 !default;
+
+
+// Fonts
+
+$font-size-base: .88rem !default;
+
+$font-weight-normal: 400 !default;
+$font-weight-bold: 700 !default;
+
+$line-height-base: 1.7 !default;
+
+$h1-font-size: $font-size-base * 2 !default;
+$h2-font-size: $font-size-base * 1.8 !default;
+$h3-font-size: $font-size-base * 1.6 !default;
+$h4-font-size: $font-size-base * 1.4 !default;
+$h5-font-size: $font-size-base * 1.2 !default;
+$h6-font-size: $font-size-base !default;
+
+$headings-color: $gray-900 !default;
+
+$text-muted: $gray-500 !default;
+
+
+// Breadcrumbs
+
+$breadcrumb-padding-y: 0 !default;
+$breadcrumb-padding-x: 0 !default;
+$breadcrumb-margin-bottom: 2rem !default;
+
+$breadcrumb-bg: transparent !default;
+$breadcrumb-divider-color: $gray-300 !default;
+
+
+// Navs
+
+$nav-link-padding-y: .8rem !default;
+
+
+// Navbar
+
+$navbar-padding-y: 0 !default;
+$navbar-padding-x: 0 !default;
+
+$navbar-nav-link-padding-x: 20px !default;
+
+$navbar-toggler-padding-y: .4rem !default;
+$navbar-light-toggler-border-color: transparent !default;
+
+
+// Alerts
+
+$alert-bg-level: -12 !default;
