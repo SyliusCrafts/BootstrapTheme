@@ -7,41 +7,50 @@
  * file that was distributed with this source code.
  */
 
+/* eslint-env browser */
+
 const handleProductOptionsChange = function handleProductOptionsChange() {
-  $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', () => {
-    let selector = '';
+  document.querySelectorAll('[name*="sylius_add_to_cart[cartItem][variant]"]').forEach((item) => {
+    item.addEventListener('change', () => {
+      let selector = '';
 
-    $('#sylius-product-adding-to-cart select[data-option]').each((index, element) => {
-      const select = $(element);
-      const option = select.find('option:selected').val();
-      selector += `[data-${select.attr('data-option')}="${option}"]`;
+      document.querySelectorAll('#sylius-product-adding-to-cart select[data-option]').forEach((element) => {
+        const select = element;
+        const option = select[select.selectedIndex].value;
+        selector += `[data-${select.getAttribute('data-option')}="${option}"]`;
+      });
+
+      const price = document.querySelector('#sylius-variants-pricing').querySelector(selector).getAttribute('data-value');
+
+      if (price !== undefined) {
+        document.querySelector('[data-js-product-price]').innerHTML = price;
+        document.querySelector('button[type=submit]').removeAttribute('disabled');
+      } else {
+        document.querySelector('[data-js-product-price]').innerHTML = document.querySelector('#sylius-variants-pricing').getAttribute('data-unavailable-text');
+        document.querySelector('button[type=submit]').setAttribute('disabled', 'disabled');
+      }
     });
-
-    const price = $('#sylius-variants-pricing').find(selector).attr('data-value');
-
-    if (price !== undefined) {
-      $('[data-js-product-price]').text(price);
-      $('button[type=submit]').removeAttr('disabled');
-    } else {
-      $('[data-js-product-price]').text($('#sylius-variants-pricing').attr('data-unavailable-text'));
-      $('button[type=submit]').attr('disabled', 'disabled');
-    }
   });
 };
 
 const handleProductVariantsChange = function handleProductVariantsChange() {
-  $('[name="sylius_add_to_cart[cartItem][variant]"]').on('change', (event) => {
-    const price = $(event.currentTarget).parents('tr').find('[data-js-product-variant-price]').text();
-    $('[data-js-product-price]').text(price);
+  document.querySelectorAll('[name="sylius_add_to_cart[cartItem][variant]"]').forEach((item) => {
+    item.addEventListener('change', (e) => {
+      const price = item.closest('tr').querySelector('[data-js-product-variant-price]').innerHTML;
+      document.querySelector('[data-js-product-price]').innerHTML = price;
+    });
   });
 };
 
-$.fn.extend({
-  variantPrices() {
-    if ($('#sylius-variants-pricing').length > 0) {
-      handleProductOptionsChange();
-    } else if ($('#sylius-product-variants').length > 0) {
-      handleProductVariantsChange();
-    }
-  },
-});
+const SyliusVariantsPrices = () => {
+  const syliusVariantsPricing = document.getElementById('sylius-variants-pricing') || null;
+  const syliusProductVariants = document.getElementById('sylius-product-variants') || null;
+
+  if (syliusVariantsPricing) {
+    handleProductOptionsChange();
+  } else if (syliusProductVariants) {
+    handleProductVariantsChange();
+  }
+};
+
+export default SyliusVariantsPrices;

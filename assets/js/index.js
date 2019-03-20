@@ -15,7 +15,6 @@ import axios from 'axios';
 import './sylius-address-book';
 import './sylius-province-field';
 import './sylius-variant-images';
-import './sylius-variants-prices';
 
 import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
@@ -23,6 +22,7 @@ import SyliusAddToCart from './sylius-add-to-cart';
 import SyliusRemoveFromCart from './sylius-remove-from-cart';
 import SyliusApiToggle from './sylius-api-toggle';
 import SyliusApiLogin from './sylius-api-login';
+import SyliusVariantsPrices from './sylius-variants-prices';
 
 // Global axios settings
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
@@ -49,7 +49,7 @@ $(document).ready(() => {
   $('[data-js-address-book="sylius-billing-address"]').addressBook();
 
   // Variant prices
-  $(document).variantPrices();
+  SyliusVariantsPrices();
 
   // Star rating
   document.querySelectorAll('[data-js-rating]').forEach((elem) => {
