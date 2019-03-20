@@ -7,27 +7,22 @@
  * file that was distributed with this source code.
  */
 
-$.fn.extend({
-  removeFromCart() {
-    this.each((index, elem) => {
-      const element = $(elem);
-      const redirectUrl = element.attr('data-js-remove-from-cart-redirect-url');
-      const csrfToken = element.attr('data-js-remove-from-cart-csrf-token');
-      const url = element.attr('data-js-remove-from-cart-api-url');
+/* eslint-env browser */
 
-      element.on('click', (e) => {
-        e.preventDefault();
+import axios from 'axios';
 
-        const request = $.ajax({
-          url,
-          method: 'DELETE',
-          data: { _csrf_token: csrfToken },
-        });
+const SyliusRemoveFromCart = (el) => {
+  const element = el;
+  const redirectUrl = element.getAttribute('data-js-remove-from-cart-redirect-url');
+  const csrfToken = element.getAttribute('data-js-remove-from-cart-csrf-token');
+  const url = element.getAttribute('data-js-remove-from-cart-api-url');
 
-        request.done(() => {
-          window.location.replace(redirectUrl);
-        });
-      });
-    });
-  },
-});
+  element.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    axios.delete(url, { data: { _csrf_token: csrfToken } })
+      .then(() => { window.location.replace(redirectUrl); });
+  });
+};
+
+export default SyliusRemoveFromCart;

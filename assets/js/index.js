@@ -7,29 +7,39 @@
  * file that was distributed with this source code.
  */
 
+/* eslint-env browser */
+
 import GLightbox from 'glightbox';
+import axios from 'axios';
 
 import './sylius-api-login';
 import './sylius-api-toggle';
-import './sylius-add-to-cart';
 import './sylius-address-book';
 import './sylius-province-field';
-import './sylius-remove-from-cart';
 import './sylius-variant-images';
 import './sylius-variants-prices';
 
 import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
+import SyliusAddToCart from './sylius-add-to-cart';
+import SyliusRemoveFromCart from './sylius-remove-from-cart';
+
+// Global axios settings
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
+axios.defaults.headers.post.accept = 'application/json, text/javascript, */*; q=0.01';
+axios.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
 
 $(document).ready(() => {
   // Lightbox
   const glightbox = GLightbox({ selector: 'glightbox' });
 
   // Add to cart
-  $('[data-js-add-to-cart="form"]').addToCart();
+  document.querySelectorAll('[data-js-add-to-cart="form"]')
+    .forEach(el => SyliusAddToCart(el));
 
   // Remove from cart
-  $('[data-js-remove-from-cart-button]').removeFromCart();
+  document.querySelectorAll('[data-js-remove-from-cart-button]')
+    .forEach(el => SyliusRemoveFromCart(el));
 
   // Province field
   $(document).provinceField();

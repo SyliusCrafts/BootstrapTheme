@@ -7,38 +7,39 @@
  * file that was distributed with this source code.
  */
 
-$.fn.extend({
-  addToCart() {
-    const element = this;
-    const url = $(element).attr('action');
-    const redirectUrl = $(element).attr('data-redirect');
-    const validationElement = $('[data-js-add-to-cart="error"]');
+/* eslint-env browser */
 
-    element.on('submit', (e) => {
-      e.preventDefault();
+import axios from 'axios';
+import serialize from 'form-serialize';
 
-      const request = $.ajax({
-        url,
-        method: 'POST',
-        data: element.serialize(),
-      });
+const SyliusAddToCart = (el) => {
+  const element = el;
+  const url = element.getAttribute('action');
+  const redirectUrl = element.getAttribute('data-redirect');
+  const validationElement = element.querySelector('[data-js-add-to-cart="error"]');
 
-      request.done(() => {
-        validationElement.addClass('d-none');
-        window.location.href = redirectUrl;
-      });
+  element.addEventListener('submit', (e) => {
+    const request = axios.post(url, serialize(element));
 
-      request.fail((response) => {
-        validationElement.removeClass('d-none');
-        let validationMessage = '';
+    e.preventDefault();
 
-        Object.entries(response.responseJSON).forEach(([, message]) => {
-          validationMessage += message;
-        });
-
-        validationElement.html(validationMessage);
-        $(element).removeClass('loading');
-      });
+    request.then(() => {
+      validationElement.classList.add('d-none');
+      window.location.href = redirectUrl;
     });
-  },
-});
+
+    request.catch((error) => {
+      validationElement.classList.remove('d-none');
+      let validationMessage = '';
+
+      Object.entries(error.response.data).forEach(([, message]) => {
+        validationMessage += message;
+      });
+
+      validationElement.innerHTML = validationMessage;
+      this.element.classList.remove('loading');
+    });
+  });
+};
+
+export default SyliusAddToCart;
