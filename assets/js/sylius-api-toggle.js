@@ -7,32 +7,25 @@
  * file that was distributed with this source code.
  */
 
+/* eslint-env browser */
+
+import axios from 'axios';
 import throttle from 'lodash.throttle';
 
-$.fn.extend({
-  apiLoginToggle() {
-    const element = $(this);
-    const url = element.attr('data-js-login-check-email-url');
-    const toggleableElement = $('[data-js-login="form"]');
+const SyliusApiToggle = (el) => {
+  const element = el;
+  const url = element.getAttribute('data-js-login-check-email-url');
+  const toggleableElement = document.querySelector('[data-js-login="form"]');
 
-    element.on('keyup', throttle((e) => {
-      toggleableElement.addClass('d-none');
+  element.addEventListener('keyup', throttle((e) => {
+    toggleableElement.classList.add('d-none');
 
-      if (e.target.value.length > 3) {
-        const request = $.ajax({
-          url,
-          method: 'GET',
-          data: { email: e.target.value },
-        });
+    if (e.target.value.length > 3) {
+      axios.get(url, { params: { email: e.target.value } })
+        .then(() => { toggleableElement.classList.remove('d-none'); })
+        .catch(() => { toggleableElement.classList.add('d-none'); });
+    }
+  }, 1500));
+};
 
-        request.done((response) => {
-          toggleableElement.removeClass('d-none');
-        });
-
-        request.fail((response) => {
-          toggleableElement.addClass('d-none');
-        });
-      }
-    }, 1500));
-  },
-});
+export default SyliusApiToggle;

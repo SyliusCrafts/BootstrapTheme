@@ -12,8 +12,6 @@
 import GLightbox from 'glightbox';
 import axios from 'axios';
 
-import './sylius-api-login';
-import './sylius-api-toggle';
 import './sylius-address-book';
 import './sylius-province-field';
 import './sylius-variant-images';
@@ -23,6 +21,8 @@ import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
 import SyliusAddToCart from './sylius-add-to-cart';
 import SyliusRemoveFromCart from './sylius-remove-from-cart';
+import SyliusApiToggle from './sylius-api-toggle';
+import SyliusApiLogin from './sylius-api-login';
 
 // Global axios settings
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
@@ -60,14 +60,14 @@ $(document).ready(() => {
     });
   });
 
-  // API login from checkout
-  $('[data-js-login]').apiLogin();
+  // Toggle and login from checkout
+  if (document.querySelector('[data-js-login]')) {
+    SyliusApiToggle(document.querySelector('[data-js-login="email"]'));
+    SyliusApiLogin(document.querySelector('[data-js-login]'));
+  }
 
   // Toggle billing address on the checkout page
   document.querySelectorAll('[data-js-toggle]').forEach(elem => new SyliusToggle(elem));
-
-  // Toggle login from checkout
-  $('[data-js-login="email"]').apiLoginToggle();
 
   // Product images for variants
   $(document).variantImages();

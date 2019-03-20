@@ -7,37 +7,35 @@
  * file that was distributed with this source code.
  */
 
-$.fn.extend({
-  apiLogin() {
-    const element = this;
-    const passwordField = element.find('input[type="password"]');
-    const emailField = element.find('input[type="email"]');
-    const csrfTokenField = element.find('input[type="hidden"]');
-    const signInButton = element.find('.btn');
-    const validationField = element.find('.alert');
-    const url = signInButton.attr('data-js-login-url');
+/* eslint-env browser */
 
-    signInButton.on('click', (e) => {
+import axios from 'axios';
 
-      const request = $.ajax({
-        url,
-        method: 'POST',
-        data: {
-          _username: emailField.val(),
-          _password: passwordField.val(),
-          [csrfTokenField.attr('name')]: csrfTokenField.val(),
-        },
+const SyliusApiLogin = (el) => {
+  const element = el;
+  const signInButton = element.querySelector('.btn');
+  const validationField = element.querySelector('.alert');
+  const url = signInButton.getAttribute('data-js-login-url');
+  const emailField = element.querySelector('input[type="email"]');
+  const passwordField = element.querySelector('input[type="password"]');
+  const csrfTokenField = element.querySelector('input[type="hidden"]');
+  const csrfTokenName = csrfTokenField.getAttribute('name');
+
+  signInButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams();
+    params.append('_username', emailField.value);
+    params.append('_password', passwordField.value);
+    params.append([csrfTokenName], csrfTokenField.value);
+
+    axios.post(url, params)
+      .then(() => { window.location.reload(); })
+      .catch((error) => {
+        validationField.classList.remove('d-none');
+        validationField.innerHTML = error.response.data.message;
       });
+  });
+};
 
-      request.done(() => {
-        element.remove();
-        window.location.reload();
-      });
-
-      request.fail((response) => {
-        validationField.removeClass('d-none');
-        validationField.html(response.responseJSON.message);
-      });
-    });
-  },
-});
+export default SyliusApiLogin;
