@@ -7,77 +7,53 @@
  * file that was distributed with this source code.
  */
 
-const changeMainImage = function changeMainImage(newImageDiv) {
-  const mainImageLink = $('[data-js-product-image]');
-  const mainImage = $('[data-js-product-image] > img');
+/* eslint-env browser */
 
-  const newImage = $(newImageDiv).find('img');
-  const newImageLink = $(newImageDiv).find('a');
+class SyliusVariantImages {
+  constructor() {
+    this.mainImageLink = document.querySelector('[data-js-product-image]');
+    this.mainImage = this.mainImageLink.querySelector('img');
+    this.defaultImageLink = this.mainImageLink.getAttribute('href');
+    this.defaultImageSrc = this.mainImage.getAttribute('src');
 
-  if (newImage.length === 0 && newImageLink.length === 0) {
-    mainImage.attr('src', $('div[data-product-image]').attr('data-product-image'));
-    newImageLink.attr('href', $('div[data-product-link]').attr('data-product-link'));
+    document.querySelectorAll('[name*="sylius_add_to_cart[cartItem][variant]"]').forEach((item) => {
+      item.addEventListener('change', () => this.setImage());
+    });
 
-    return;
+    this.setImage();
   }
 
-  mainImageLink.attr('href', newImageLink.attr('href'));
-  mainImage.attr('src', newImage.attr('data-large-thumbnail'));
-};
+  getActiveVariant() {
+    const items = document.querySelectorAll(`
+      input[name="sylius_add_to_cart[cartItem][variant]"]:checked, 
+      select[name*="sylius_add_to_cart[cartItem][variant]"] option:checked
+    `);
 
-const handleProductOptionImages = function handleProductOptionImages() {
-  let options = '';
+    return [...items].map(el => el.value).join(' ');
+  }
 
-  $('#sylius-product-adding-to-cart select').each((index, select) => {
-    options += `${$(select).find('option:selected').val()} `;
-  });
+  getActiveImageSrc(variant) {
+    let imageLink = this.defaultImageLink;
+    let imageSrc = this.defaultImageSrc;
+    const item = document.querySelector(`
+      .sylius-image-variants [data-variant-code="${variant}"], 
+      .sylius-image-variants [data-variant-options="${variant} "]
+    `);
 
-  const imagesWithOptions = [];
-  const optionsArray = options.trim().split(' ');
-
-  $('[data-variant-options]').each((index, element) => {
-    const imageOptions = $(element).attr('data-variant-options');
-    const imageHasOptions = optionsArray.every(option => imageOptions.indexOf(option) > -1);
-
-    if (imageHasOptions) {
-      imagesWithOptions.push($(element).closest('[data-js-product-thumbnail]'));
+    if (item) {
+      const parent = item.closest('[data-js-product-thumbnail]');
+      imageLink = parent.querySelector('a').getAttribute('href');
+      imageSrc = parent.querySelector('img').getAttribute('data-large-thumbnail');
     }
-  });
 
-  changeMainImage(imagesWithOptions.shift());
-};
+    return { imageLink, imageSrc };
+  }
 
-const handleProductOptionChange = function handleProductOptionChange() {
-  $('[name*="sylius_add_to_cart[cartItem][variant]"]').on('change', () => {
-    handleProductOptionImages();
-  });
-};
+  setImage() {
+    const img = this.getActiveImageSrc(this.getActiveVariant());
+    this.mainImageLink.setAttribute('href', img.imageLink);
+    this.mainImage.setAttribute('src', img.imageSrc);
+  }
+}
 
-const handleProductVariantImages = function handleProductVariantImages(variantElement) {
-  const variantCode = $(variantElement).attr('value');
-  const imagesWithVariantCode = [];
-
-  $(`[data-variant-code*="${variantCode}"]`).each((index, element) => {
-    imagesWithVariantCode.push($(element).closest('[data-js-product-thumbnail]'));
-  });
-
-  changeMainImage(imagesWithVariantCode.shift());
-};
-
-const handleProductVariantChange = function handleProductVariantChange() {
-  $('[name="sylius_add_to_cart[cartItem][variant]"]').on('change', (event) => {
-    handleProductVariantImages($(event.currentTarget));
-  });
-};
-
-$.fn.extend({
-  variantImages() {
-    if ($('[data-variant-options]').length > 0) {
-      handleProductOptionImages();
-      handleProductOptionChange();
-    } else if ($('[data-variant-code]').length > 0) {
-      handleProductVariantImages($('[name="sylius_add_to_cart[cartItem][variant]"]'));
-      handleProductVariantChange();
-    }
-  },
-});
+export default SyliusVariantImages;

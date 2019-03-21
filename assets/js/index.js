@@ -14,7 +14,6 @@ import axios from 'axios';
 
 import './sylius-address-book';
 import './sylius-province-field';
-import './sylius-variant-images';
 
 import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
@@ -23,6 +22,7 @@ import SyliusRemoveFromCart from './sylius-remove-from-cart';
 import SyliusApiToggle from './sylius-api-toggle';
 import SyliusApiLogin from './sylius-api-login';
 import SyliusVariantsPrices from './sylius-variants-prices';
+import SyliusVariantImages from './sylius-variant-images';
 
 // Global axios settings
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
@@ -70,7 +70,9 @@ $(document).ready(() => {
   document.querySelectorAll('[data-js-toggle]').forEach(elem => new SyliusToggle(elem));
 
   // Product images for variants
-  $(document).variantImages();
+  if (document.querySelector('[data-variant-options], [data-variant-code]')) {
+    new SyliusVariantImages();
+  }
 
   // Loadable forms
   $('form.loadable').append($('[data-js-loading-overlay]'));
