@@ -12,9 +12,6 @@
 import GLightbox from 'glightbox';
 import axios from 'axios';
 
-import './sylius-address-book';
-import './sylius-province-field';
-
 import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
 import SyliusAddToCart from './sylius-add-to-cart';
@@ -23,6 +20,8 @@ import SyliusApiToggle from './sylius-api-toggle';
 import SyliusApiLogin from './sylius-api-login';
 import SyliusVariantsPrices from './sylius-variants-prices';
 import SyliusVariantImages from './sylius-variant-images';
+import SyliusProvinceField from './sylius-province-field';
+import SyliusAddressBook from './sylius-address-book';
 
 // Global axios settings
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
@@ -42,11 +41,13 @@ $(document).ready(() => {
     .forEach(el => SyliusRemoveFromCart(el));
 
   // Province field
-  $(document).provinceField();
+  SyliusProvinceField();
 
   // Address book
-  $('[data-js-address-book="sylius-shipping-address"]').addressBook();
-  $('[data-js-address-book="sylius-billing-address"]').addressBook();
+  const syliusShippingAddress = document.querySelector('[data-js-address-book="sylius-shipping-address"]');
+  if (syliusShippingAddress) { SyliusAddressBook(syliusShippingAddress); }
+  const syliusBillingAddress = document.querySelector('[data-js-address-book="sylius-billing-address"]');
+  if (syliusBillingAddress) { SyliusAddressBook(syliusBillingAddress); }
 
   // Variant prices
   SyliusVariantsPrices();
