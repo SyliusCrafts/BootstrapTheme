@@ -11,6 +11,7 @@
 
 import GLightbox from 'glightbox';
 import axios from 'axios';
+import 'bootstrap.native/dist/bootstrap-native-v4';
 
 import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
@@ -29,7 +30,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.defaults.headers.post.accept = 'application/json, text/javascript, */*; q=0.01';
 axios.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
 
-$(document).ready(() => {
+document.addEventListener('DOMContentLoaded', () => {
   // Lightbox
   const glightbox = GLightbox({ selector: 'glightbox' });
 
@@ -72,9 +73,7 @@ $(document).ready(() => {
   document.querySelectorAll('[data-js-toggle]').forEach(elem => new SyliusToggle(elem));
 
   // Product images for variants
-  if (document.querySelector('[data-variant-options], [data-variant-code]')) {
-    new SyliusVariantImages();
-  }
+  if (document.querySelector('[data-variant-options], [data-variant-code]')) { new SyliusVariantImages(); }
 
   // Loadable forms
   SyliusLoadableForms();
