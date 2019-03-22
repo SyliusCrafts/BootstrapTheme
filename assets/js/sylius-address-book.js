@@ -52,11 +52,11 @@ const SyliusAddressBook = function SyliusAddressBook(el) {
             const provinceNameField = findByName('provinceName');
 
             if (!provinceContainer.hasAttribute('data-loading')) {
-              if (provinceCodeField.length !== 0 && (provinceCode !== '' || provinceCode != undefined)) {
+              if (provinceCodeField && provinceCodeField.length !== 0 && (provinceCode !== '' || provinceCode != undefined)) {
                 provinceCodeField.value = provinceCode;
 
                 clearInterval(exists);
-              } else if (provinceNameField.length !== 0 && (provinceName !== '' || provinceName != undefined)) {
+              } else if (provinceNameField && provinceNameField.length !== 0 && (provinceName !== '' || provinceName != undefined)) {
                 provinceNameField.value = provinceName;
 
                 clearInterval(exists);

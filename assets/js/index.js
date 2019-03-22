@@ -47,9 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Address book
   const syliusShippingAddress = document.querySelector('[data-js-address-book="sylius-shipping-address"]');
-  if (syliusShippingAddress) { SyliusAddressBook(syliusShippingAddress); }
+  if (syliusShippingAddress && syliusShippingAddress.querySelector('.dropdown')) {
+    SyliusAddressBook(syliusShippingAddress);
+  }
   const syliusBillingAddress = document.querySelector('[data-js-address-book="sylius-billing-address"]');
-  if (syliusBillingAddress) { SyliusAddressBook(syliusBillingAddress); }
+  if (syliusBillingAddress && syliusBillingAddress.querySelector('.dropdown')) {
+    SyliusAddressBook(syliusBillingAddress);
+  }
 
   // Variant prices
   SyliusVariantsPrices();
