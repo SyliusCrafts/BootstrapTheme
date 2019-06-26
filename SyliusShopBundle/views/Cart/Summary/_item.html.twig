@@ -18,7 +18,7 @@
     </td>
     <td class="text-center">
         {% if item.unitPrice != item.discountedUnitPrice %}
-            <span>{{ money.convertAndFormat(item.unitPrice) }}</span>
+            <small><s>{{ money.convertAndFormat(item.unitPrice) }}</s></small>
         {% endif %}
         <span>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
     </td>
