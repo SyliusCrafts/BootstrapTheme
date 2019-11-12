@@ -1,8 +1,23 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
+{% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
+{% set unitPromotions = item.units.first.adjustments(unitPromotionAdjustment) %}
+
 <tr>
     <td>{% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}</td>
-    <td class="text-right">{{ money.format(item.unitPrice, order.currencyCode) }}</td>
+    <td class="text-right">
+        {% if item.unitPrice != item.discountedUnitPrice %}
+            <small><s>{{ money.convertAndFormat(item.unitPrice) }}</s></small>
+        {% endif %}
+        <span>
+            {{ money.convertAndFormat(item.discountedUnitPrice) }}
+            {% if item.unitPrice != item.discountedUnitPrice %}
+                <span title="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
+                    <i class="fas fa-question-circle"></i>
+                </span>
+            {% endif %}
+        </span>
+    </td>
     <td class="text-right">{{ item.quantity }}</td>
-    <td class="text-right">{{ money.format(item.subtotal, order.currencyCode) }}</td>
+    <td class="text-right">{{ money.convertAndFormat(item.subtotal) }}</td>
 </tr>
