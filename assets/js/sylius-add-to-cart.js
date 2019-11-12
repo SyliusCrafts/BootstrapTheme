@@ -33,11 +33,11 @@ const SyliusAddToCart = (el) => {
       let validationMessage = '';
 
       Object.entries(error.response.data).forEach(([, message]) => {
-        validationMessage += message;
+        validationMessage += message.errors;
       });
 
       validationElement.innerHTML = validationMessage;
-      this.element.classList.remove('loading');
+      element.classList.remove('loading');
     });
   });
 };
