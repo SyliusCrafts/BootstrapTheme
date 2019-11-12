@@ -1,5 +1,4 @@
 <div data-js-login>
-    {{ form_errors(form.email) }}
     {{ form_row(form.email, {'attr': {'data-js-login': 'email', 'data-js-login-check-email-url': path('sylius_shop_ajax_user_check_action')}}) }}
 
     <div data-js-login="form" class="mb-3 d-none">
