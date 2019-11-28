@@ -20,7 +20,7 @@ Installation
 
     ```bash
     yarn
-    yarn add @symfony/webpack-encore sass-loader node-sass lodash.throttle -D
+    yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
     yarn add bootstrap bootstrap.native glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
     ```
    
