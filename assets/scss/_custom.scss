@@ -8,6 +8,14 @@
     }
 }
 
+@include media-breakpoint-up(lg) {
+    .dropdown-menu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: 0;
+    }
+}
+
 .logo {
     @include media-breakpoint-up(md) {
         width: 160px;
