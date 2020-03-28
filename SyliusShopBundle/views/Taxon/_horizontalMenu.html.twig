@@ -13,8 +13,10 @@
             </div>
         </span>
     {% else %}
-        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"
-           class="{% if isChild %}dropdown-item{% else %}nav-item nav-link{% endif %}">{{ taxon.name }}</a>
+        <li>
+            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"
+                class="nav-link {% if not isChild -%}nav-item{% endif %}">{{ taxon.name }}</a>
+        </li>
     {% endif %}
 {% endmacro %}
 
