@@ -7,7 +7,7 @@
 
 {% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
 
-<div class="form-group province-container" data-url="{{ path('sylius_shop_ajax_render_province_form') }}">
+<div class="form-group province-container" data-url="{{ path('sylius_shop_ajax_render_province_form') }}" data-parent="{{ form.countryCode.vars.id }}">
     {% if form.provinceCode is defined %}
         {{ form_row(form.provinceCode, {'attr': {'class': ''}}) }}
     {% elseif form.provinceName is defined %}

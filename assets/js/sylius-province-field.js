@@ -24,7 +24,7 @@ const SyliusProvinceField = function SyliusProvinceField() {
   countrySelect.forEach((countrySelectItem) => {
     countrySelectItem.addEventListener('change', (event) => {
       const select = event.currentTarget;
-      const provinceContainer = select.closest('.form-group').nextElementSibling;
+      const provinceContainer = document.querySelector('[data-parent="' + select.id + '"]');
 
       const provinceSelectFieldName = select.getAttribute('name').replace('country', 'province');
       const provinceInputFieldName = select.getAttribute('name').replace('countryCode', 'provinceName');
