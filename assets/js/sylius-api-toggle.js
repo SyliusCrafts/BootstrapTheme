@@ -17,7 +17,7 @@ const SyliusApiToggle = (el) => {
   const url = element.getAttribute('data-js-login-check-email-url');
   const toggleableElement = document.querySelector('[data-js-login="form"]');
 
-  element.addEventListener('keyup', throttle((e) => {
+  element.addEventListener('input', throttle((e) => {
     toggleableElement.classList.add('d-none');
 
     if (e.target.value.length > 3) {
