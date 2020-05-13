@@ -2,19 +2,21 @@
     {% import _self as macros %}
 
     {% if taxon.children|length > 0 %}
-        <span class="nav-item dropdown">
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                 {{ taxon.name }}
             </a>
-            <div class="dropdown-menu">
+            <ul class="dropdown-menu">
                 {% for childTaxon in taxon.children %}
                     {{ macros.item(childTaxon, true) }}
                 {% endfor %}
-            </div>
-        </span>
+            </ul>
+        </li>
     {% else %}
-        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"
-           class="{% if isChild %}dropdown-item{% else %}nav-item nav-link{% endif %}">{{ taxon.name }}</a>
+        <li>
+            <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}"
+                class="nav-link {% if not isChild -%}nav-item{% endif %}">{{ taxon.name }}</a>
+        </li>
     {% endif %}
 {% endmacro %}
 
