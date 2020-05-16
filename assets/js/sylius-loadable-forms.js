@@ -17,6 +17,11 @@ const SyliusLoadableForms = function SyliusLoadableForms() {
     form.addEventListener('submit', () => {
       form.classList.add('loading');
     });
+    window.addEventListener('pageshow', () => {
+      if (event.persisted) {
+        form.classList.remove('loading');
+      }
+    });
   });
 };
 
