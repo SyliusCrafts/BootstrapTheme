@@ -1,5 +1,5 @@
-<div data-js-address-book="sylius-shipping-address">
-    <h1 class="mb-4">{{ 'sylius.ui.shipping_address'|trans }}</h1>
+<div data-js-address-book="sylius-billing-address">
+    <h1 class="mb-4">{{ 'sylius.ui.billing_address'|trans }}</h1>
 
     <div class="card">
         <div class="card-body">
@@ -10,16 +10,16 @@
             {% if form.customer is defined %}
                 {% include '@SyliusShop/Common/Form/_login.html.twig' with {'form': form.customer} %}
             {% endif %}
-            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order} %}
-            {{ form_row(form.differentBillingAddress, {'attr': {'data-js-toggle': '[data-js-address-book="sylius-billing-address"]'}}) }}
+            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order} %}
+            {{ form_row(form.differentShippingAddress, {'attr': {'data-js-toggle': '[data-js-address-book="sylius-shipping-address"]'}}) }}
 
-            {{ sonata_block_render_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
+            {{ sonata_block_render_event('sylius.shop.checkout.address.billing_address_form', {'order': order}) }}
         </div>
     </div>
 </div>
 
-<div data-js-address-book="sylius-billing-address">
-    <h1 class="my-4">{{ 'sylius.ui.billing_address'|trans }}</h1>
+<div data-js-address-book="sylius-shipping-address">
+    <h1 class="my-4">{{ 'sylius.ui.shipping_address'|trans }}</h1>
 
     <div class="card">
         <div class="card-body">
@@ -27,9 +27,9 @@
                 {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
             </div>
 
-            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order} %}
+            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order} %}
 
-            {{ sonata_block_render_event('sylius.shop.checkout.address.billing_address_form', {'order': order}) }}
+            {{ sonata_block_render_event('sylius.shop.checkout.address.shipping_address_form', {'order': order}) }}
         </div>
     </div>
 </div>
