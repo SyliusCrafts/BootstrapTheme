@@ -8,6 +8,9 @@
             "email": "szymon.kulczynski@sylius.com"
         }
     ],
+    "require": {
+        "sylius/shop-bundle": "^1.6"
+    },
     "extra": {
         "sylius-theme": {
             "title": "Sylius Bootstrap Theme"
