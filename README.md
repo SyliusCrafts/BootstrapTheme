@@ -8,9 +8,9 @@
 Installation
 ------------
 
-There are two ways to install a theme. It is possible to copy files in `src/theme` or add this package as a composer dependency and create a child theme.
+There are two ways to install a theme. It is possible to copy files in `themes/` or add this package as a composer dependency and create a child theme.
 
-The instructions below refers to an installation in the theme folder. Installation as a composer dependency (with child theme) [is also documented](https://docs.sylius.com/en/latest/book/themes/bootstrap-theme.html).
+The instructions below refer to an installation in the theme folder. Installation as a composer dependency (with child theme) [is also documented](https://docs.sylius.com/en/latest/book/themes/bootstrap-theme.html).
 
 Branch 0.1.x is only compatible with Sylius 1.6. Master is compatible with Sylius >= 1.7.0.
 
