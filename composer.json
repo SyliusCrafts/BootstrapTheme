@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "sylius/shop-bundle": "^1.6"
+        "sylius/shop-bundle": "^1.7"
     },
     "extra": {
         "sylius-theme": {
