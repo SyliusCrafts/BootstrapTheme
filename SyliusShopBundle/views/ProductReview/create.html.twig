@@ -2,16 +2,14 @@
 
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.write_your_own_review'|trans }} | {{ parent() }}{% endblock %}
+
 {% set product = product_review.reviewSubject %}
 
 {% block content %}
     <div class="row">
         <div class="col-12 col-md-4">
-            {{ sonata_block_render_event('sylius.shop.product_review.create.before_product_box', {'product_review': product_review}) }}
-
-            {% include '@SyliusShop/Product/_box.html.twig' %}
-
-            {{ sonata_block_render_event('sylius.shop.product_review.create.after_product_box', {'product_review': product_review}) }}
+            {{ sylius_template_event('sylius.shop.product_review.create.product_box', _context) }}
         </div>
         <div class="col-12 col-md-8">
             <div>
@@ -19,12 +17,12 @@
                 {{ 'sylius.ui.you_are_reviewing'|trans }} <strong>{{ product.name }}</strong>.
             </div>
 
-            {{ sonata_block_render_event('sylius.shop.product_review.create.before_form', {'product_review': product_review}) }}
+            {{ sylius_template_event('sylius.shop.product_review.create.before_form', {'product_review': product_review}) }}
 
             {{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug, '_locale': product.translation.locale}), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
                 {% include '@SyliusShop/ProductReview/_form.html.twig' %}
 
-                {{ sonata_block_render_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
+                {{ sylius_template_event('sylius.shop.product_review.create.form', {'product_review': product_review, 'form': form}) }}
 
                 {{ form_row(form._token) }}
                 <button type="submit" class="btn btn-primary">

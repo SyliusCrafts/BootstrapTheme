@@ -1,7 +1,2 @@
-{{ sonata_block_render_event('sylius.shop.product.show.tab_details', {'product': product}) }}
+{{ sylius_template_event('sylius.shop.product.show.tab_details', _context) }}
 
-{% if product.description is not empty %}
-    {{ product.description | nl2br }}
-{% else %}
-    {{ 'sylius.ui.no_description'|trans }}.
-{% endif %}

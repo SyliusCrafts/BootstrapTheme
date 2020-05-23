@@ -2,6 +2,8 @@
 
 {% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
 
+{% block title %}{{ 'sylius.ui.summary_of_your_order'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     <div>
         {% include '@SyliusShop/Order/_summary.html.twig' %}

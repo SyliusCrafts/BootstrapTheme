@@ -1,18 +1,9 @@
 {% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
 {% import '@SyliusShop/Common/Macro/pagination.html.twig' as pagination %}
 
-{{ sonata_block_render_event('sylius.shop.product.index.before_search', {'products': resources.data}) }}
+{{ sylius_template_event('sylius.shop.product.index.search', _context) }}
 
-{% include '@SyliusShop/Product/Index/_search.html.twig' %}
-
-{{ sonata_block_render_event('sylius.shop.product.index.after_search', {'products': resources.data}) }}
-
-<div class="d-flex justify-content-end my-3">
-    {% include '@SyliusShop/Product/Index/_pagination.html.twig' %}
-    {% include '@SyliusShop/Product/Index/_sorting.html.twig' %}
-</div>
-
-{{ sonata_block_render_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
+{{ sylius_template_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
 
 {% if resources.data|length > 0 %}
     <div class="row">
@@ -23,7 +14,7 @@
         {% endfor %}
     </div>
 
-    {{ sonata_block_render_event('sylius.shop.product.index.before_pagination', {'products': resources.data}) }}
+    {{ sylius_template_event('sylius.shop.product.index.before_pagination', {'products': resources.data}) }}
 
     <div class="d-flex justify-content-end mt-3">
         {{ pagination.simple(resources.data) }}

@@ -13,20 +13,20 @@
     </td>
 </tr>
 <tr{% if taxIncluded and not taxExcluded %} class="bg-light"{% endif %}>
-    <td colspan="4">
+    <td colspan="4" id="tax-total">
         <div style="display: flex; justify-content: flex-end; align-items: center">
             <div><strong>{{ 'sylius.ui.taxes_total'|trans }}:</strong>&nbsp;</div>
-            <div>
+            <div data-test="tax-total" {{ sylius_test_html_attribute('tax-total') }}>
             {% if not taxIncluded and not taxExcluded %}
-                <div>{{ money.convertAndFormat(0) }}</div>
+                <div id="sylius-cart-tax-none">{{ money.convertAndFormat(0) }}</div>
             {% endif %}
             {% if taxExcluded %}
-                <div>{{ money.convertAndFormat(taxExcluded) }}</div>
+                <div id="sylius-cart-tax-excluded">{{ money.convertAndFormat(taxExcluded) }}</div>
             {% endif %}
             {% if taxIncluded %}
-                <div>
+                <div class="tax-disabled">
                     <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
-                    <span>{{ money.convertAndFormat(taxIncluded) }}</span>
+                    <span id="sylius-cart-tax-included">{{ money.convertAndFormat(taxIncluded) }}</span>
                 </div>
             {% endif %}
             </div>
@@ -34,10 +34,10 @@
     </td>
 </tr>
 <tr>
-    <td colspan="4">
+    <td colspan="4" id="promotion-total" {{ sylius_test_html_attribute('promotion-total') }}>
         <strong>{{ 'sylius.ui.discount'|trans }}:</strong> {{ money.convertAndFormat(order.orderPromotionTotal)  }}
         {% if order.orderPromotionTotal != 0 %}
-            <span title="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
+            <span id="order-promotions-details" {{ sylius_test_html_attribute('order-promotions-details') }} title="{% for key, value in orderPromotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
                 <i class="fas fa-question-circle"></i>
             </span>
         {% endif %}
@@ -47,13 +47,13 @@
     {% include '@SyliusShop/Common/Order/Table/_shipping.html.twig' with {'order': order} %}
 </tr>
 <tr>
-    <td colspan="4" class="h3">
+    <td colspan="4" class="h3" id="total" {{ sylius_test_html_attribute('order-total') }}>
         {{ 'sylius.ui.total'|trans }}: {{ money.convertAndFormat(order.total) }}
     </td>
 </tr>
 {% if order.currencyCode is not same as(sylius.currencyCode) %}
     <tr>
-        <td colspan="4">
+        <td colspan="4" id="base-total" {{ sylius_test_html_attribute('summary-order-total') }}>
             {{ 'sylius.ui.total_in_base_currency'|trans }}: {{ money.format(order.total, order.currencyCode) }}
         </td>
     </tr>

@@ -1,15 +1,16 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
+{% block title %}{{ 'sylius.ui.thank_you'|trans }} | {{ parent() }}{% endblock %}
+
 {% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
 
 {% block content %}
     <div>
         <div>
             {% set lastPayment = order.payments.last() %}
-
             {{ headers.default('sylius.ui.thank_you'|trans, '', 'sylius.ui.placed_an_order'|trans) }}
 
-            {{ sonata_block_render_event('sylius.shop.order.thank_you.after_message', {'order': order}) }}
+            {{ sylius_template_event('sylius.shop.order.thank_you.after_message', {'order': order}) }}
 
             {% if lastPayment != false %}
                 {%  if lastPayment.method.instructions is not null %}
