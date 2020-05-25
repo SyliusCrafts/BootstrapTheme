@@ -21,7 +21,7 @@
 {% endif %}
 
 <div class="steps mb-5 {{ steps_count }}">
-    <a class="steps-item {{ steps['address'] }}" href="{{ path('sylius_shop_checkout_address') }}">
+    <a class="steps-item {{ steps['address'] }}" href="{{ path('sylius_shop_checkout_address') }}" {{ sylius_test_html_attribute('step-address') }}>
         <div class="steps-icon">{{ icons.address() }}</div>
         <div class="steps-content">
             <h6 class="steps-title">{{ 'sylius.ui.address'|trans }}</h6>
@@ -29,7 +29,7 @@
         </div>
     </a>
     {% if order_requires_shipping %}
-    <a class="steps-item {{ steps['select_shipping'] }}" href="{{ path('sylius_shop_checkout_select_shipping') }}">
+    <a class="steps-item {{ steps['select_shipping'] }}" href="{{ path('sylius_shop_checkout_select_shipping') }}" {{ sylius_test_html_attribute('step-shipping') }}>
         <div class="steps-icon">{{ icons.transport() }}</div>
         <div class="steps-content">
             <h6 class="steps-title">{{ 'sylius.ui.shipping'|trans }}</h6>
@@ -38,7 +38,7 @@
     </a>
     {% endif %}
     {% if order_requires_payment %}
-    <a class="steps-item {{ steps['select_payment'] }}" href="{{ path('sylius_shop_checkout_select_payment') }}">
+    <a class="steps-item {{ steps['select_payment'] }}" href="{{ path('sylius_shop_checkout_select_payment') }}" {{ sylius_test_html_attribute('step-payment') }}>
         <div class="steps-icon">{{ icons.creditCard() }}</div>
         <div class="steps-content">
             <h6 class="steps-title">{{ 'sylius.ui.payment'|trans }}</h6>

@@ -5,7 +5,7 @@
 {% set taxExcluded = sylius_order_tax_excluded(order) %}
 
 <div class="card">
-    <table class="table">
+    <table class="table" id="sylius-checkout-subtotal" {{ sylius_test_html_attribute('checkout-subtotal') }}>
         <thead class="card-header">
             <tr>
                 <th class="border-0">{{ 'sylius.ui.item'|trans }}</th>
@@ -20,7 +20,9 @@
                 <td class="text-right">
                     {{ item.quantity }}
                 </td>
-                <td class="text-right">{{ money.convertAndFormat(item.subtotal) }}</td>
+                <td class="text-right" id="sylius-item-{{ item.variant.product.slug }}-subtotal" {{ sylius_test_html_attribute('item-subtotal', item.variant.product.slug) }}>
+                    {{ money.convertAndFormat(item.subtotal) }}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
@@ -29,7 +31,7 @@
             <td colspan="1" class="border-top border-dark">
                 <strong>{{ 'sylius.ui.items_total'|trans }}:</strong>
             </td>
-            <td colspan="2" class="text-right border-top border-dark">
+            <td colspan="2" id="sylius-summary-items-subtotal" class="text-right border-top border-dark">
                 {{ money.convertAndFormat(itemsSubtotal) }}
             </td>
         </tr>
@@ -39,15 +41,15 @@
             </td>
             <td colspan="2" class="text-right">
                 {% if not taxIncluded and not taxExcluded %}
-                    <div>{{ money.convertAndFormat(0) }}</div>
+                    <div id="sylius-summary-tax-none">{{ money.convertAndFormat(0) }}</div>
                 {% endif %}
                 {% if taxExcluded %}
-                    <div>{{ money.convertAndFormat(taxExcluded) }}</div>
+                    <div id="sylius-summary-tax-excluded">{{ money.convertAndFormat(taxExcluded) }}</div>
                 {% endif %}
                 {% if taxIncluded %}
                     <div>
                         <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
-                        <span>{{ money.convertAndFormat(taxIncluded) }}</span>
+                        <span id="sylius-summary-tax-included">{{ money.convertAndFormat(taxIncluded) }}</span>
                     </div>
                 {% endif %}
             </td>
@@ -56,7 +58,7 @@
             <td colspan="1">
                 <strong>{{ 'sylius.ui.discount'|trans }}:</strong>
             </td>
-            <td colspan="2" class="text-right">
+            <td colspan="2" id="sylius-summary-promotion-total" class="text-right">
                 {{ money.convertAndFormat(order.orderPromotionTotal) }}
             </td>
         </tr>
@@ -68,14 +70,14 @@
                 {% if order.getAdjustmentsTotal('shipping') > order.shippingTotal %}
                     <small><s>{{ money.convertAndFormat(order.getAdjustmentsTotal('shipping')) }}</s></small>
                 {% endif %}
-                <span>{{ money.convertAndFormat(order.shippingTotal) }}</span>
+                <span id="sylius-summary-shipping-total">{{ money.convertAndFormat(order.shippingTotal) }}</span>
             </td>
         </tr>
         <tr>
             <td colspan="1">
                 <div class="h3">{{ 'sylius.ui.order_total'|trans }}:</div>
             </td>
-            <td colspan="2" class="text-right">
+            <td colspan="2" id="sylius-summary-grand-total" class="text-right">
                 <div class="h3">{{ money.convertAndFormat(order.total) }}</div>
             </td>
         </tr>

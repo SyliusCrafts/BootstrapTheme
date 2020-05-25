@@ -3,8 +3,8 @@
 
 {% set product_variant = item.variant %}
 
-<tr>
-    <td>
+<tr {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
+    <td {{ sylius_test_html_attribute('cart-item', loop_index|default(null) ) }}>
         <button type="button"
                 data-js-remove-from-cart-button
                 data-js-remove-from-cart-redirect-url="{{ path('sylius_shop_cart_summary') }}"
@@ -17,14 +17,14 @@
     </td>
     <td class="text-center">
         {% if item.unitPrice != item.discountedUnitPrice %}
-            <small><s>{{ money.convertAndFormat(item.unitPrice) }}</s></small>
+            <small class="sylius-regular-unit-price" {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}><s>{{ money.convertAndFormat(item.unitPrice) }}</s></small>
         {% endif %}
-        <span>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
+        <span class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
     </td>
     <td class="text-center">
-        <span>{{ form_widget(form.quantity) }}</span>
+        <span class="sylius-quantity">{{ form_widget(form.quantity) }}</span>
     </td>
     <td class="text-right">
-        <span>{{ money.convertAndFormat(item.subtotal) }}</span>
+        <span class="sylius-total" {{ sylius_test_html_attribute('cart-product-subtotal') }}>{{ money.convertAndFormat(item.subtotal) }}</span>
     </td>
 </tr>

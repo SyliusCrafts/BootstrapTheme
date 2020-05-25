@@ -4,12 +4,14 @@
 {% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
 {% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
 
+{% block title %}{{ 'sylius.ui.address_book'|trans }} | {{ parent() }}{% endblock %}
+
 {% block subcontent %}
     <div class="row">
         <div class="col">
             {{ headers.default('sylius.ui.address_book'|trans, '', 'sylius.ui.manage_your_saved_addresses'|trans) }}
 
-            {{ sonata_block_render_event('sylius.shop.account.address_book.index.after_content_header', {'addresses': addresses}) }}
+            {{ sylius_template_event('sylius.shop.account.address_book.index.after_content_header', {'addresses': addresses}) }}
         </div>
         <div class="col-auto">
             <a href="{{ path('sylius_shop_account_address_book_create') }}" class="btn btn-primary">
@@ -17,7 +19,7 @@
                 {{ 'sylius.ui.add_address'|trans }}
             </a>
 
-            {{ sonata_block_render_event('sylius.shop.account.address_book.index.after_add_address_button', {'addresses': addresses}) }}
+            {{ sylius_template_event('sylius.shop.account.address_book.index.after_add_address_button', {'addresses': addresses}) }}
         </div>
     </div>
 
@@ -32,7 +34,7 @@
             {% endif %}
 
             {% for address in addresses if default_address is null or address.id != default_address.id %}
-                <div class="col-12 col-lg-6 mb-3">
+                <div class="col-12 col-lg-6 mb-3" id="sylius-addresses" {{ sylius_test_html_attribute('addresses') }}>
                     {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
                 </div>
             {% endfor %}
