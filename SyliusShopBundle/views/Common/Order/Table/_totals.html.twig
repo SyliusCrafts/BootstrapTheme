@@ -8,9 +8,9 @@
 {% set orderPromotions = sylius_aggregate_adjustments(order.adjustmentsRecursively(orderPromotionAdjustment)) %}
 
 <tr>
-    <td colspan="4">
+    <th colspan="4" id="subtotal" {{ sylius_test_html_attribute('subtotal') }}>
         <strong>{{ 'sylius.ui.items_total'|trans }}:</strong> {{ money.convertAndFormat(itemsSubtotal) }}
-    </td>
+    </th>
 </tr>
 <tr{% if taxIncluded and not taxExcluded %} class="bg-light"{% endif %}>
     <td colspan="4" id="tax-total">

@@ -1,12 +1,14 @@
 {% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
 {% import '@SyliusShop/Common/Macro/pagination.html.twig' as pagination %}
 
+<div class="d-flex justify-content-end my-3">
 {{ sylius_template_event('sylius.shop.product.index.search', _context) }}
+</div>
 
 {{ sylius_template_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
 
 {% if resources.data|length > 0 %}
-    <div class="row">
+    <div class="row" {{ sylius_test_html_attribute('products') }}>
         {% for product in resources.data %}
             <div class="col-6 col-md-6 col-lg-4 mb-3">
                 {% include '@SyliusShop/Product/_box.html.twig' %}

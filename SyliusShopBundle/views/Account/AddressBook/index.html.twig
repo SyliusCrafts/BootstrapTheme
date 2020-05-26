@@ -24,7 +24,7 @@
     </div>
 
     {% if addresses|length > 0 %}
-        <div class="row">
+        <div class="row" id="sylius-addresses" {{ sylius_test_html_attribute('addresses') }}>
             {% set default_address = (sylius.customer.defaultAddress) %}
 
             {% if default_address is not null %}

@@ -5,8 +5,6 @@
 {% block title %}{{ 'sylius.ui.payment'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'select_payment', 'orderTotal': order.total} %}
-
     {{ sylius_template_event(['sylius.shop.checkout.select_payment.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'select_payment', 'orderTotal': order.total})) }}
 
     <div class="row">

@@ -1,3 +1,5 @@
 {% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
 
-{{ headers.default(product.name) }}
+<h1 id="sylius-product-name" {{ sylius_test_html_attribute('product-name', product.name) }}>
+    {{ product.name }}
+</h1>

@@ -10,7 +10,8 @@
                 data-js-remove-from-cart-redirect-url="{{ path('sylius_shop_cart_summary') }}"
                 data-js-remove-from-cart-csrf-token="{{ csrf_token(item.id) }}"
                 data-js-remove-from-cart-api-url="{{ path('sylius_shop_ajax_cart_item_remove', {'id': item.id}) }}"
-                class="btn btn-sm btn-link text-danger">{{ icons.times() }}</button>
+                class="btn btn-sm btn-link text-danger sylius-cart-remove-button"
+                {{ sylius_test_html_attribute('cart-remove-button', item.productName) }}>{{ icons.times() }}</button>
     </td>
     <td>
         {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
@@ -22,7 +23,7 @@
         <span class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
     </td>
     <td class="text-center">
-        <span class="sylius-quantity">{{ form_widget(form.quantity) }}</span>
+        <span class="sylius-quantity">{{ form_widget(form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)) }}</span>
     </td>
     <td class="text-right">
         <span class="sylius-total" {{ sylius_test_html_attribute('cart-product-subtotal') }}>{{ money.convertAndFormat(item.subtotal) }}</span>

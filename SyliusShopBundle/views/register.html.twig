@@ -18,7 +18,7 @@
 
                 {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" {{ sylius_test_html_attribute('register-button') }}>
                     {{ 'sylius.ui.create_an_account'|trans }}
                 </button>
             {{ form_row(form._token) }}

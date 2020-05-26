@@ -13,7 +13,7 @@
             <input type="hidden" name="_method" value="PUT" />
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
                 {{ 'sylius.ui.pay'|trans }}
             </button>
 

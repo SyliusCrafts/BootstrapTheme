@@ -8,8 +8,8 @@
                     {% endfor %}
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">{{ 'sylius.ui.search'|trans }}</button>
-                    <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="btn btn-link">
+                    <button type="submit" class="btn btn-primary" {{ sylius_test_html_attribute('search') }}>{{ 'sylius.ui.search'|trans }}</button>
+                    <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="btn btn-link" {{ sylius_test_html_attribute('clear') }}>
                         {{ 'sylius.ui.clear'|trans }}
                     </a>
                 </div>

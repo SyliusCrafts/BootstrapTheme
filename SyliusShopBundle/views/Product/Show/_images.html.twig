@@ -13,11 +13,11 @@
 
 <div data-product-image="{{ path }}" data-product-link="{{ original_path }}"></div>
 <a href="{{ original_path }}" class="glightbox" data-js-product-image>
-    <img class="img-fluid" src="{{ path }}" alt="{{ product.name }}" />
+    <img class="img-fluid" src="{{ path }}" alt="{{ product.name }}" {{ sylius_test_html_attribute('main-image') }}/>
 </a>
 {% if product.images|length > 1 %}
 
-{{ sonata_block_render_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
+{{ sylius_template_event('sylius.shop.product.show.before_thumbnails', {'product': product}) }}
 
 <div class="row mt-3">
     {% for image in product.images %}

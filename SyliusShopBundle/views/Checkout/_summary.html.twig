@@ -8,9 +8,9 @@
     <table class="table" id="sylius-checkout-subtotal" {{ sylius_test_html_attribute('checkout-subtotal') }}>
         <thead class="card-header">
             <tr>
-                <th class="border-0">{{ 'sylius.ui.item'|trans }}</th>
-                <th class="border-0 text-right">{{ 'sylius.ui.quantity'|trans }}</th>
-                <th class="border-0 text-right">{{ 'sylius.ui.subtotal'|trans }}</th>
+                <th class="border-0 sylius-table-column-item">{{ 'sylius.ui.item'|trans }}</th>
+                <th class="border-0 text-right sylius-table-column-qty">{{ 'sylius.ui.quantity'|trans }}</th>
+                <th class="border-0 text-right sylius-table-column-subtotal">{{ 'sylius.ui.subtotal'|trans }}</th>
             </tr>
         </thead>
         <tbody>

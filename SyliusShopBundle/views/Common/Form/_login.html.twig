@@ -1,12 +1,12 @@
-<div data-js-login>
-    {{ form_row(form.email, {'attr': {'data-js-login': 'email', 'data-js-login-check-email-url': path('sylius_shop_ajax_user_check_action')}}) }}
+<div data-js-login id="sylius-api-login">
+    {{ form_row(form.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({'attr': {'data-js-login': 'email', 'data-js-login-check-email-url': path('sylius_shop_ajax_user_check_action')}})) }}
 
-    <div data-js-login="form" class="mb-3 d-none">
-        <input class="form-control" type="password" placeholder="{{ 'sylius.ui.password'|trans }}">
+    <div data-js-login="form" class="mb-3 d-none" id="sylius-api-login-form">
+        <input class="form-control" type="password" placeholder="{{ 'sylius.ui.password'|trans }}" {{ sylius_test_html_attribute('password-input') }}>
         <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
-        <button class="btn btn-primary mt-3" data-js-login-url="{{ path('sylius_shop_login_check') }}" type="button">
+        <button class="btn btn-primary mt-3" data-js-login-url="{{ path('sylius_shop_login_check') }}" type="button" id="sylius-api-login-submit" {{ sylius_test_html_attribute('login-button') }}>
             {{ 'sylius.ui.sign_in'|trans }}
         </button>
     </div>
-    <div class="alert alert-danger d-none"></div>
+    <div class="alert alert-danger d-none" {{ sylius_test_html_attribute('login-validation-error') }}></div>
 </div>
