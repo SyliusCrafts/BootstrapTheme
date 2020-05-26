@@ -21,6 +21,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt';
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons/faSyncAlt';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
 
-library.add(faStar, faQuestionCircle, faShoppingBag, faCheck, faExclamationCircle, faInfoCircle, faChevronUp, faMapMarkerAlt, faShuttleVan, faCreditCard, faFlag, faCcMastercard, faCcVisa, faCcPaypal, faTimes, faSearch, faPlus, faPencilAlt, faSyncAlt);
+library.add(faStar, faQuestionCircle, faShoppingBag, faCheck, faExclamationCircle, faInfoCircle, faChevronUp, faMapMarkerAlt, faShuttleVan, faCreditCard, faFlag, faCcMastercard, faCcVisa, faCcPaypal, faTimes, faSearch, faPlus, faPencilAlt, faSyncAlt, faFacebook, faTwitter, faInstagram);
 dom.watch();

@@ -1,9 +1,17 @@
-<div id="sylius-carousel" class="carousel slide col-12" data-ride="carousel">
+<div id="sylius-carousel" class="carousel slide my-5" data-ride="carousel">
     <div class="carousel-inner">
         {% for product in products %}
-            <div class="carousel-item">
-                {% include '@SyliusShop/Product/_box.html.twig' %}
+            {% if loop.index0 % 2 == 0 %}
+            <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+                <div class="row">
+            {% endif %}
+                    <div class="col-6">
+                        {% include '@SyliusShop/Product/_box.html.twig' %}
+                    </div>
+            {% if loop.index % 2 == 0 %}
+                </div>
             </div>
+            {% endif %}
         {% endfor %}
     </div>
 

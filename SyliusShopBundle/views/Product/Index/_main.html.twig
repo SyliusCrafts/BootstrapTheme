@@ -1,8 +1,9 @@
 {% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
 {% import '@SyliusShop/Common/Macro/pagination.html.twig' as pagination %}
 
-<div class="d-flex justify-content-end my-3">
-{{ sylius_template_event('sylius.shop.product.index.search', _context) }}
+<div class="mb-3">
+    {{ sylius_template_event('sylius.shop.product.index.search', _context) }}
+    <div class="clearfix"></div>
 </div>
 
 {{ sylius_template_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
