@@ -12,11 +12,9 @@
                 {{ 'sylius.ui.thank_you'|trans }}
             </h1>
 
-            {% if subheader is not empty %}
-                <p class="text-muted mb-4">
-                    {{'sylius.ui.placed_an_order'|trans }}
-                </p>
-            {% endif %}
+            <p class="text-muted mb-4">
+                {{'sylius.ui.placed_an_order'|trans }}
+            </p>
 
             {{ sylius_template_event('sylius.shop.order.thank_you.after_message', {'order': order}) }}
 

@@ -9,7 +9,7 @@
 
 {% set value = 'sylius.ui.' ~ state %}
 
-<span class="badge-{{ viewOptions[state]['color'] }} badge">
+<span class="badge-{{ viewOptions[state]['color'] }} badge mx-2">
     <i class="{{ viewOptions[state]['icon'] }} icon"></i>
     {{ value|trans }}
 </span>

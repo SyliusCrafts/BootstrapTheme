@@ -8,19 +8,19 @@
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 
 {% if definition.enabledFilters|length > 0 %}
-    <div class="">
-        <div class="">
+    <div>
+        <div>
             {{ 'sylius.ui.filters'|trans }}
         </div>
-        <div class="">
+        <div>
             <form method="get" action="{{ path }}" class="loadable">
-                <div class="">
+                <div>
                 {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
                     {{ sylius_grid_render_filter(grid, filter) }}
 
                     {% if loop.index0 % 2 %}
                         </div>
-                        <div class="">
+                        <div>
                     {% endif %}
                 {% endfor %}
                 </div>
@@ -36,11 +36,11 @@
 {% endif %}
 
 {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
-    <div class="">
-        <div class="">
+    <div>
+        <div>
             {{ 'sylius.ui.bulk_actions'|trans }}
         </div>
-        <div class="">
+        <div>
             {% for action in definition.getEnabledActions('bulk') %}
                 {{ sylius_grid_render_bulk_action(grid, action, null) }}
             {% endfor %}
@@ -48,14 +48,14 @@
     </div>
 {% endif %}
 
-<div class="">
+<div>
     {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
-    <div class="">
-        <div class="">
+    <div>
+        <div>
             {{ pagination.simple(data) }}
         </div>
-        <div class="">
-            <div class="">
+        <div>
+            <div>
                 {{ pagination.perPage(data, definition.limits) }}
             </div>
         </div>

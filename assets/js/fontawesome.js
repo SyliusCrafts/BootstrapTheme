@@ -24,6 +24,14 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCi
 import { faFacebook } from '@fortawesome/free-brands-svg-icons/faFacebook';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons/faInstagram';
+import { faBan } from '@fortawesome/free-solid-svg-icons/faBan';
+import { faAdjust } from '@fortawesome/free-solid-svg-icons/faAdjust';
+import { faClock } from '@fortawesome/free-solid-svg-icons/faClock';
+import { faReplyAll } from '@fortawesome/free-solid-svg-icons/faReplyAll';
 
-library.add(faStar, faQuestionCircle, faShoppingBag, faCheck, faExclamationCircle, faInfoCircle, faChevronUp, faMapMarkerAlt, faShuttleVan, faCreditCard, faFlag, faCcMastercard, faCcVisa, faCcPaypal, faTimes, faSearch, faPlus, faPencilAlt, faSyncAlt, faFacebook, faTwitter, faInstagram);
+library.add(faStar, faQuestionCircle, faShoppingBag, faCheck, faExclamationCircle,
+  faInfoCircle, faChevronUp, faMapMarkerAlt, faShuttleVan, faCreditCard, faFlag,
+  faCcMastercard, faCcVisa, faCcPaypal, faTimes, faSearch, faPlus, faPencilAlt,
+  faSyncAlt, faFacebook, faTwitter, faInstagram, faBan, faAdjust, faClock, faReplyAll
+);
 dom.watch();
