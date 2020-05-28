@@ -23,13 +23,15 @@
 {{ sylius_template_event('sylius.shop.layout.before_body') }}
 
 {% block top %}
-    <div class="bg-dark navbar">
-        <div class="container">
-            <div class="nav navbar-nav ml-auto">
-                {{ sylius_template_event('sylius.shop.layout.topbar') }}
-            </div>
+    <nav class="bg-dark navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTop">
+            {{ sylius_template_event('sylius.shop.layout.topbar') }}
         </div>
-    </div>
+    </nav>
 {% endblock %}
 
 {% block header %}
