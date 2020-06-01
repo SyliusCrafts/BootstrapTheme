@@ -1,8 +1,8 @@
-<div class="list-group mb-2">
+<div class="list-group mb-2" {{ sylius_test_html_attribute('payment-item') }}>
     <div class="list-group-item flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">
-                {{ form_widget(form) }}
+            <h5 class="mb-1" {{ sylius_test_html_attribute('payment-method-checkbox') }}>
+                {{ form_widget(form, sylius_test_form_attribute('payment-method-select')) }}
                 {{ form_label(form) }}
             </h5>
         </div>

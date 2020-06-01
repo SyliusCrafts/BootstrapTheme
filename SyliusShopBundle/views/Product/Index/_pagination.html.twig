@@ -1,6 +1,6 @@
 {% set paginationLimits = (resources.definition.limits) %}
 
-<div class="dropdown">
+<div class="dropdown sylius-paginate float-right">
     <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">
         {{ 'sylius.ui.show'|trans }} {{ resources.data.maxPerPage }}
     </button>
@@ -11,3 +11,4 @@
         {% endfor %}
     </div>
 </div>
+

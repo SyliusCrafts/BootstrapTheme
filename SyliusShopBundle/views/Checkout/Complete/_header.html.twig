@@ -1,4 +1,16 @@
 {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 {% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
 
-{{ headers.default('sylius.ui.summary_of_your_order'|trans, '', order.currencyCode ~ ' | ' ~ flags.fromLocaleCode(sylius.localeCode) ~ sylius.localeCode|locale_name) }}
+<h1>
+    {{ 'sylius.ui.summary_of_your_order'|trans }}
+</h1>
+
+<p class="text-muted mb-4">
+    <span id="sylius-order-currency-code" {{ sylius_test_html_attribute('order-currency-code') }}>
+        {{ order.currencyCode }}
+    </span>
+    |
+    <span id="sylius-order-locale-name" {{ sylius_test_html_attribute('order-locale-name') }}>
+        {{ flags.fromLocaleCode(sylius.localeCode) }}{{ sylius.localeCode|locale_name }}
+    </span>
+</p>

@@ -1,12 +1,4 @@
-.navbar a.nav-link {
-    text-transform: uppercase;
-    color: $headings-color;
-    font-weight: 500;
 
-    &:hover {
-        color: $primary;
-    }
-}
 
 @include media-breakpoint-up(lg) {
     .dropdown-menu .dropdown-menu {

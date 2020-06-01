@@ -1,6 +1,6 @@
 {% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
 
-{{ sonata_block_render_event('sylius.shop.product.index.before_vertical_menu', {'taxon': taxon}) }}
+{{ sylius_template_event('sylius.shop.product.index.before_vertical_menu', {'taxon': taxon}) }}
 
 <div class="card mb-4">
     <div class="card-header">{{ taxon.name }}</div>
@@ -17,4 +17,4 @@
     </div>
 </div>
 
-{{ sonata_block_render_event('sylius.shop.product.index.after_vertical_menu', {'taxon': taxon}) }}
+{{ sylius_template_event('sylius.shop.product.index.after_vertical_menu', {'taxon': taxon}) }}

@@ -2,6 +2,8 @@
 
 {% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
 
+{% block title %}{{ 'sylius.ui.summary_of_your_order'|trans }} | {{ parent() }}{% endblock %}
+
 {% block content %}
     <div>
         {% include '@SyliusShop/Order/_summary.html.twig' %}
@@ -11,7 +13,7 @@
             <input type="hidden" name="_method" value="PUT" />
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
                 {{ 'sylius.ui.pay'|trans }}
             </button>
 

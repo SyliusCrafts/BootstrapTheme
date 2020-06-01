@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <div class="card">
+        <div class="card" id="sylius-billing-address" {{ sylius_test_html_attribute('billing-address') }}>
             <div class="card-header">
                 {{ 'sylius.ui.shipping_address'|trans }}
             </div>
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="col">
-        <div class="card">
+        <div class="card" id="sylius-shipping-address" {{ sylius_test_html_attribute('shipping-address') }}>
             <div class="card-header">
                 {{ 'sylius.ui.billing_address'|trans }}
             </div>

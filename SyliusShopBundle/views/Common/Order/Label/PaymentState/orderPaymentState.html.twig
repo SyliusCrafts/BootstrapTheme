@@ -1,0 +1,19 @@
+{%
+    set viewOptions = {
+        authorized: { icon: "fas fa-check", color: "primary" } ,
+        awaiting_payment: { icon: "fas fa-clock", color: "secondary" } ,
+        cancelled: { icon: "fas fa-ban", color: "danger" } ,
+        paid: { icon: "fas fa-adjust", color: "success" } ,
+        partially_authorized: { icon: "fas fa-ban", color: "warning" } ,
+        partially_paid: { icon: "fas fa-clock", color: "info" } ,
+        partially_refunded: { icon: "fas fa-check", color: "info" } ,
+        refunded: { icon: "fas fa-reply-all", color: "light" } ,
+    }
+%}
+
+{% set value = 'sylius.ui.' ~ state %}
+
+<span class="badge-{{ viewOptions[state]['color'] }} badge">
+    <i class="{{ viewOptions[state]['icon'] }} icon"></i>
+    {{ 'sylius.ui.state'|trans }}: <span id="order-payment-status" {{ sylius_test_html_attribute('order-payment-state') }}>{{ value|trans }}</span>
+</span>

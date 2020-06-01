@@ -1,6 +1,6 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-<table class="table" id="sylius-product-variants">
+<table class="table" id="sylius-product-variants" {{ sylius_test_html_attribute('product-variants') }}>
     <thead class="">
         <tr>
             <th class="border-0 h6">{{ 'sylius.ui.variant'|trans }}</th>
@@ -20,7 +20,7 @@
                     {% endfor %}
                 {% endif %}
             </td>
-            <td data-js-product-variant-price>{{ money.calculatePrice(variant) }}</td>
+            <td data-js-product-variant-price class="sylius-product-variant-price">{{ money.calculatePrice(variant) }}</td>
             <td class="text-right">{{ form_widget(form.cartItem.variant[key], {'label': false}) }}</td>
         </tr>
     {% endfor %}

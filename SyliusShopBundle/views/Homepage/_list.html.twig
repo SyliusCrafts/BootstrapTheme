@@ -1,0 +1,15 @@
+{% if products|length == 4 %}
+    {% set columns = "col-6" %}
+{% endif %}
+{% if products|length == 3 %}
+    {% set columns = "col-4" %}
+{% endif %}
+
+<div class="card-group">
+    {% for product in products %}
+        <div class="{{ columns|default('col-12') }}">
+        {% include '@SyliusShop/Product/_box.html.twig' %}
+        </div>
+    {% endfor %}
+</div>
+

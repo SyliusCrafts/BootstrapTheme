@@ -3,9 +3,9 @@
         {{ form_errors(form) }}
         <input type="hidden" name="_method" value="PATCH"/>
 
-        {{ sonata_block_render_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
+        {{ sylius_template_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
 
-        <table class="table">
+        <table class="table" id="sylius-cart-items" {{ sylius_test_html_attribute('cart-items') }}>
             <thead class="card-header">
                 <tr>
                     <th class="border-0"></th>
@@ -25,11 +25,7 @@
             <div class="row">
                 {% if form.promotionCoupon is defined %}
                     <div class="col">
-                        {{ sonata_block_render_event('sylius.shop.cart.summary.before_coupon', {'cart': cart, 'form': form}) }}
-
-                        {% include '@SyliusShop/Cart/Summary/_coupon.html.twig' with {'form': form.promotionCoupon} %}
-
-                        {{ sonata_block_render_event('sylius.shop.cart.summary.after_coupon', {'cart': cart, 'form': form}) }}
+                        {{ sylius_template_event('sylius.shop.cart.coupon', {'cart': cart, 'form': form, 'main_form': form.vars.id}) }}
                     </div>
                 {% endif %}
 

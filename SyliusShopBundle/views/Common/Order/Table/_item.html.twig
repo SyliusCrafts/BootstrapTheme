@@ -3,16 +3,16 @@
 {% set unitPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT') %}
 {% set unitPromotions = item.units.first.adjustments(unitPromotionAdjustment) %}
 
-<tr>
+<tr {{ sylius_test_html_attribute('product-row', item.productName) }}>
     <td>{% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}</td>
     <td class="text-right">
         {% if item.unitPrice != item.discountedUnitPrice %}
-            <small><s>{{ money.convertAndFormat(item.unitPrice) }}</s></small>
+            <small class="old-price" {{ sylius_test_html_attribute('product-old-price', item.productName) }}><s>{{ money.convertAndFormat(item.unitPrice) }}</s></small>
         {% endif %}
-        <span>
+        <span class="sylius-unit-price" {{ sylius_test_html_attribute('product-unit-price', item.productName) }}>
             {{ money.convertAndFormat(item.discountedUnitPrice) }}
             {% if item.unitPrice != item.discountedUnitPrice %}
-                <span title="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
+                <span id="item-promotion-details"  title="{% for promotion in unitPromotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
                     <i class="fas fa-question-circle"></i>
                 </span>
             {% endif %}

@@ -1,0 +1,18 @@
+{%
+    set viewOptions = {
+        authorized: { icon: "fas fa-check", color: "primary" } ,
+        cancelled: { icon: "fas fa-ban", color: "warning" } ,
+        completed: { icon: "fas fa-adjust", color: "success" } ,
+        failed: { icon: "fas fa-ban", color: "danger" } ,
+        new: { icon: "fas fa-clock", color: "secondary" } ,
+        processing: { icon: "fas fa-check", color: "info" } ,
+        refunded: { icon: "fas fa-reply-all", color: "light" } ,
+}
+%}
+
+{% set value = 'sylius.ui.' ~ state %}
+
+<span class="badge-{{ viewOptions[state]['color'] }} badge">
+    <i class="{{ viewOptions[state]['icon'] }} icon"></i>
+    {{ value|trans }}
+</span>

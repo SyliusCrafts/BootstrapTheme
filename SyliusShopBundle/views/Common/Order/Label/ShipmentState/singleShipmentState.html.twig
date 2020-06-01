@@ -1,0 +1,15 @@
+{%
+    set viewOptions = {
+        cart: { icon: "fas fa-adjust", color: "secondary" } ,
+        cancelled: { icon: "fas fa-ban", color: "danger" } ,
+        shipped: { icon: "fas fa-plane", color: "success" } ,
+        ready: { icon: "fas fa-clock", color: "primary" } ,
+}
+%}
+
+{% set value = 'sylius.ui.' ~ state %}
+
+<span class="badge-{{ viewOptions[state]['color'] }} badge mx-2">
+    <i class="{{ viewOptions[state]['icon'] }} icon"></i>
+    {{ value|trans }}
+</span>
