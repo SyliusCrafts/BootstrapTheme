@@ -1,5 +1,5 @@
 <div class="card">
-    {{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
+    {{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
         {{ form_errors(form) }}
         <input type="hidden" name="_method" value="PATCH"/>
 
