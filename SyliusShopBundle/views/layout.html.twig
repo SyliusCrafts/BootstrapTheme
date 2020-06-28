@@ -42,7 +42,7 @@
     <div class="mb-2">
         <div class="container">
             <header class="my-4">
-                {% include '@SyliusShop/_header.html.twig' %}
+                {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/_header.html.twig'})) }}
 
                 {{ sonata_block_render_event('sylius.shop.layout.after_header') }}
             </header>

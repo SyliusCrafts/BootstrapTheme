@@ -17,7 +17,7 @@
             {{ render(url('sylius_shop_partial_cart_summary', {'template': '@SyliusShop/Cart/_widget.html.twig'})) }}
         </div>
     </div>
-    <div class="col-auto d-lg-none ml-2">
+    <div class="{{ 'col-auto ml-2 ' ~ ((taxons|length > 0) ? 'd-lg-none' : 'd-md-none') }}">
         <div class="navbar-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar">
                 <span class="navbar-toggler-icon"></span>
