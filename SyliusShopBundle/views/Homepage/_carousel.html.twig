@@ -8,7 +8,7 @@
                     <div class="col-6">
                         {% include '@SyliusShop/Product/_box.html.twig' %}
                     </div>
-            {% if loop.index % 2 == 0 %}
+            {% if loop.index % 2 == 0 or loop.last %}
                 </div>
             </div>
             {% endif %}
