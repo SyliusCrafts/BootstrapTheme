@@ -36,7 +36,8 @@
 
 {% block header %}
     <div class="mb-2">
-        {{ sylius_template_event('sylius.shop.layout.header') }}
+        {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/_header.html.twig'})) }}
+        {% include '@SyliusShop/Layout/Header/_menu.html.twig' %}
     </div>
 {% endblock %}
 
