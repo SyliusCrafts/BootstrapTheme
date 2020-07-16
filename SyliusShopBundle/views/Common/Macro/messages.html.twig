@@ -1,5 +1,5 @@
 {% macro default(message, icon, type, header) %}
-    <div class="alert alert-{{ type|default('') }}">
+    <div class="alert alert-{{ type|default('') }}" {{ sylius_test_html_attribute('flash-message', type) }}>
         <div class="d-flex align-items-center">
             <span class="pr-3 fa-2x">
                 {{ icon }}
