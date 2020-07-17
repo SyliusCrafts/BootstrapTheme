@@ -21,7 +21,7 @@ services:
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
     volumes:
       - .:/srv/sylius/themes/BootstrapTheme:rw,cached
-      - public-media:/srv/sylius/public/media:rw
+      - public:/srv/sylius/public:rw
 
   mysql:
     image: percona:5.7
@@ -53,6 +53,7 @@ services:
       - PHP_PORT=9000
     volumes:
       - .:/srv/sylius/themes/BootstrapTheme:rw,cached
+      - public:/srv/sylius/public:rw
     ports:
       - "35729:35729"
 
@@ -69,7 +70,7 @@ services:
       - php
       - nodejs # to ensure correct build order
     volumes:
-      - public-media:/srv/sylius/public/media:ro,nocopy
+      - public:/srv/sylius/public:ro,nocopy
     ports:
       - "80:80"
 
@@ -93,4 +94,4 @@ services:
 
 volumes:
   mysql-data:
-  public-media:
+  public:
