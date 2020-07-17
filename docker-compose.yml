@@ -20,12 +20,7 @@ services:
       - MAILER_URL=smtp://mailhog:1025
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
     volumes:
-      - .:/srv/sylius:rw,cached
-      # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./var:/srv/sylius/var:rw
-      - ./public:/srv/sylius/public:rw,delegated
-      # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./public/media:/srv/sylius/public/media:rw
+      - .:/srv/sylius/themes/BootstrapTheme:rw,cached
       - public-media:/srv/sylius/public/media:rw
 
   mysql:
@@ -57,8 +52,7 @@ services:
       - PHP_HOST=php
       - PHP_PORT=9000
     volumes:
-      - .:/srv/sylius:rw,cached
-      - ./public:/srv/sylius/public:rw,delegated
+      - .:/srv/sylius/themes/BootstrapTheme:rw,cached
     ports:
       - "35729:35729"
 
@@ -75,9 +69,6 @@ services:
       - php
       - nodejs # to ensure correct build order
     volumes:
-      - ./public:/srv/sylius/public:ro
-      # if you develop on Linux, you may use a bind-mounted host directory instead
-      # - ./public/media:/srv/sylius/public/media:ro
       - public-media:/srv/sylius/public/media:ro,nocopy
     ports:
       - "80:80"
