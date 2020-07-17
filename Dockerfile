@@ -175,7 +175,11 @@ CMD ["php-fpm"]
 
 FROM nginx:${NGINX_VERSION}-alpine AS sylius_nginx
 
-COPY --from=sylius_php /srv/sylius/docker/nginx/conf.d/default.conf /etc/nginx/conf.d/
+COPY --from=sylius_php /srv/sylius/docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.orig
+RUN set -eux; \
+	head -n 1 /etc/nginx/conf.d/default.conf.orig > /etc/nginx/conf.d/default.conf; \
+	echo "    listen 8080;" >> /etc/nginx/conf.d/default.conf; \
+	tail -n +2 /etc/nginx/conf.d/default.conf.orig >> /etc/nginx/conf.d/default.conf
 
 WORKDIR /srv/sylius
 

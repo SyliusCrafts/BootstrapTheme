@@ -72,7 +72,7 @@ services:
     volumes:
       - public:/srv/sylius/public:ro
     ports:
-      - "8080:80"
+      - "8080:8080"
 
   mailhog:
     # do not use in production!
