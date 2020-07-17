@@ -1,0 +1,6 @@
+
+
+Encore.reset();
+
+const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');
+module.exports = [shopConfig, adminConfig, bootstrapTheme];
