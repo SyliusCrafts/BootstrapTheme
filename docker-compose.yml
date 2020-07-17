@@ -20,7 +20,7 @@ services:
       - MAILER_URL=smtp://mailhog:1025
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
     volumes:
-      - .:/srv/sylius/themes/BootstrapTheme:rw,cached
+      - .:/srv/sylius/themes/BootstrapTheme:rw
       - public:/srv/sylius/public:rw
 
   mysql:
@@ -52,7 +52,7 @@ services:
       - PHP_HOST=php
       - PHP_PORT=9000
     volumes:
-      - .:/srv/sylius/themes/BootstrapTheme:rw,cached
+      - .:/srv/sylius/themes/BootstrapTheme:rw
       - public:/srv/sylius/public:rw
     ports:
       - "35729:35729"
@@ -70,9 +70,9 @@ services:
       - php
       - nodejs # to ensure correct build order
     volumes:
-      - public:/srv/sylius/public:ro,nocopy
+      - public:/srv/sylius/public:ro
     ports:
-      - "80:80"
+      - "8080:80"
 
   mailhog:
     # do not use in production!
