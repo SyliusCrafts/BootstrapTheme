@@ -61,8 +61,8 @@ RUN set -eux; \
 ARG BLACKFIRE=false
 
 RUN set -eux; \
-	if [ -z "$BLACKFIRE" ] && [ "$BLACKFIRE" = "true" ]; then \
-		curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$PHP_VERSION; \
+	if [ ! -z "$BLACKFIRE" ] && [ "$BLACKFIRE" = "true" ]; then \
+		curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;"); \
 		mkdir -p /tmp/blackfire; \
 		tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire; \
 		mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so; \
