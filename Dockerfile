@@ -165,7 +165,7 @@ COPY --from=sylius_php_base /srv/sylius/docker/nodejs/docker-entrypoint.sh /usr/
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
-CMD ["yarn", "watch"]
+CMD ["yarn", "encore", "dev", "--watch"]
 
 
 FROM sylius_php_base AS sylius_php
@@ -192,11 +192,7 @@ CMD ["php-fpm"]
 
 FROM nginx:${NGINX_VERSION}-alpine AS sylius_nginx
 
-COPY --from=sylius_php /srv/sylius/docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.orig
-RUN set -eux; \
-	head -n 1 /etc/nginx/conf.d/default.conf.orig > /etc/nginx/conf.d/default.conf; \
-	echo "    listen 8080;" >> /etc/nginx/conf.d/default.conf; \
-	tail -n +2 /etc/nginx/conf.d/default.conf.orig >> /etc/nginx/conf.d/default.conf
+COPY docker/default.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /srv/sylius
 
