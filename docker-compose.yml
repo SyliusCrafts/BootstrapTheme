@@ -19,13 +19,18 @@ services:
       - APP_DEBUG=1
       - APP_SECRET=EDITME
       - COMPOSER_PROCESS_TIMEOUT=0
-      - DATABASE_URL=mysql://sylius:nopassword@mysql/sylius
-      - MAILER_URL=smtp://mailhog:1025
+      - DATABASE_URL=mysql://sylius:nopassword@127.0.0.1:3306/sylius
+      - MAILER_URL=smtp://127.0.0.1:1025
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+      - BLACKFIRE_CLIENT_ID=${BLACKFIRE_CLIENT_ID}
+      - BLACKFIRE_CLIENT_TOKEN=${BLACKFIRE_CLIENT_TOKEN}
+      - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID}
+      - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN}
     volumes:
       - .:/srv/sylius/themes/BootstrapTheme:rw
       - public:/srv/sylius/public:rw
       - var:/srv/sylius/var:rw
+    network_mode: host
 
   mysql:
     image: percona:5.7
@@ -37,9 +42,10 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql:rw
       # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/mysql/data:/var/lib/mysql:rw,delegated
+      #- ./docker/mysql/data:/var/lib/mysql
     ports:
       - "3306:3306"
+    network_mode: host
 
   nodejs:
     build:
@@ -53,13 +59,14 @@ services:
     depends_on:
       - php
     environment:
-      - PHP_HOST=php
+      - PHP_HOST=127.0.0.1
       - PHP_PORT=9000
     volumes:
       - .:/srv/sylius/themes/BootstrapTheme:rw
       - public:/srv/sylius/public:rw
     ports:
       - "35729:35729"
+    network_mode: host
 
   nginx:
     build:
@@ -77,6 +84,7 @@ services:
       - public:/srv/sylius/public:ro
     ports:
       - "8080:8080"
+    network_mode: host
 
   mailhog:
     # do not use in production!
@@ -87,6 +95,7 @@ services:
     #   - ./docker/mailhog/maildir:/maildir:rw,delegated
     ports:
       - "8025:8025"
+    network_mode: host
 
   chrome:
     build:
@@ -95,6 +104,7 @@ services:
     image: quay.io/sylius-bootstrap-theme/chrome:latest
     ports:
       - "9222:9222"
+    network_mode: host
 
 volumes:
   mysql-data:
