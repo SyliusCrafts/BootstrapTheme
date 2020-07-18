@@ -1,6 +1,6 @@
 ARG PHP_VERSION=7.4
 ARG NODE_VERSION=12
-ARG NGINX_VERSION=1.17
+ARG NGINX_VERSION=1.19
 
 FROM php:${PHP_VERSION}-fpm-alpine AS sylius_php_base
 
@@ -11,6 +11,7 @@ RUN apk add --no-cache \
 		gettext \
 		git \
 		mariadb-client \
+		vim \
 	;
 
 ARG APCU_VERSION=5.1.17
@@ -56,6 +57,22 @@ RUN set -eux; \
 	apk add --no-cache --virtual .sylius-phpexts-rundeps $runDeps; \
 	\
 	apk del .build-deps
+
+ARG BLACKFIRE=false
+
+RUN set -eux; \
+	if [ -z "$BLACKFIRE" ] && [ "$BLACKFIRE" = "true" ]; then \
+		curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$PHP_VERSION; \
+		mkdir -p /tmp/blackfire; \
+		tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire; \
+		mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so; \
+		printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini; \
+		rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz; \
+		mkdir -p /tmp/blackfire; \
+		curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd64 | tar zxp -C /tmp/blackfire; \
+		mv /tmp/blackfire/blackfire /usr/bin/blackfire; \
+		rm -Rf /tmp/blackfire; \
+	fi
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 

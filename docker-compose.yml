@@ -3,6 +3,8 @@ version: '3.4'
 services:
   php:
     build:
+      args:
+        - BLACKFIRE=${BLACKFIRE:-false}
       context: .
       target: sylius_php
       cache_from:
@@ -16,12 +18,14 @@ services:
       - APP_ENV=dev
       - APP_DEBUG=1
       - APP_SECRET=EDITME
+      - COMPOSER_PROCESS_TIMEOUT=0
       - DATABASE_URL=mysql://sylius:nopassword@mysql/sylius
       - MAILER_URL=smtp://mailhog:1025
       - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
     volumes:
       - .:/srv/sylius/themes/BootstrapTheme:rw
       - public:/srv/sylius/public:rw
+      - var:/srv/sylius/var:rw
 
   mysql:
     image: percona:5.7
@@ -95,3 +99,4 @@ services:
 volumes:
   mysql-data:
   public:
+  var:
