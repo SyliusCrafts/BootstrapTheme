@@ -17,7 +17,7 @@
                         {{ icon|default(icons.success()) }}
                     </span>
                     <strong>
-                        {% set header = 'sylius.ui.'~type %}
+                        {% set header = 'sylius.ui.' ~ type %}
                         {{ header|trans }}&nbsp;
                     </strong>
                     {% if flash is iterable %}

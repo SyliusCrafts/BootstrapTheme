@@ -1,5 +1,5 @@
 <div class="input-group" {{ sylius_test_html_attribute('cart-promotion-coupon') }}>
-    {{ form_widget(form.promotionCoupon, sylius_test_form_attribute('cart-promotion-coupon-input')|sylius_merge_recursive({'attr': {'form': main_form, 'placeholder': 'sylius.ui.enter_your_code'|trans~'...'}})) }}
+    {{ form_widget(form.promotionCoupon, sylius_test_form_attribute('cart-promotion-coupon-input')|sylius_merge_recursive({'attr': {'form': main_form, 'placeholder': 'sylius.ui.enter_your_code'|trans ~ '...'}})) }}
     <div class="input-group-append">
         <button type="submit" id="sylius-save" {{ sylius_test_html_attribute('apply-coupon-button') }} class="btn btn-primary">{{ 'sylius.ui.apply_coupon'|trans }}</button>
     </div>
