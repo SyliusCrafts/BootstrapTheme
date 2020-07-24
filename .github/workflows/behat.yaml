@@ -1,0 +1,167 @@
+name: Behat
+
+on:
+    push:
+        branches: [ master ]
+        paths-ignore:
+            - README.md
+    pull_request:
+        branches: [ master ]
+        paths-ignore:
+            - README.md
+
+jobs:
+    sylius:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php: [7.4]
+                sylius: ['~1.7.0']
+
+        env:
+            APP_ENV: test
+
+        steps:
+            - name: PHP - Switch
+              run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php }} && php -v
+
+            - name: PHP - Setup timezone
+              run: |
+                  echo "date.timezone=UTC" >> /tmp/timezone.ini; \
+                  sudo mv /tmp/timezone.ini /etc/php/${{ matrix.php }}/cli/conf.d/timezone.ini
+
+            - uses: actions/checkout@v2
+              with:
+                  path: theme
+
+            - uses: actions/cache@v1
+              id: cache-composer
+              with:
+                  path: /home/runner/.composer/cache
+                  key: composer-php.${{ matrix.php }}-sylius.${{ matrix.sylius }}-${{ github.sha }}
+                  restore-keys: composer-php.${{ matrix.php }}-sylius.${{ matrix.sylius }}-
+
+            - name: Composer - Create cache directory
+              run: mkdir -p /home/runner/.composer/cache
+              if: steps.cache-composer.outputs.cache-hit != 'true'
+
+            - name: Composer - Self Update
+              run: |
+                  mkdir -p /home/runner/.composer/
+                  sudo composer self-update
+
+            - name: Composer - Github Auth
+              run: composer config -g github-oauth.github.com ${{ github.token }}
+
+            - name: Composer - Install Sylius-Standard
+              run: composer create-project --no-progress sylius/sylius-standard sylius "${{ matrix.sylius }}"
+
+            - name: Composer - Add path repository
+              working-directory: ./sylius
+              run: |
+                  composer config repositories.plugin '{"type": "path", "url": "../theme/"}'
+
+            - name: Theme - Install Theme
+              working-directory: ./sylius
+              run: composer require sylius/bootstrap-theme encore
+
+            - name: Theme - Copy Theme
+              working-directory: ./sylius
+              run: |
+                  mkdir -p themes/BootstrapTheme/
+                  cp -r ../theme/* themes/BootstrapTheme/
+
+            - name: Theme - Install dependencies
+              working-directory: ./sylius
+              run: |
+                  yarn
+                  yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
+                  yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
+
+            - name: Theme - Config Webpack
+              working-directory: ./sylius
+              run: |
+                  echo "const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');" >> webpack.config.js
+                  echo "module.exports = [bootstrapTheme];" >> webpack.config.js
+
+            - name: Theme - Config Assets
+              working-directory: ./sylius
+              run: |
+                  echo "framework:" > config/packages/assets.yaml
+                  echo "    assets:" >> config/packages/assets.yaml
+                  echo "        packages:" >> config/packages/assets.yaml
+                  echo "            bootstrapTheme:" >> config/packages/assets.yaml
+                  echo "                json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'" >> config/packages/assets.yaml
+
+            - name: Theme - Config Webpack Encore
+              working-directory: ./sylius
+              run: |
+                  echo "    builds:" >> config/packages/webpack_encore.yaml
+                  echo "        bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'" >> config/packages/webpack_encore.yaml
+
+            - name: Theme - Build
+              working-directory: ./sylius
+              run: yarn build
+
+            - name: Theme - Set in Sylius Standard
+              working-directory: ./sylius
+              run: |
+                  sed -i "82i\                                theme_name: 'sylius/bootstrap-theme'" vendor/sylius/sylius/src/Sylius/Bundle/CoreBundle/Resources/config/app/fixtures/shop_configuration.yaml
+                  sed -i "113i\        \$channel->setThemeName('sylius/bootstrap-theme');" vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultUnitedStatesChannelFactory.php
+                  sed -i "88i\        \$channel->setThemeName('sylius/bootstrap-theme');" vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultChannelFactory.php
+
+            - name: Sylius - Init database
+              working-directory: ./sylius
+              run: php bin/console doctrine:database:create --if-not-exists
+
+            - name: Sylius - Install
+              working-directory: ./sylius
+              run: php bin/console sylius:install -n -s default
+
+            - name: Behat - Configure display
+              working-directory: ./sylius
+              run: |
+                  /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
+                  export DISPLAY=:99
+
+            - name: Behat - Download and configure ChromeDriver
+              working-directory: ./sylius
+              run: |
+                  if [ ! -f chromedriver ] || [ "$(chromedriver --version | grep -c 2.34)" = "0" ]; then
+                      curl http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip > chromedriver.zip
+                      unzip chromedriver.zip
+                      chmod +x chromedriver
+                  fi
+
+            - name: Behat - Run ChromeDriver
+              working-directory: ./sylius
+              run: chromedriver > /dev/null 2>&1 &
+
+            - name: Behat - Download and configure Selenium
+              working-directory: ./sylius
+              run: |
+                  if [ ! -f selenium.jar ] || [ "$(java -jar selenium.jar --version | grep -c 3.4.0)" = "0" ]; then
+                      curl http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar > selenium.jar
+                  fi
+
+            - name: Behat - Run Selenium
+              working-directory: ./sylius
+              run: java -Dwebdriver.chrome.driver=chromedriver -jar selenium.jar > /dev/null 2>&1 &
+
+            - name: Behat - Run webserver
+              working-directory: ./sylius
+              run: bin/console server:run 127.0.0.1:8080 --quiet > /dev/null 2>&1 &
+
+            - name: Behat - Run Behat tests
+              working-directory: ./sylius
+              run: vendor/bin/behat --strict -vvv --no-interaction -f progress --tags="~@javascript && ~@todo && ~@cli" vendor/sylius/sylius/features/account/registering.feature || \
+                   vendor/bin/behat --strict -vvv --no-interaction -f progress --tags="~@javascript && ~@todo && ~@cli" vendor/sylius/sylius/features/account/registering.feature --rerun
+
+        services:
+            mariadb:
+                image: mariadb:latest
+                ports:
+                    - 3306:3306
+                env:
+                    MYSQL_ALLOW_EMPTY_PASSWORD: true

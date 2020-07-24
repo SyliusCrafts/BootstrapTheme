@@ -8,6 +8,12 @@
             "email": "szymon.kulczynski@sylius.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Sylius/SyliusShopBundle.git"
+        }
+    ],
     "require": {
         "sylius/shop-bundle": "^1.7"
     },
