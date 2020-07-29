@@ -30,7 +30,7 @@ RUN set -eux; \
 		zlib-dev \
 	; \
 	\
-	if [ ! -z "$PHP_VERSION" ] && [ "$PHP_VERSION" = "7.3" ]; then \
+	if [ ! -z "${PHP_VERSION}" ] && [ "${PHP_VERSION:0:3}" = "7.3" ]; then \
 		docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include/; \
 		docker-php-ext-configure zip --with-libzip; \
 	else \
