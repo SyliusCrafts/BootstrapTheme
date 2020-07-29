@@ -5,6 +5,7 @@ services:
     build:
       args:
         - BLACKFIRE=${BLACKFIRE:-false}
+        - PHP_VERSION=${PHP_VERSION:-7.3}
       context: .
       target: sylius_php
       cache_from:

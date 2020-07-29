@@ -30,8 +30,13 @@ RUN set -eux; \
 		zlib-dev \
 	; \
 	\
-	docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype; \
-	docker-php-ext-configure zip --with-zip; \
+	if [ ! -z "$PHP_VERSION" ] && [ "$PHP_VERSION" = "7.3" ]; then \
+		docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include --with-webp-dir=/usr/include --with-freetype-dir=/usr/include/; \
+		docker-php-ext-configure zip --with-libzip; \
+	else \
+		docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype; \
+		docker-php-ext-configure zip --with-zip; \
+	fi; \
 	docker-php-ext-install -j$(nproc) \
 		exif \
 		gd \
