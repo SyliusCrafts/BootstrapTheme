@@ -101,3 +101,81 @@ Screenshots
 
 #### Changing the theme
 ![Changing the theme](docs/edit-channel-page.png)
+
+Running development environment using Docker
+--------------------------------------------
+
+This repository comes with a container setup that gives us a Sylius Standard instance with the theme pre-installed.
+The container setup provides us with a `php` container used for executing requests that come in through http and for
+running CLI commands.
+
+To be able to receive http requests, there is the `nginx` container.
+For the database there is the `mysql` container, running `Percona`.
+
+Since we need to be able to run nodejs to build the frontend using webpack/encore, there is a `nodejs` container, which
+when started will automatically start watching the frontend assets and rebuilds them when a file changes.
+
+In order to test the emails and their respective templates, we have the `mailhog` container. Which catches all outbound
+emails.
+
+Finally, the `chrome` container is there so that we can execute automated browser tests using Behat/mink.
+
+1. Building the container images:
+    ```bash
+    docker-compose build
+    ```
+
+2. Bring the containers up:
+    ```bash
+    docker-compose up -d
+    ```
+
+3. After the containers are up and running the shop can be setup as usual using the install feature:
+    ```bash
+    docker-compose exec php bin/console sylius:install
+    ```
+
+You should now be able to use Sylius in the browser using url: `http://localhost:8080`. (We're using port 8080 instead
+of port 80 here, the reason for that is that port 80 is a port in the privileged range, so it requires root
+permissions, whereas port 8080 does not).
+
+**Optional:**
+By default PHP 7.3 is used in the `php` container. However it is also possible to use a newer version:
+
+1. Make `.env` file available:
+    ```bash
+    cp .env.dist .env
+    ```
+
+2. Set `PHP_VERSION` variable to `7.4`:
+    ```dotenv
+    PHP_VERSION=7.4
+    ```
+
+3. (Re)build the container images:
+    ```bash
+    docker-compose build
+    ```
+
+When running into performance issues it can be very helpful to be able to profile our code using [Blackfire](https://blackfire.io/).
+To enable the installation of the probe:
+
+1. Make `.env` file available (if you haven't already):
+    ```bash
+    cp .env.dist .env
+    ```
+
+2. Configure Blackfire
+    ```dotenv
+    BLACKFIRE=true
+    BLACKFIRE_CLIENT_ID=[INSERT_YOUR_CLIENT_ID]
+    BLACKFIRE_CLIENT_TOKEN=[INSERT_YOUR_CLIENT_TOKEN]
+    BLACKFIRE_SERVER_ID=[INSERT_YOUR_SERVER_ID]
+    BLACKFIRE_SERVER_TOKEN=[INSERT_YOUR_SERVER_TOKEN]
+    BLACKFIRE_LOG_LEVEL=3
+    ```
+
+3. (Re)build the container images:
+    ```bash
+    docker-compose build
+    ```
