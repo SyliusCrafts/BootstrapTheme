@@ -27,6 +27,7 @@ services:
       - BLACKFIRE_CLIENT_TOKEN=${BLACKFIRE_CLIENT_TOKEN}
       - BLACKFIRE_SERVER_ID=${BLACKFIRE_SERVER_ID}
       - BLACKFIRE_SERVER_TOKEN=${BLACKFIRE_SERVER_TOKEN}
+      - SYLIUS_FIXTURES_THEME_NAME=${SYLIUS_FIXTURES_THEME_NAME}
     volumes:
       - .:/srv/sylius/themes/BootstrapTheme:rw
       - public:/srv/sylius/public:rw
