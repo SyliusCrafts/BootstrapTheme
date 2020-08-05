@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Toggle and login from checkout
-  if (document.querySelector('[data-js-login]')) {
+  if (document.querySelector('[data-js-login]') && document.querySelector('[data-js-login="email"]')) {
     SyliusApiToggle(document.querySelector('[data-js-login="email"]'));
     SyliusApiLogin(document.querySelector('[data-js-login]'));
   }
