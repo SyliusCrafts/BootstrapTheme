@@ -18,18 +18,25 @@ jobs:
             matrix:
                 php: [7.4]
                 sylius: ['~1.7.0']
+                node: [10.x]
 
         env:
-            APP_ENV: test
+            APP_ENV: test_cached
 
         steps:
-            - name: PHP - Switch
-              run: sudo update-alternatives --set php /usr/bin/php${{ matrix.php }} && php -v
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "${{ matrix.php }}"
+                  extensions: intl
+                  tools: symfony, composer:v1
+                  coverage: none
+                  ini-values: date.timezone=Europe/Paris
 
-            - name: PHP - Setup timezone
-              run: |
-                  echo "date.timezone=UTC" >> /tmp/timezone.ini; \
-                  sudo mv /tmp/timezone.ini /etc/php/${{ matrix.php }}/cli/conf.d/timezone.ini
+            - name: Setup Node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "${{ matrix.node }}"
 
             - uses: actions/checkout@v2
               with:
@@ -46,11 +53,6 @@ jobs:
               run: mkdir -p /home/runner/.composer/cache
               if: steps.cache-composer.outputs.cache-hit != 'true'
 
-            - name: Composer - Self Update
-              run: |
-                  mkdir -p /home/runner/.composer/
-                  sudo composer self-update
-
             - name: Composer - Github Auth
               run: composer config -g github-oauth.github.com ${{ github.token }}
 
@@ -62,28 +64,34 @@ jobs:
               run: |
                   composer config repositories.plugin '{"type": "path", "url": "../theme/"}'
 
+            - name: Composer - Config
+              working-directory: ./sylius
+              run: |
+                  composer config extra.symfony.allow-contrib true
+                  composer config minimum-stability "dev"
+                  composer config prefer-stable true
+
+            - name: Composer - Install plugin
+              working-directory: ./sylius
+              run: composer require sylius/bootstrap-theme --prefer-source  --no-scripts
+
             - name: Theme - Install Theme
               working-directory: ./sylius
-              run: composer require sylius/bootstrap-theme encore
+              run: composer require encore
 
             - name: Theme - Copy Theme
               working-directory: ./sylius
               run: |
                   mkdir -p themes/BootstrapTheme/
                   cp -r ../theme/* themes/BootstrapTheme/
-
-            - name: Theme - Install dependencies
-              working-directory: ./sylius
-              run: |
-                  yarn
-                  yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
-                  yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
+                  ls -l themes/BootstrapTheme
 
             - name: Theme - Config Webpack
               working-directory: ./sylius
               run: |
-                  echo "const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');" >> webpack.config.js
-                  echo "module.exports = [bootstrapTheme];" >> webpack.config.js
+                  sed -i "s#module.exports = \[shopConfig, adminConfig\];#const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');#" webpack.config.js
+                  echo "module.exports = [shopConfig, adminConfig, bootstrapTheme];" >> webpack.config.js
+                  cat webpack.config.js
 
             - name: Theme - Config Assets
               working-directory: ./sylius
@@ -93,23 +101,49 @@ jobs:
                   echo "        packages:" >> config/packages/assets.yaml
                   echo "            bootstrapTheme:" >> config/packages/assets.yaml
                   echo "                json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'" >> config/packages/assets.yaml
+                  cat config/packages/assets.yaml
 
             - name: Theme - Config Webpack Encore
               working-directory: ./sylius
               run: |
                   echo "    builds:" >> config/packages/webpack_encore.yaml
                   echo "        bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'" >> config/packages/webpack_encore.yaml
+                  cat config/packages/webpack_encore.yaml
 
-            - name: Theme - Build
+            - name: Theme - Get Yarn cache directory
+              id: yarn-cache
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            - name: Theme - Cache Yarn
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.yarn-cache.outputs.dir }}
+                  key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-${{ matrix.node }}-yarn-
+
+            - name: Theme - Install JS dependencies
               working-directory: ./sylius
-              run: yarn build
+              run: |
+                  yarn install
+                  yarn add @symfony/webpack-encore sass-loader@^9.0 node-sass@^4.0 lodash.throttle -D
+                  yarn add bootstrap@^4.5 bootstrap.native@^3.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
+
+            - name: Theme - Prepare test application assets
+              working-directory: ./sylius
+              run: |
+                  php bin/console assets:install public -vvv
+                  yarn encore dev
 
             - name: Theme - Set in Sylius Standard
               working-directory: ./sylius
               run: |
                   sed -i "82i\                                theme_name: 'sylius/bootstrap-theme'" vendor/sylius/sylius/src/Sylius/Bundle/CoreBundle/Resources/config/app/fixtures/shop_configuration.yaml
-                  sed -i "113i\        \$channel->setThemeName('sylius/bootstrap-theme');" vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultUnitedStatesChannelFactory.php
-                  sed -i "88i\        \$channel->setThemeName('sylius/bootstrap-theme');" vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultChannelFactory.php
+                  cat vendor/sylius/sylius/src/Sylius/Bundle/CoreBundle/Resources/config/app/fixtures/shop_configuration.yaml
+                  sed -i "110i\        \$channel->setThemeName('sylius/bootstrap-theme');" vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultUnitedStatesChannelFactory.php
+                  cat vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultUnitedStatesChannelFactory.php
+                  sed -i "85i\        \$channel->setThemeName('sylius/bootstrap-theme');" vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultChannelFactory.php
+                  cat vendor/sylius/sylius/src/Sylius/Component/Core/Test/Services/DefaultChannelFactory.php
 
             - name: Sylius - Init database
               working-directory: ./sylius
@@ -119,44 +153,34 @@ jobs:
               working-directory: ./sylius
               run: php bin/console sylius:install -n -s default
 
-            - name: Behat - Configure display
+            - name: Symfony CLI - PHP version
               working-directory: ./sylius
               run: |
-                  /sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1680x1050x16
-                  export DISPLAY=:99
+                  php -v | head -n 1 | awk '{ print $2 }' > .php-version
 
-            - name: Behat - Download and configure ChromeDriver
+            - name: Symfony CLI - Certificat
               working-directory: ./sylius
-              run: |
-                  if [ ! -f chromedriver ] || [ "$(chromedriver --version | grep -c 2.34)" = "0" ]; then
-                      curl http://chromedriver.storage.googleapis.com/2.34/chromedriver_linux64.zip > chromedriver.zip
-                      unzip chromedriver.zip
-                      chmod +x chromedriver
-                  fi
+              run: symfony server:ca:install
 
-            - name: Behat - Run ChromeDriver
-              working-directory: ./sylius
-              run: chromedriver > /dev/null 2>&1 &
+            - name: Chrome - Run
+              run: google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1 > /dev/null 2>&1 &
 
-            - name: Behat - Download and configure Selenium
+            - name: Symfony CLI - Server start
               working-directory: ./sylius
-              run: |
-                  if [ ! -f selenium.jar ] || [ "$(java -jar selenium.jar --version | grep -c 3.4.0)" = "0" ]; then
-                      curl http://selenium-release.storage.googleapis.com/3.4/selenium-server-standalone-3.4.0.jar > selenium.jar
-                  fi
-
-            - name: Behat - Run Selenium
-              working-directory: ./sylius
-              run: java -Dwebdriver.chrome.driver=chromedriver -jar selenium.jar > /dev/null 2>&1 &
-
-            - name: Behat - Run webserver
-              working-directory: ./sylius
-              run: bin/console server:run 127.0.0.1:8080 --quiet > /dev/null 2>&1 &
+              run: symfony server:start --port=8080 --dir=public --daemon
 
             - name: Behat - Run Behat tests
               working-directory: ./sylius
-              run: vendor/bin/behat --strict -vvv --no-interaction -f progress --tags="~@javascript && ~@todo && ~@cli" vendor/sylius/sylius/features/account/registering.feature || \
-                   vendor/bin/behat --strict -vvv --no-interaction -f progress --tags="~@javascript && ~@todo && ~@cli" vendor/sylius/sylius/features/account/registering.feature --rerun
+              run: vendor/bin/behat --strict -vvv --no-interaction -f progress --tags="~@javascript && ~@todo && ~@cli" vendor/sylius/sylius/features/account || \
+                   vendor/bin/behat --strict -vvv --no-interaction -f progress --tags="~@javascript && ~@todo && ~@cli" --rerun vendor/sylius/sylius/features/account
+
+            - name: Behat - Upload logs
+              uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                  name: Behat logs
+                  path: sylius/etc/build/
+                  if-no-files-found: ignore
 
         services:
             mariadb:
