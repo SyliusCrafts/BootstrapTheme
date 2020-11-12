@@ -4,7 +4,7 @@
 
     {% if grid.isSortedBy(field.name) %}
         <th class="sortable sorted {{ order == 'desc' ? 'descending' : 'ascending' }} sylius-table-column-{{ field.name }}">
-            <a href="{{ link(field.name, attributes, (order == 'desc' ? 'asc' : 'desc'), grid.parameters.all) }}">{{ field.label|trans }}</a>
+            <a href="{{ link(field.name, attributes, (order== 'desc' ? 'asc' : 'desc'), grid.parameters.all) }}">{{ field.label|trans }}</a>
         </th>
     {% else %}
         <th class="sortable sylius-table-column-{{ field.name }}">

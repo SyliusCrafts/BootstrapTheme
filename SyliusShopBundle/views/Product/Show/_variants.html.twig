@@ -15,8 +15,8 @@
                 {{ variant.name }}
                 {% if product.hasOptions() %}
                     <span class="text-muted">|</span>
-                    {% for optionValue in variant.optionValues %}
-                        <span class="pr-1">{{ optionValue.value }}</span>
+                    {% for option_value in variant.optionValues %}
+                        <span class="pr-1">{{ option_value.value }}</span>
                     {% endfor %}
                 {% endif %}
             </td>
