@@ -26,7 +26,7 @@ Branch 0.1.x is only compatible with Sylius 1.6. Master is compatible with Syliu
 
     ```bash
     yarn
-    yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
+    yarn add @symfony/webpack-encore sass-loader@^8.0.0 node-sass@^4.0 lodash.throttle -D
     yarn add bootstrap bootstrap.native glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
     ```
    
