@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="40%" src="https://sylius.com/wp-content/themes/sylius/assets/img/sylius-bootstrap.png" />
+    <img width="40%" src="https://camo.githubusercontent.com/f1a61f80abc01fe14ab9d8820fd048ad817f92dc2e4fa65d3271d350b9a78749/68747470733a2f2f64656d6f2e73796c6975732e636f6d2f6173736574732f73686f702f696d672f6c6f676f2e706e67" />
     <h1 align="center">Sylius Bootstrap Theme</h1>
     <p align="center">Sylius Bootstrap theme with build process based on <a target="_blank" href="https://symfony.com/doc/current/frontend.html">Webpack Encore.</a></p>
     It allows to swap to Bootstrap-based theme separately in each channel.
@@ -21,7 +21,7 @@ Branch 0.1.x is only compatible with Sylius 1.6. Master is compatible with Syliu
     ```bash
     composer require encore
     ```
-    
+
 3. Install node dependencies
 
     ```bash
@@ -29,12 +29,12 @@ Branch 0.1.x is only compatible with Sylius 1.6. Master is compatible with Syliu
     yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
     yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
     ```
-   
+
 4. Import bootstrap-theme config in the main webpack file
 
     ```bash
     # ./webpack.config.js
-    
+
     const Encore = require('@symfony/webpack-encore');
     const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');
     module.exports = [bootstrapTheme];
@@ -44,17 +44,17 @@ Branch 0.1.x is only compatible with Sylius 1.6. Master is compatible with Syliu
 
     ```bash
     # ./config/packages/assets.yaml
-    
+
     framework:
         assets:
             packages:
                 bootstrapTheme:
-                    json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'  
+                    json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'
     ```
-    
+
     ```bash
     # ./config/packages/webpack_encore.yaml
-    
+
     webpack_encore:
         output_path: '%kernel.project_dir%/public/build'
         builds:
@@ -65,14 +65,14 @@ Branch 0.1.x is only compatible with Sylius 1.6. Master is compatible with Syliu
 
     ```bash
     # compile assets once
-    yarn encore dev      
-    
+    yarn encore dev
+
     # recompile assets automatically when files change
     yarn encore dev --watch
-    
+
     # recompile assets automatically with live reload
     yarn encore dev-server
-    
+
     # create a production build
     yarn encore production
     ```
