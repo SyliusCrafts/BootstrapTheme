@@ -9,7 +9,10 @@
         }
     ],
     "require": {
-        "sylius/shop-bundle": "^1.7"
+        "sylius/sylius": "^1.7"
+    },
+    "require-dev": {
+        "friendsoftwig/twigcs": "^4.0"
     },
     "extra": {
         "sylius-theme": {

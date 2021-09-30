@@ -1,0 +1,51 @@
+name: Code Quality
+
+on:
+    push:
+        branches: [master]
+        paths-ignore:
+            - README.md
+    pull_request:
+        branches: [master]
+        paths-ignore:
+            - README.md
+
+jobs:
+    TwigCS:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: PHP - Switch
+              run: sudo update-alternatives --set php /usr/bin/php7.3
+
+            - name: Composer - Get Cache Directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - uses: actions/cache@v1
+              id: cache-composer
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: composer-php-${{ github.sha }}
+                  restore-keys: composer-php-
+
+            - name: Composer - Create cache directory
+              run: mkdir -p /home/runner/.composer/cache
+              if: steps.cache-composer.outputs.cache-hit != 'true'
+
+            - name: Composer - Self Update
+              run: sudo composer self-update
+
+            - name: Composer - Validate composer.json and composer.lock
+              run: composer validate --strict
+
+            - name: Composer - Github Auth
+              run: composer config -g github-oauth.github.com ${{ github.token }}
+
+            - name: Composer - Update dependencies
+              run: composer update --no-progress
+
+            - name: TwigCS - Check
+              run: vendor/bin/twigcs SyliusShopBundle/ --severity error --display blocking

@@ -16,7 +16,7 @@
                     <div {{ sylius_test_html_attribute('payment-price') }}>{{ money.format(payment.amount, payment.currencyCode) }}</div>
                     {% if state != 'cart' %}
                         <p id="payment-status" {{ sylius_test_html_attribute('payment-state') }}>
-                            {% include "@SyliusShop/Common/Order/Label/PaymentState/singlePaymentState.html.twig" with { 'state': state } %}
+                            {% include "@SyliusShop/Common/Order/Label/PaymentState/singlePaymentState.html.twig" with {'state': state} %}
                         </p>
                     {% endif %}
                 </div>

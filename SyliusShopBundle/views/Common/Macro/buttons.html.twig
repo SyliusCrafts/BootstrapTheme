@@ -9,7 +9,7 @@
     </a>
 {% endmacro %}
 
-{% macro show(url, message, id, class, labeled = true) %}
+{% macro show(url, message, id, class, labeled=true) %}
     {% import _self as buttons %}
 
     {% if message is empty and labeled %}
@@ -19,7 +19,7 @@
     {{ buttons.default(url, message, id, 'fas fa-search', 'primary') }}
 {% endmacro %}
 
-{% macro create(url, message, id, labeled = true) %}
+{% macro create(url, message, id, labeled=true) %}
     {% import _self as buttons %}
 
     {% if message is empty and labeled %}
@@ -29,7 +29,7 @@
     {{ buttons.default(url, message, id, 'fas fa-plus', 'primary') }}
 {% endmacro %}
 
-{% macro edit(url, message, id, labeled = true) %}
+{% macro edit(url, message, id, labeled=true) %}
     {% import _self as buttons %}
 
     {% if message is empty and labeled %}
@@ -51,7 +51,7 @@
     </a>
 {% endmacro %}
 
-{% macro delete(url, message, labeled = true, resourceId = null) %}
+{% macro delete(url, message, labeled=true, resourceId=null) %}
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <button class="btn btn-danger" type="submit" data-requires-confirmation>
@@ -61,7 +61,7 @@
     </form>
 {% endmacro %}
 
-{% macro bulkDelete(url, message, labeled = true) %}
+{% macro bulkDelete(url, message, labeled=true) %}
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <button class="btn btn-danger" type="submit" data-bulk-action-requires-confirmation>

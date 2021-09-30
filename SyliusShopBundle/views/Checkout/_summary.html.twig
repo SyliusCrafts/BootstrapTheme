@@ -1,8 +1,8 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% set itemsSubtotal = sylius_order_items_subtotal(order) %}
-{% set taxIncluded = sylius_order_tax_included(order) %}
-{% set taxExcluded = sylius_order_tax_excluded(order) %}
+{% set items_subtotal = sylius_order_items_subtotal(order) %}
+{% set tax_included = sylius_order_tax_included(order) %}
+{% set tax_excluded = sylius_order_tax_excluded(order) %}
 
 <div class="card">
     <table class="table" id="sylius-checkout-subtotal" {{ sylius_test_html_attribute('checkout-subtotal') }}>
@@ -32,24 +32,24 @@
                 <strong>{{ 'sylius.ui.items_total'|trans }}:</strong>
             </td>
             <td colspan="2" id="sylius-summary-items-subtotal" class="text-right border-top border-dark">
-                {{ money.convertAndFormat(itemsSubtotal) }}
+                {{ money.convertAndFormat(items_subtotal) }}
             </td>
         </tr>
-        <tr {% if taxIncluded and not taxExcluded %}class="bg-light" {% endif %}>
+        <tr {% if tax_included and not tax_excluded %}class="bg-light" {% endif %}>
             <td colspan="1">
                 <strong>{{ 'sylius.ui.taxes_total'|trans }}:</strong>
             </td>
             <td colspan="2" class="text-right">
-                {% if not taxIncluded and not taxExcluded %}
+                {% if not tax_included and not tax_excluded %}
                     <div id="sylius-summary-tax-none">{{ money.convertAndFormat(0) }}</div>
                 {% endif %}
-                {% if taxExcluded %}
-                    <div id="sylius-summary-tax-excluded">{{ money.convertAndFormat(taxExcluded) }}</div>
+                {% if tax_excluded %}
+                    <div id="sylius-summary-tax-excluded">{{ money.convertAndFormat(tax_excluded) }}</div>
                 {% endif %}
-                {% if taxIncluded %}
+                {% if tax_included %}
                     <div>
                         <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
-                        <span id="sylius-summary-tax-included">{{ money.convertAndFormat(taxIncluded) }}</span>
+                        <span id="sylius-summary-tax-included">{{ money.convertAndFormat(tax_included) }}</span>
                     </div>
                 {% endif %}
             </td>

@@ -4,7 +4,7 @@
 {% set product_variant = item.variant %}
 
 <tr {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
-    <td {{ sylius_test_html_attribute('cart-item', loop_index|default(null) ) }}>
+    <td {{ sylius_test_html_attribute('cart-item', loop_index|default(null)) }}>
         <button type="button"
                 data-js-remove-from-cart-button
                 data-js-remove-from-cart-redirect-url="{{ path('sylius_shop_cart_summary') }}"
