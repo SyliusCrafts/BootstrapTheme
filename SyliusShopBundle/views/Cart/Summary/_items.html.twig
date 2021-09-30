@@ -17,7 +17,7 @@
             </thead>
             <tbody>
                 {% for key, item in cart.items %}
-                    {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key]} %}
+                    {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id} %}
                 {% endfor %}
             </tbody>
         </table>
@@ -30,7 +30,7 @@
                 {% endif %}
 
                 <div class="col text-right">
-                    {% include '@SyliusShop/Cart/Summary/_update.html.twig' %}
+                    {% include '@SyliusShop/Cart/Summary/_update.html.twig' with {'main_form': form.vars.id} %}
                 </div>
             </div>
         </div>
