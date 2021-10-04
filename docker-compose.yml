@@ -1,0 +1,64 @@
+version: '3.4'
+
+services:
+  php:
+    build:
+      context: .
+    volumes:
+      - .:/srv/sylius:rw
+    environment:
+      - COMPOSER_HOME=/tmp/composer
+      - APP_ENV=test
+      - APP_SECRET=EDITME
+      - DATABASE_URL=mysql://sylius:nopassword@mysql/sylius
+      - MAILER_URL=smtp://mailhog:1025
+      - PHP_DATE_TIMEZONE=${PHP_DATE_TIMEZONE:-UTC}
+    depends_on:
+      - mysql
+    ports:
+        - "8080:8080"
+
+  mysql:
+    image: percona:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-nopassword}
+      - MYSQL_DATABASE=sylius
+      - MYSQL_USER=sylius
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-nopassword}
+    volumes:
+      - mysql-data:/var/lib/mysql:rw
+      # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/mysql/data:/var/lib/mysql:rw,delegated
+    ports:
+      - "3306:3306"
+
+  nodejs:
+    image: node:10
+    tty: true
+    depends_on:
+      - php
+    environment:
+      - PHP_HOST=php
+      - PHP_PORT=9000
+    working_dir: /srv/sylius
+    volumes:
+      - ./:/srv/sylius:rw,cached
+
+  mailhog:
+    # do not use in production!
+    image: mailhog/mailhog:latest
+    environment:
+      - MH_STORAGE=maildir
+    # volumes:
+    #   - ./docker/mailhog/maildir:/maildir:rw,delegated
+    ports:
+      - "8025:8025"
+
+  chrome:
+    image: zenika/alpine-chrome:latest
+    command: [ chromium-browser, "--headless", "--disable-gpu", "--no-sandbox", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222" ]
+    ports:
+      - "9222:9222"
+
+volumes:
+  mysql-data:

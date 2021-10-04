@@ -101,3 +101,133 @@ Screenshots
 
 #### Changing the theme
 ![Changing the theme](docs/edit-channel-page.png)
+
+Developers
+----------
+
+1. Run `composer create-project sylius/bootstrap-theme ProjectName` or clone this project
+
+### Quickstart Installation (docker)
+
+1. From the plugin skeleton root directory, run the following commands:
+
+```bash
+sudo chmod -Rf 777 tests/Application/var
+sudo chmod -Rf 777 tests/Application/public/media
+docker-compose exec php php -d memory_limit=-1 /usr/bin/composer install
+docker-compose exec nodejs yarn --cwd tests/Application install
+docker-compose exec php tests/Application/bin/console doctrine:database:create --if-not-exists -vvv
+docker-compose exec php tests/Application/bin/console doctrine:schema:create -vvv
+docker-compose exec php tests/Application/bin/console assets:install tests/Application/public -vvv
+docker-compose exec nodejs yarn --cwd tests/Application build
+docker-compose exec php php -d memory_limit=-1 tests/Application/bin/console cache:warmup -vvv
+docker-compose exec php tests/Application/bin/console sylius:fixtures:load -n
+```
+
+#### Quality tools
+
+```bash
+docker-compose exec php composer validate --ansi --strict
+docker-compose exec php vendor/bin/phpstan analyse -c phpstan.neon -l max src/
+docker-compose exec php vendor/bin/psalm
+docker-compose exec php vendor/bin/phpspec run --ansi -f progress --no-interaction
+docker-compose exec php vendor/bin/phpunit --colors=always
+docker-compose exec php php -d memory_limit=-1 vendor/bin/behat --profile docker --colors --strict -vvv -f progress --no-interaction --tags="@javascript && ~@todo && ~@cli"
+``` 
+__ProTip__ use `Makefile` ;)
+
+### Quickstart Installation (legacy)
+
+1. From the plugin skeleton root directory, run the following commands:
+
+    ```bash
+    $ (cd tests/Application && yarn install)
+    $ (cd tests/Application && yarn build)
+    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
+    
+    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
+    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
+    ```
+
+To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+
+### Usage
+
+#### Running plugin tests
+
+- PHPUnit
+
+  ```bash
+  vendor/bin/phpunit
+  ```
+
+- PHPSpec
+
+  ```bash
+  vendor/bin/phpspec run
+  ```
+
+- Behat (non-JS scenarios)
+
+  ```bash
+  vendor/bin/behat --strict --tags="~@javascript"
+  ```
+
+- Behat (JS scenarios)
+
+    1. [Install Symfony CLI command](https://symfony.com/download).
+
+    2. Start Headless Chrome:
+
+    ```bash
+    google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
+    ```
+
+    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
+
+    ```bash
+    symfony server:ca:install
+    APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
+    ```
+
+    4. Run Behat:
+
+    ```bash
+    vendor/bin/behat --strict --tags="@javascript"
+    ```
+
+- Static Analysis
+
+    - Psalm
+
+      ```bash
+      vendor/bin/psalm
+      ```
+
+    - PHPStan
+
+      ```bash
+      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
+      ```
+
+- Coding Standard
+
+  ```bash
+  vendor/bin/ecs check src
+  ```
+
+#### Opening Sylius with your plugin
+
+- Using `test` environment:
+
+    ```bash
+    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
+    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
+    ```
+
+- Using `dev` environment:
+
+    ```bash
+    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
+    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
+    ```
