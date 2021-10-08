@@ -1,0 +1,10 @@
+sylius_fixtures:
+    suites:
+        default: # this key is always called whenever the sylius:fixtures:load command is called, below we are extending it with new fixtures
+            fixtures:
+                channel:
+                    options:
+                        custom:
+                            fashion_web_store:
+                                theme_name: 'sylius/bootstrap-theme'
+                                

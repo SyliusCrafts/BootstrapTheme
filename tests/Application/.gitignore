@@ -1,0 +1,25 @@
+/public/bootstrap-theme
+/public/build
+
+/public/assets
+/public/css
+/public/js
+/public/media/*
+!/public/media/image/
+/public/media/image/*
+!/public/media/image/.gitignore
+
+/node_modules
+
+###> symfony/framework-bundle ###
+/.env.*.local
+/.env.local
+/.env.local.php
+/public/bundles
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
