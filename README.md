@@ -12,7 +12,10 @@ There are two ways to install a theme. It is possible to copy files in `themes/`
 
 The instructions below refer to an installation in the theme folder. Installation as a composer dependency (with child theme) [is also documented](https://docs.sylius.com/en/latest/book/themes/bootstrap-theme.html).
 
-Branch 0.1.x is only compatible with Sylius 1.6. Master is compatible with Sylius >= 1.7.0.
+- Sylius 1.6 : `composer require sylius/bootstrap-theme:~0.1.0`
+- Sylius 1.7 : `composer require sylius/bootstrap-theme:~0.2.0`
+
+Master is compatible with Sylius >= 1.7.0.
 
 1. Copy files from repository to `./themes/BootstrapTheme`
 
