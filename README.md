@@ -131,12 +131,9 @@ docker-compose exec php tests/Application/bin/console sylius:fixtures:load -n
 
 ```bash
 docker-compose exec php composer validate --ansi --strict
-docker-compose exec php vendor/bin/phpstan analyse -c phpstan.neon -l max src/
-docker-compose exec php vendor/bin/psalm
-docker-compose exec php vendor/bin/phpspec run --ansi -f progress --no-interaction
-docker-compose exec php vendor/bin/phpunit --colors=always
 docker-compose exec php php -d memory_limit=-1 vendor/bin/behat --profile docker --colors --strict -vvv -f progress --no-interaction --tags="@javascript && ~@todo && ~@cli"
 ``` 
+
 __ProTip__ use `Makefile` ;)
 
 ### Quickstart Installation (legacy)
@@ -157,18 +154,6 @@ To be able to setup a plugin's database, remember to configure you database cred
 ### Usage
 
 #### Running plugin tests
-
-- PHPUnit
-
-  ```bash
-  vendor/bin/phpunit
-  ```
-
-- PHPSpec
-
-  ```bash
-  vendor/bin/phpspec run
-  ```
 
 - Behat (non-JS scenarios)
 
@@ -198,26 +183,6 @@ To be able to setup a plugin's database, remember to configure you database cred
     ```bash
     vendor/bin/behat --strict --tags="@javascript"
     ```
-
-- Static Analysis
-
-    - Psalm
-
-      ```bash
-      vendor/bin/psalm
-      ```
-
-    - PHPStan
-
-      ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
-      ```
-
-- Coding Standard
-
-  ```bash
-  vendor/bin/ecs check src
-  ```
 
 #### Opening Sylius with your plugin
 
