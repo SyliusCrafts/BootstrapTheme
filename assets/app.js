@@ -1,3 +1,5 @@
+require('bootstrap');
+
 // Main scripts file
 import './js/index';
 
@@ -9,3 +11,4 @@ import './media/sylius-logo.png';
 
 // Font awesome icons
 import './js/fontawesome';
+
