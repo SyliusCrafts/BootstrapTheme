@@ -14,6 +14,7 @@ The instructions below refer to an installation in the theme folder. Installatio
 
 - Sylius 1.6 : `composer require sylius/bootstrap-theme:~0.1.0`
 - Sylius 1.7 : `composer require sylius/bootstrap-theme:~0.2.0`
+- Sylius 1.8 : `composer require sylius/bootstrap-theme:~0.3.0`
 
 Master is compatible with Sylius >= 1.7.0.
 
