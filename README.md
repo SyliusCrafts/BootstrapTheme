@@ -32,7 +32,7 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
     ```bash
     yarn
     yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
-    yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons
+    yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
     ```
 
 4. Import bootstrap-theme config in the main webpack file
