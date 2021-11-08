@@ -65,6 +65,12 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
         builds:
             bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
     ```
+    
+    ```bash
+    # ./config/packages/_sylius.yaml
+    sylius_theme:
+        legacy_mode: true # for sylius 1.9 and 1.10
+    ```
 
 6. To build the assets, run one of the following commands
 
