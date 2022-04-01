@@ -41,8 +41,16 @@ const handleProductOptionsChange = function handleProductOptionsChange() {
 const handleProductVariantsChange = function handleProductVariantsChange() {
   document.querySelectorAll('[name="sylius_add_to_cart[cartItem][variant]"]').forEach((item) => {
     item.addEventListener('change', (e) => {
-      const price = item.closest('tr').querySelector('[data-js-product-variant-price]').innerHTML;
+      const priceElement = item.closest('tr').querySelector('[data-js-product-variant-price]');
+      const price = priceElement.innerHTML;
+      
       document.querySelector('[data-js-product-price]').innerHTML = price;
+
+      if (priceElement.hasAttribute('data-original-price')) {
+        document.querySelector('#product-original-price').innerHTML = `<del>${priceElement.dataset.originalPrice}</del>`;
+      } else {
+        document.querySelector('#product-original-price').innerHTML = '';
+      }
     });
   });
 };
