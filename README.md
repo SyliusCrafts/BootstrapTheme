@@ -19,6 +19,8 @@ The instructions below refer to an installation in the theme folder. Installatio
 
 Master is compatible with Sylius 1.8, 1.9 and 1.10.
 
+0. Use node ```18.16.0``` and downgrade ```"node-sass"``` package version to ```"^4.0.0"``` in ```package.json```
+
 1. Copy files from repository to `./themes/BootstrapTheme`
 
 2. Install Encore
@@ -31,7 +33,7 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
 
     ```bash
     yarn
-    yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
+    yarn add @symfony/webpack-encore sass-loader@^13.0.0 node-sass lodash.throttle -D
     yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
     ```
 
