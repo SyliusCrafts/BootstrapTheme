@@ -17,13 +17,11 @@ The instructions below refer to an installation in the theme folder. Installatio
 - Sylius 1.8 : `composer require sylius/bootstrap-theme:~0.3.0`
 - Sylius 1.8, 1.9 and 1.10 : `composer require sylius/bootstrap-theme:~0.4.0`
 
-Master is compatible with Sylius 1.8, 1.9 and 1.10.
-
-0. Use node ```18.16.0``` and downgrade ```"node-sass"``` package version to ```"^4.0.0"``` in ```package.json```
+Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12 and node version 18.16.0
 
 1. Copy files from repository to `./themes/BootstrapTheme`
 
-2. Install Encore
+2. For sylius < 1.12 install Encore
 
     ```bash
     composer require encore
@@ -42,7 +40,7 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
     ```bash
     # ./webpack.config.js
 
-    const Encore = require('@symfony/webpack-encore');
+    const Encore = require('@symfony/webpack-encore'); # for sylius < 1.12
     const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');
     module.exports = [bootstrapTheme];
     ```
@@ -71,11 +69,11 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
     ```bash
     # ./config/packages/_sylius.yaml
     sylius_theme:
-        legacy_mode: true # for sylius 1.9 and 1.10
+        legacy_mode: true # for sylius 1.9, 1.10, 1.12
     ```
 
-6. To build the assets, run one of the following commands
-
+6. To build the assets, run one of the following commands  
+    Sylius < 1.12
     ```bash
     # compile assets once
     yarn encore dev
@@ -88,6 +86,14 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
 
     # create a production build
     yarn encore production
+    ```
+    Sylius 1.12
+    ```bash
+    # compile assets once
+    yarn build
+
+    # recompile assets automatically when files change
+    yarn watch
     ```
 
 7. Change theme in the admin panel by visiting the Edit Channel page
