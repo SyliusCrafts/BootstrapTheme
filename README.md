@@ -17,7 +17,7 @@ The instructions below refer to an installation in the theme folder. Installatio
 - Sylius 1.8 : `composer require sylius/bootstrap-theme:~0.3.0`
 - Sylius 1.8, 1.9 and 1.10 : `composer require sylius/bootstrap-theme:~0.4.0`
 
-Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12 and node version 18.16.0
+Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12
 
 1. Copy files from repository to `./themes/BootstrapTheme`
 
@@ -40,7 +40,7 @@ Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12 and node version 18.16.0
     ```bash
     # ./webpack.config.js
 
-    const Encore = require('@symfony/webpack-encore'); # for sylius < 1.12
+    const Encore = require('@symfony/webpack-encore');
     const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');
     module.exports = [bootstrapTheme];
     ```
