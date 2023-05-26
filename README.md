@@ -45,6 +45,16 @@ Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12
     module.exports = [bootstrapTheme];
     ```
 
+    For sylius 1.12 change output paths
+    
+    ```bash
+    # ./webpack.config.js
+    // Shop config
+    Encore
+        .setOutputPath('public/bootstrap-theme')
+        .setPublicPath('/bootstrap-theme')
+    ```
+
 5. Edit project config files
 
     ```bash
