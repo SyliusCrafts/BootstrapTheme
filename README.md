@@ -33,7 +33,7 @@ Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with Node v18.16.0
     ```bash
     yarn
     yarn add @symfony/webpack-encore sass-loader@^13.0.0 node-sass lodash.throttle -D
-    yarn add bootstrap@^5.3.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
+    yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
     yarn add @popperjs/core
     ```
 
