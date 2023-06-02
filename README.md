@@ -17,11 +17,12 @@ The instructions below refer to an installation in the theme folder. Installatio
 - Sylius 1.8 : `composer require sylius/bootstrap-theme:~0.3.0`
 - Sylius 1.8, 1.9 and 1.10 : `composer require sylius/bootstrap-theme:~0.4.0`
 
-Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12
+Master is compatible with Sylius 1.8, 1.9, 1.10, 1.11, 1.12.  
+Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with Node v18.16.0
 
 1. Copy files from repository to `./themes/BootstrapTheme`
 
-2. For sylius < 1.12 install Encore
+2. For sylius **<1.12** install Encore
 
     ```bash
     composer require encore
@@ -46,7 +47,7 @@ Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12
     module.exports = [bootstrapTheme];
     ```
 
-    For sylius 1.12 change output paths
+    For sylius **1.11** and **1.12** change output paths
     
     ```bash
     # ./webpack.config.js
@@ -80,11 +81,10 @@ Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12
     ```bash
     # ./config/packages/_sylius.yaml
     sylius_theme:
-        legacy_mode: true # for sylius 1.9, 1.10, 1.12
+        legacy_mode: true # for sylius 1.9, 1.10, 1.11, 1.12
     ```
 
 6. To build the assets, run one of the following commands  
-    Sylius < 1.12
     ```bash
     # compile assets once
     yarn encore dev
@@ -98,7 +98,7 @@ Master is compatible with Sylius 1.8, 1.9, 1.10, 1.12
     # create a production build
     yarn encore production
     ```
-    Sylius 1.12
+    In Sylius 1.12 you can use predefined commands
     ```bash
     # compile assets once
     yarn build
