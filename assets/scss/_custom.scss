@@ -53,3 +53,24 @@ label.required {
     padding-left: 5px;
     //font-size: $font-size-lg;
 }
+
+.homepage-banner{
+    @include media-breakpoint-up(lg) {
+        position: relative;
+        &__content{
+            position: absolute;
+            bottom: 70px;
+            left: 70px;
+            max-width: 500px;
+            line-height: 1.4;
+            background-color: unset !important;
+            h1{
+                font-size: 50px;
+                color: #fff;
+            }
+            p{
+                font-size: 22px;
+            }
+        }
+    }
+}
