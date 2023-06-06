@@ -32,7 +32,8 @@ Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with Node v18.16.0
 
     ```bash
     yarn
-    yarn add @symfony/webpack-encore sass-loader@^13.0.0 node-sass lodash.throttle -D
+    yarn add @symfony/webpack-encore sass-loader@^13.0.0 node-sass -D
+    yarn add lodash.throttle -D
     yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
     ```
 
@@ -66,6 +67,14 @@ Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with Node v18.16.0
             packages:
                 bootstrapTheme:
                     json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'
+                admin:
+                    json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+                shop:
+                    json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+                app.admin:
+                    json_manifest_path: '%kernel.project_dir%/public/build/app/admin/manifest.json'
+                app.shop:
+                    json_manifest_path: '%kernel.project_dir%/public/build/app/shop/manifest.json'
     ```
 
     ```bash
@@ -75,6 +84,10 @@ Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with Node v18.16.0
         output_path: '%kernel.project_dir%/public/build'
         builds:
             bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
+            admin: '%kernel.project_dir%/public/build/admin'
+            shop: '%kernel.project_dir%/public/build/shop'
+            app.admin: '%kernel.project_dir%/public/build/app/admin'
+            app.shop: '%kernel.project_dir%/public/build/app/shop'
     ```
     
     ```bash
