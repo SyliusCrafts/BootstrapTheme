@@ -33,13 +33,11 @@
                 </div>
             {% endif %}
 
-            {% if default_address is null or address.id != default_address.id %}
-                {% for address in addresses %}
-                    <div class="col-12 col-lg-6 mb-3" id="sylius-addresses" {{ sylius_test_html_attribute('addresses') }}>
-                        {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
-                    </div>
-                {% endfor %}
-            {% endif %}
+            {% for address in addresses|filter(address => address.id != default_address.id or default_address is null) %}
+                <div class="col-12 col-lg-6 mb-3" id="sylius-addresses" {{ sylius_test_html_attribute('addresses') }}>
+                    {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
+                </div>
+            {% endfor %}
         </div>
     {% else %}
         {{ messages.info('sylius.ui.you_have_no_addresses_defined') }}
