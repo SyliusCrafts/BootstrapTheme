@@ -15,14 +15,16 @@
         <div>
             <form method="get" action="{{ path }}" class="loadable">
                 <div>
-                {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
-                    {{ sylius_grid_render_filter(grid, filter) }}
+                {% if filter.enabled %}
+                    {% for filter in definition.enabledFilters|sort_by('position') %}
+                        {{ sylius_grid_render_filter(grid, filter) }}
 
-                    {% if loop.index0 % 2 %}
-                        </div>
-                        <div>
-                    {% endif %}
-                {% endfor %}
+                        {% if loop.index0 % 2 %}
+                            </div>
+                            <div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 </div>
                 <button class="btn btn-primary" type="submit">
                     {{ 'sylius.ui.filter'|trans }}
