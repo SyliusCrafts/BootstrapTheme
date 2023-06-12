@@ -40,7 +40,7 @@
 
         {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
 
-        <button type="submit" class="btn btn-primary" {{ sylius_test_html_attribute('save-changes') }}>
+        <button type="submit" class="btn btn-primary mb-3" {{ sylius_test_html_attribute('save-changes') }}>
             {{ 'sylius.ui.save_changes'|trans }}
         </button>
         {{ form_row(form._token) }}
