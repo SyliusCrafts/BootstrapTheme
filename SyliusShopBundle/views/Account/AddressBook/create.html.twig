@@ -7,7 +7,7 @@
 {% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
 
 {% block subcontent %}
-    <div>
+    <div class="mb-3">
         {{ headers.default('sylius.ui.address_book'|trans, '', 'sylius.ui.add_address'|trans) }}
 
         {{ sylius_template_event('sylius.shop.account.address_book.create.after_content_header', {'address': address}) }}
