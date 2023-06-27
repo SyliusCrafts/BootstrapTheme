@@ -15,7 +15,7 @@
         <div>
             <form method="get" action="{{ path }}" class="loadable">
                 <div>
-                {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
+                {% for filter in definition.enabledFilters|sort_by('position')|filter(filter.enabled) %}
                     {{ sylius_grid_render_filter(grid, filter) }}
 
                     {% if loop.index0 % 2 %}

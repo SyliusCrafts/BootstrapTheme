@@ -5,7 +5,7 @@
     {% set columns = "col-4" %}
 {% endif %}
 
-<div class="card-group">
+<div class="card-group row">
     {% for product in products %}
         <div class="{{ columns|default('col-12') }}">
         {% include '@SyliusShop/Product/_box.html.twig' %}

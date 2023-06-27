@@ -4,7 +4,7 @@
 
 {% block content %}
     <div>
-        <div>
+        <div class="mb-3">
             {% set last_payment = order.payments.last() %}
             <h1 id="sylius-thank-you" {{ sylius_test_html_attribute('thank-you') }}>
                 {{ 'sylius.ui.thank_you'|trans }}

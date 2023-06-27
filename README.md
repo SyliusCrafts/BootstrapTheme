@@ -17,11 +17,12 @@ The instructions below refer to an installation in the theme folder. Installatio
 - Sylius 1.8 : `composer require sylius/bootstrap-theme:~0.3.0`
 - Sylius 1.8, 1.9 and 1.10 : `composer require sylius/bootstrap-theme:~0.4.0`
 
-Master is compatible with Sylius 1.8, 1.9 and 1.10.
+Master is compatible with Sylius 1.8, 1.9, 1.10, 1.11, 1.12.  
+Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with Node v18.16.0
 
 1. Copy files from repository to `./themes/BootstrapTheme`
 
-2. Install Encore
+2. For sylius **<1.12** install Encore
 
     ```bash
     composer require encore
@@ -31,8 +32,10 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
 
     ```bash
     yarn
-    yarn add @symfony/webpack-encore sass-loader@^7.0.0 node-sass lodash.throttle -D
+    yarn add @symfony/webpack-encore sass-loader@^13.0.0 node-sass -D
+    yarn add lodash.throttle -D
     yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
+    yarn add @popperjs/core
     ```
 
 4. Import bootstrap-theme config in the main webpack file
@@ -45,6 +48,16 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
     module.exports = [bootstrapTheme];
     ```
 
+    For sylius **1.11** and **1.12** change output paths
+    
+    ```bash
+    # ./webpack.config.js
+    // Shop config
+    Encore
+        .setOutputPath('public/bootstrap-theme')
+        .setPublicPath('/bootstrap-theme')
+    ```
+
 5. Edit project config files
 
     ```bash
@@ -55,6 +68,14 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
             packages:
                 bootstrapTheme:
                     json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'
+                admin:
+                    json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+                shop:
+                    json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+                app.admin:
+                    json_manifest_path: '%kernel.project_dir%/public/build/app/admin/manifest.json'
+                app.shop:
+                    json_manifest_path: '%kernel.project_dir%/public/build/app/shop/manifest.json'
     ```
 
     ```bash
@@ -64,16 +85,19 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
         output_path: '%kernel.project_dir%/public/build'
         builds:
             bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
+            admin: '%kernel.project_dir%/public/build/admin'
+            shop: '%kernel.project_dir%/public/build/shop'
+            app.admin: '%kernel.project_dir%/public/build/app/admin'
+            app.shop: '%kernel.project_dir%/public/build/app/shop'
     ```
     
     ```bash
     # ./config/packages/_sylius.yaml
     sylius_theme:
-        legacy_mode: true # for sylius 1.9 and 1.10
+        legacy_mode: true # for sylius 1.9, 1.10, 1.11, 1.12
     ```
 
-6. To build the assets, run one of the following commands
-
+6. To build the assets, run one of the following commands  
     ```bash
     # compile assets once
     yarn encore dev
@@ -86,6 +110,14 @@ Master is compatible with Sylius 1.8, 1.9 and 1.10.
 
     # create a production build
     yarn encore production
+    ```
+    In Sylius 1.12 you can use predefined commands
+    ```bash
+    # compile assets once
+    yarn build
+
+    # recompile assets automatically when files change
+    yarn watch
     ```
 
 7. Change theme in the admin panel by visiting the Edit Channel page
