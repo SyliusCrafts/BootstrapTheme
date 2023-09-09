@@ -14,7 +14,7 @@
             <td>
                 {{ variant.name }}
                 {% if product.hasOptions() %}
-                    <span class="text-muted">|</span>
+                    <span class="text-body-secondary">|</span>
                     {% for option_value in variant.optionValues %}
                         <span class="pe-1">{{ option_value.value }}</span>
                     {% endfor %}

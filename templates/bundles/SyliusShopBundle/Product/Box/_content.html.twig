@@ -7,7 +7,7 @@
     <div class="card-body text-center" {{ sylius_test_html_attribute('product-content') }}>
         <h6 class="sylius-product-name" {{ sylius_test_html_attribute('product-name', product.name) }}>{{ product.name }}</h6>
         {% if not product.variants.empty() %}
-            <span class="text-muted sylius-product-price" {{ sylius_test_html_attribute('product-price') }}>
+            <span class="text-body-secondary sylius-product-price" {{ sylius_test_html_attribute('product-price') }}>
                 {{ money.calculatePrice(product|sylius_resolve_variant) }} |
             </span>
         {% endif %}

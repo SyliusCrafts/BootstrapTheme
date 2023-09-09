@@ -8,7 +8,7 @@
 
                 <form action="{{ path('sylius_shop_account_address_book_delete', {'id': address.id}) }}" method="post" onsubmit="return confirm('{{ "sylius.ui.are_your_sure_you_want_to_perform_this_action"|trans }}');">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button class="btn btn-link text-muted" type="submit">
+                    <button class="btn btn-link text-body-secondary" type="submit">
                         {{ 'sylius.ui.delete'|trans }}
                     </button>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token(address.id) }}" />
