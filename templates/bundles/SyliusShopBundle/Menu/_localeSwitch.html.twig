@@ -2,7 +2,7 @@
 
 {% if locales|length > 1 %}
     <li class="nav-item dropdown" id="sylius-locale-selector" {{ sylius_test_html_attribute('locale-selector') }}>
-        <a class="btn btn-dark text-muted nav-link dropdown-toggle sylius-active-locale" type="button" data-toggle="dropdown" {{ sylius_test_html_attribute('active-locale') }}>
+        <a class="btn btn-dark text-muted nav-link dropdown-toggle sylius-active-locale" type="button" data-bs-toggle="dropdown" {{ sylius_test_html_attribute('active-locale') }}>
             {{ active|sylius_locale_name }}
         </a>
         <div class="dropdown-menu">

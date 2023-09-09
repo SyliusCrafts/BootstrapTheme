@@ -12,7 +12,7 @@
         <span class="sylius-unit-price" {{ sylius_test_html_attribute('product-unit-price', item.productName) }}>
             {{ money.convertAndFormat(item.discountedUnitPrice) }}
             {% if item.unitPrice != item.discountedUnitPrice %}
-                <span id="item-promotion-details"  title="{% for promotion in unit_promotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
+                <span id="item-promotion-details"  title="{% for promotion in unit_promotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}" data-bs-toggle="tooltip" data-placement="top" >
                     <i class="fas fa-question-circle"></i>
                 </span>
             {% endif %}

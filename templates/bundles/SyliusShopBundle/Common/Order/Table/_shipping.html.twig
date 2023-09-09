@@ -10,7 +10,7 @@
         <small><s>{{ money.convertAndFormat(order.getAdjustmentsTotal(shipping_adjustment)) }}</s></small>
         <span>
             <span id="shipping-total" {{ sylius_test_html_attribute('shipping-total') }}>{{ money.convertAndFormat(order.getAdjustmentsTotal(shipping_adjustment) + order.getAdjustmentsTotal(order_shipping_promotion_adjustment)) }}</span>
-            <span id="shipping-promotion-details" {{ sylius_test_html_attribute('shipping-promotion-details') }} title="{% for label, amount in order_shipping_promotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
+            <span id="shipping-promotion-details" {{ sylius_test_html_attribute('shipping-promotion-details') }} title="{% for label, amount in order_shipping_promotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}" data-bs-toggle="tooltip" data-placement="top" >
                 <i class="fas fa-question-circle"></i>
             </span>
         </span>

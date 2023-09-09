@@ -1,5 +1,5 @@
-<a class="nav-item nav-link active" href="#nav-details" data-toggle="tab">{{ 'sylius.ui.details'|trans }}</a>
+<a class="nav-item nav-link active" href="#nav-details" data-bs-toggle="tab">{{ 'sylius.ui.details'|trans }}</a>
 {% if product.attributes|length > 0 %}
-    <a class="nav-item nav-link" href="#nav-attributes" data-toggle="tab" {{ sylius_test_html_attribute('tab', 'attributes') }}>{{ 'sylius.ui.attributes'|trans }}</a>
+    <a class="nav-item nav-link" href="#nav-attributes" data-bs-toggle="tab" {{ sylius_test_html_attribute('tab', 'attributes') }}>{{ 'sylius.ui.attributes'|trans }}</a>
 {% endif %}
-<a class="nav-item nav-link" href="#nav-reviews" data-toggle="tab">{{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})</a>
+<a class="nav-item nav-link" href="#nav-reviews" data-bs-toggle="tab">{{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})</a>

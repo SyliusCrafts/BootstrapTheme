@@ -1,4 +1,4 @@
-require('bootstrap');
+import 'bootstrap';
 
 // Main scripts file
 import './js/index';

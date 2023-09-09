@@ -2,7 +2,7 @@
 {% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
 
 <a class="btn btn-light d-flex align-items-center dropdown-toggle"
-   data-toggle="dropdown"
+   data-bs-toggle="dropdown"
    href="#"
    id="sylius-cart-total" {{ sylius_test_html_attribute('cart-total') }}>
     <span class="pe-3">{{ money.convertAndFormat(cart.itemsTotal) }}</span>
