@@ -1,0 +1,31 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% set product_variant = item.variant %}
+
+<tr {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
+    <td {{ sylius_test_html_attribute('cart-item', loop_index|default(null)) }}>
+        <button type="button"
+                data-js-remove-from-cart-button
+                data-js-remove-from-cart-redirect-url="{{ path('sylius_shop_cart_summary') }}"
+                data-js-remove-from-cart-csrf-token="{{ csrf_token(item.id) }}"
+                data-js-remove-from-cart-api-url="{{ path('sylius_shop_ajax_cart_item_remove', {'id': item.id}) }}"
+                class="btn btn-sm btn-link text-danger sylius-cart-remove-button"
+                {{ sylius_test_html_attribute('cart-remove-button', item.productName) }}>{{ icons.times() }}</button>
+    </td>
+    <td>
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
+    </td>
+    <td class="text-center">
+        {% if item.unitPrice != item.discountedUnitPrice %}
+            <small class="sylius-regular-unit-price" {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}><s>{{ money.convertAndFormat(item.unitPrice) }}</s></small>
+        {% endif %}
+        <span class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
+    </td>
+    <td class="text-center">
+        <span class="sylius-quantity">{{ form_widget(form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)) }}</span>
+    </td>
+    <td class="text-end">
+        <span class="sylius-total" {{ sylius_test_html_attribute('cart-product-subtotal') }}>{{ money.convertAndFormat(item.subtotal) }}</span>
+    </td>
+</tr>
