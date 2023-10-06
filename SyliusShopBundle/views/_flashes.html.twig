@@ -13,7 +13,7 @@
             {% endif %}
             <div class="alert alert-{{ result|default('success') }} alert-dismissible fade show">
                 <div class="d-flex align-items-center">
-                    <span class="pr-3 fa-2x">
+                    <span class="pe-3 fa-2x">
                         {{ icon|default(icons.success()) }}
                     </span>
                     <strong>
@@ -26,8 +26,7 @@
                         {{ flash|trans({}, 'flashes') }}
                     {% endif %}
                 </div>
-                <button type="button" class="close" data-dismiss="alert">
-                    <span>&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert">
                 </button>
             </div>
         {% endfor %}

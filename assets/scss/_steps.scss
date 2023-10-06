@@ -36,15 +36,15 @@
         }
 
         &.completed {
-            background: theme-color-level('primary', -11);
+            background: $primary-100;
 
             .steps-icon,
             .steps-text {
-                color: theme-color-level('primary', -4);
+                color: $primary-200;
             }
 
             .steps-title {
-                color: theme-color-level('primary', 3);
+                color: $primary-300;
             }
         }
 

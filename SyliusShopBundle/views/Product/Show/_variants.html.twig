@@ -16,12 +16,12 @@
                 {% if product.hasOptions() %}
                     <span class="text-muted">|</span>
                     {% for option_value in variant.optionValues %}
-                        <span class="pr-1">{{ option_value.value }}</span>
+                        <span class="pe-1">{{ option_value.value }}</span>
                     {% endfor %}
                 {% endif %}
             </td>
             <td data-js-product-variant-price class="sylius-product-variant-price" {% if variant|sylius_has_discount({'channel': sylius.channel}) %}data-original-price="{{ money.calculateOriginalPrice(variant) }}"{% endif %}>{{ money.calculatePrice(variant) }}</td>
-            <td class="text-right">{{ form_widget(form.cartItem.variant[key], {'label': false}) }}</td>
+            <td class="text-end">{{ form_widget(form.cartItem.variant[key], {'label': false}) }}</td>
         </tr>
     {% endfor %}
     </tbody>

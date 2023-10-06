@@ -1,4 +1,4 @@
-<ul class="nav navbar ml-auto">
+<ul class="nav navbar ms-auto">
     {% if is_granted('ROLE_USER') %}
         <li class="nav-item btn-dark my-2 my-lg-0">
             <span class="text-muted nav-link" {{ sylius_test_html_attribute('full-name') }}>{{ 'sylius.ui.hello'|trans }} {{ app.user.customer.fullName }}!</span>

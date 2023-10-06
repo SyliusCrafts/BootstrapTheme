@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card overflow-hidden">
     {{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
         {{ form_errors(form) }}
         <input type="hidden" name="_method" value="PATCH"/>
@@ -12,7 +12,7 @@
                     <th class="border-0 text-nowrap">{{ 'sylius.ui.item'|trans }}</th>
                     <th class="border-0 text-nowrap text-center">{{ 'sylius.ui.unit_price'|trans }}</th>
                     <th class="border-0 text-nowrap text-center">{{ 'sylius.ui.qty'|trans }}</th>
-                    <th class="border-0 text-nowrap text-right">{{ 'sylius.ui.total'|trans }}</th>
+                    <th class="border-0 text-nowrap text-end">{{ 'sylius.ui.total'|trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                     </div>
                 {% endif %}
 
-                <div class="col text-right">
+                <div class="col text-end">
                     {% include '@SyliusShop/Cart/Summary/_update.html.twig' with {'main_form': form.vars.id} %}
                 </div>
             </div>

@@ -10,13 +10,13 @@
             <div>
                 {{ order.checkoutCompletedAt|format_date }}
             </div>
-            <div class="pl-2">
+            <div class="ps-2">
                 {% include [('@SyliusShop/Account/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
             </div>
-            <div class="pl-2">
+            <div class="ps-2">
                 {{ order.currencyCode }}
             </div>
-            <div class="pl-2">
+            <div class="ps-2">
                 {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|locale_name }}
             </div>
         </div>

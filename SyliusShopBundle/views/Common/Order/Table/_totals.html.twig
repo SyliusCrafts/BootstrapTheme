@@ -37,7 +37,7 @@
     <td colspan="4" id="promotion-total" {{ sylius_test_html_attribute('promotion-total') }}>
         <strong>{{ 'sylius.ui.discount'|trans }}:</strong> {{ money.convertAndFormat(order.orderPromotionTotal) }}
         {% if order.orderPromotionTotal != 0 %}
-            <span id="order-promotions-details" {{ sylius_test_html_attribute('order-promotions-details') }} title="{% for key, value in order_promotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}" data-toggle="tooltip" data-placement="top" >
+            <span id="order-promotions-details" {{ sylius_test_html_attribute('order-promotions-details') }} title="{% for key, value in order_promotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}" data-bs-toggle="tooltip" data-placement="top" >
                 <i class="fas fa-question-circle"></i>
             </span>
         {% endif %}

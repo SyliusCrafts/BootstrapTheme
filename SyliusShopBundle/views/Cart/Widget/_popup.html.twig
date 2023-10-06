@@ -10,7 +10,7 @@
         {% for item in cart.items %}
             <tr>
                 <td>{{ item.product }}</td>
-                <td class="text-right">
+                <td class="text-end">
                     <small class="text-muted">{{ item.quantity }} x </small>
                     {{ money.convertAndFormat(item.unitPrice) }}
                 </td>
@@ -18,14 +18,14 @@
         {% endfor %}
         <tr class="bg-light">
             <td><strong class="text-dark">{{ 'sylius.ui.subtotal'|trans }}:</strong></td>
-            <td class="text-right text-dark"><strong>{{ money.convertAndFormat(cart.itemsTotal) }}</strong></td>
+            <td class="text-end text-dark"><strong>{{ money.convertAndFormat(cart.itemsTotal) }}</strong></td>
         </tr>
         </tbody>
     </table>
 
     <div class="px-3 pb-2">
-        <a href="{{ path('sylius_shop_cart_summary') }}" class="btn btn-outline-primary btn-block">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
-        <a href="{{ path('sylius_shop_checkout_start') }}" class="btn btn-primary btn-block">{{ 'sylius.ui.checkout'|trans }}</a>
+        <a href="{{ path('sylius_shop_cart_summary') }}" class="btn btn-outline-primary d-block w-100">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
+        <a href="{{ path('sylius_shop_checkout_start') }}" class="btn btn-primary d-block w-100">{{ 'sylius.ui.checkout'|trans }}</a>
     </div>
 {% endif %}
 

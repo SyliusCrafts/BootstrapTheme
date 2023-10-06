@@ -13,7 +13,7 @@
 
 {% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
 
-<div class="form-group province-container" data-url="{{ path('sylius_shop_ajax_render_province_form') }}" data-parent="{{ form.countryCode.vars.id }}">
+<div class="mb-3 province-container" data-url="{{ path('sylius_shop_ajax_render_province_form') }}" data-parent="{{ form.countryCode.vars.id }}">
     {% if form.provinceCode is defined %}
         {{ form_row(form.provinceCode, sylius_test_form_attribute('province-code')|sylius_merge_recursive({'attr': {'class': 'ui dropdown'}})) }}
     {% elseif form.provinceName is defined %}

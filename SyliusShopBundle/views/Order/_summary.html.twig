@@ -9,10 +9,10 @@
             <div>
                 {{ order.checkoutCompletedAt|date }}
             </div>
-            <div class="pl-2">
+            <div class="ps-2">
                 {{ money.convertAndFormat(order.total) }}
             </div>
-            <div class="pl-2">
+            <div class="ps-2">
                 {{ order.totalQuantity }} {{ 'sylius.ui.items'|trans|lower }}
             </div>
         </div>

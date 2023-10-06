@@ -25,7 +25,7 @@
     <td class="text-center">
         <span class="sylius-quantity">{{ form_widget(form.quantity, sylius_test_form_attribute('cart-item-quantity-input', item.productName)) }}</span>
     </td>
-    <td class="text-right">
+    <td class="text-end">
         <span class="sylius-total" {{ sylius_test_html_attribute('cart-product-subtotal') }}>{{ money.convertAndFormat(item.subtotal) }}</span>
     </td>
 </tr>

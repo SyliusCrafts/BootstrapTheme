@@ -1,5 +1,5 @@
 {% macro default(text) %}
-    <span class="badge badge-secondary">{{ text|trans }}</span>
+    <span class="badge bg-secondary">{{ text|trans }}</span>
 {% endmacro %}
 
 {% macro status(status) %}
@@ -13,14 +13,14 @@
 {% endmacro %}
 
 {% macro enabled() %}
-    <span class="badge badge-info">
+    <span class="badge bg-info">
         <i class="fas fa-check"></i>
         {{ 'sylius.ui.enabled'|trans }}
     </span>
 {% endmacro %}
 
 {% macro disabled() %}
-    <span class="badge badge-danger">
+    <span class="badge bg-danger">
         <i class="fas fa-times"></i>
         {{ 'sylius.ui.disabled'|trans }}
     </span>
@@ -37,14 +37,14 @@
 {% endmacro %}
 
 {% macro yes() %}
-    <span class="badge badge-primary">
+    <span class="badge bg-primary">
         <i class="fas fa-check"></i>
         {{ 'sylius.ui.yes_label'|trans }}
     </span>
 {% endmacro %}
 
 {% macro no() %}
-    <span class="badge badge-primary">
+    <span class="badge bg-primary">
         <i class="fas fa-times"></i>
         {{ 'sylius.ui.no_label'|trans }}
     </span>

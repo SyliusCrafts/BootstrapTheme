@@ -26,8 +26,8 @@
                     {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item}) }}
                 </div>
                 <div class="col">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-block btn-primary" {{ sylius_test_html_attribute('add-to-cart-button') }}>
+                    <div class="mb-3">
+                        <button type="submit" class="btn d-block w-100 btn-primary" {{ sylius_test_html_attribute('add-to-cart-button') }}>
                             <span class="btn-icon">{{ icons.cart() }}</span>
                             {{ 'sylius.ui.add_to_cart'|trans }}
                         </button>

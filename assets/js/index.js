@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add to cart
   document.querySelectorAll('[data-js-add-to-cart="form"]')
-    .forEach(el => SyliusAddToCart(el));
+    .forEach((el) => SyliusAddToCart(el));
 
   // Remove from cart
   document.querySelectorAll('[data-js-remove-from-cart-button]')
-    .forEach(el => SyliusRemoveFromCart(el));
+    .forEach((el) => SyliusRemoveFromCart(el));
 
   // Province field
   SyliusProvinceField();
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Toggle billing address on the checkout page
-  document.querySelectorAll('[data-js-toggle]').forEach(elem => new SyliusToggle(elem));
+  document.querySelectorAll('[data-js-toggle]').forEach((elem) => new SyliusToggle(elem));
 
   // Product images for variants
   if (document.querySelector('[data-variant-options], [data-variant-code]')) { new SyliusVariantImages(); }

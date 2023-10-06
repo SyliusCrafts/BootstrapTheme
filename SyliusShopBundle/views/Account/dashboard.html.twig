@@ -43,7 +43,7 @@
     {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'customer': customer}) }}
 
     <div class="d-flex">
-        <a href="{{ path('sylius_shop_account_profile_update') }}" class="btn btn-primary mr-2">{{ 'sylius.ui.edit'|trans }}</a>
-        <a href="{{ path('sylius_shop_account_change_password') }}" class="btn btn-primary mr-2">{{ 'sylius.ui.change_password'|trans }}</a>
+        <a href="{{ path('sylius_shop_account_profile_update') }}" class="btn btn-primary me-2">{{ 'sylius.ui.edit'|trans }}</a>
+        <a href="{{ path('sylius_shop_account_change_password') }}" class="btn btn-primary me-2">{{ 'sylius.ui.change_password'|trans }}</a>
     </div>
 {% endblock %}

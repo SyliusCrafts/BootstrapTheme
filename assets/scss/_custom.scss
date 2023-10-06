@@ -1,4 +1,6 @@
-
+a {
+    text-decoration: none;
+}
 
 @include media-breakpoint-up(lg) {
     .dropdown-menu .dropdown-menu {
@@ -13,7 +15,7 @@
         width: 160px;
     }
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
         width: 130px;
     }
 }
@@ -73,4 +75,30 @@ label.required {
             }
         }
     }
+}
+
+.navbar {
+    .btn-dark {
+        &:hover {
+            background-color: #23272b;
+            border-color: #23272b;
+        }
+    }
+    .nav-link {
+        color: $primary;
+        &:hover {
+            color: $primary-400;
+        }
+    }
+}
+
+.btn-primary, .btn-success, .btn-info {
+    color: $white;
+    &:hover,&:active {
+        color: $white;
+    }
+}
+
+.text-muted {
+    color: $gray-500!important;
 }
