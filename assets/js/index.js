@@ -11,7 +11,7 @@
 
 import GLightbox from 'glightbox';
 import axios from 'axios';
-import 'bootstrap.native/dist/bootstrap-native';
+import 'bootstrap.native';
 
 import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
