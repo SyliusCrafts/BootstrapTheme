@@ -8,6 +8,7 @@ import './scss/index.scss';
 
 // Images
 import './media/sylius-logo.png';
+import './media/sylius-plus-banner.png';
 
 // Font awesome icons
 import './js/fontawesome';
