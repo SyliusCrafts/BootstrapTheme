@@ -1,0 +1,8 @@
+// How to use utilities api: https://getbootstrap.com/docs/5.0/utilities/api/
+
+$utilities: (
+    "object-fit": (
+        property: object-fit,
+        values: contain cover fill none revert scale-down unset,
+    ),
+);

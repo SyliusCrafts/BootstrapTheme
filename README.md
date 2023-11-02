@@ -35,7 +35,7 @@ composer require encore
 
 ```bash
 yarn install
-yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 glightbox axios
+yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 glightbox axios @popperjs/core@^2.11
 ```
 
 4. Import bootstrap-theme config in the main webpack file

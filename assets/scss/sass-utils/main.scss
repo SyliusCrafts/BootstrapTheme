@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions";
+
+@import '_variables';
+@import "~bootstrap/scss/variables-dark";
+
+@import "_utilities";
+
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/utilities/api";
+
+@import './mixins/main.scss';
