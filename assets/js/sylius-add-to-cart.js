@@ -10,7 +10,6 @@
 /* eslint-env browser */
 
 import axios from 'axios';
-import serialize from 'form-serialize';
 
 const SyliusAddToCart = (el) => {
   const element = el;
@@ -19,7 +18,7 @@ const SyliusAddToCart = (el) => {
   const validationElement = element.querySelector('[data-js-add-to-cart="error"]');
 
   element.addEventListener('submit', (e) => {
-    const request = axios.post(url, serialize(element));
+    const request = axios.post(url, new FormData(element));
 
     e.preventDefault();
 

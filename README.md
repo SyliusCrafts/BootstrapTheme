@@ -34,11 +34,8 @@ composer require encore
 3. Install node dependencies
 
 ```bash
-yarn
-yarn add @symfony/webpack-encore sass-loader@^13.0.0 node-sass -D
-yarn add lodash.throttle -D
-yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
-yarn add @popperjs/core
+yarn install
+yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 glightbox axios
 ```
 
 4. Import bootstrap-theme config in the main webpack file
