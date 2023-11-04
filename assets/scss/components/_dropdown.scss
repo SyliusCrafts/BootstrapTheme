@@ -1,0 +1,10 @@
+.dropdown {
+	&-item {
+		i {
+			width: 1.5rem;
+			text-align: center;
+			margin-right: .75rem;
+			color: $gray-500;
+		}
+	}
+}

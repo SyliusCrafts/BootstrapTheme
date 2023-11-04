@@ -1,0 +1,7 @@
+.breadcrumb {
+	&-item {
+		&::before {
+			font-family: $font-family-icons;
+		}
+	}
+}

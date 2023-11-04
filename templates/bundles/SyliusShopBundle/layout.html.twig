@@ -9,8 +9,7 @@
 
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    {% block metatags %}
-    {% endblock %}
+    {% block metatags '' %}
 
     {% block stylesheets %}
         {{ sylius_template_event('sylius.shop.layout.stylesheets') }}
@@ -23,27 +22,16 @@
 {{ sylius_template_event('sylius.shop.layout.before_body') }}
 
 {% block top %}
-    <nav class="bg-dark navbar navbar-expand-lg">
+    <nav class="border-bottom border-light-subtle navbar navbar-expand-lg">
         <div class="container">
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-target="#navbarTop" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon text-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                    </svg>
-                </span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarTop">
-                {{ sylius_template_event('sylius.shop.layout.topbar') }}
-            </div>
+            {{ sylius_template_event('sylius.shop.layout.topbar') }}
         </div>
     </nav>
 {% endblock %}
 
 {% block header %}
-    <div class="mb-2">
-        {{ sylius_template_event('sylius.shop.layout.header') }}
-    </div>
+    {{ sylius_template_event('sylius.shop.layout.header') }}
+    <div class="mb-4"></div>
 {% endblock %}
 
 <div class="main-content container">

@@ -1,28 +1,4 @@
 
-
-@include media-breakpoint-up(lg) {
-    .dropdown-menu .dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: 0;
-    }
-}
-
-.logo {
-    @include media-breakpoint-up(md) {
-        width: 160px;
-    }
-
-    @include media-breakpoint-down(sm) {
-        width: 130px;
-    }
-}
-
-.main-content > :first-child:not(nav):not(.nav) {
-    margin-top: map-get($spacers, 4);
-}
-
-
 .loading-overlay {
     position: absolute;
     top: 0;
@@ -45,32 +21,5 @@ label.required {
         display: inline-block;
         padding-left: 4px;
         color: $danger;
-    }
-}
-
-.btn-icon {
-    padding-right: 5px;
-    padding-left: 5px;
-    //font-size: $font-size-lg;
-}
-
-.homepage-banner{
-    @include media-breakpoint-up(lg) {
-        position: relative;
-        &__content{
-            position: absolute;
-            bottom: 70px;
-            left: 70px;
-            max-width: 500px;
-            line-height: 1.4;
-            background-color: unset !important;
-            h1{
-                font-size: 50px;
-                color: #fff;
-            }
-            p{
-                font-size: 22px;
-            }
-        }
     }
 }

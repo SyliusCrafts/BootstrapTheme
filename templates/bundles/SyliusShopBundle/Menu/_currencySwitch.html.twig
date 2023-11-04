@@ -1,10 +1,9 @@
-<ul class="nav navbar">
-
 {% if currencies|length > 1 %}
-    <li class="nav-item dropdown" id="sylius-currency-selector" {{ sylius_test_html_attribute('currency-selector') }}>
-        <a class="btn btn-dark text-body-secondary nav-link dropdown-toggle sylius-active-currency" type="button" data-bs-toggle="dropdown" {{ sylius_test_html_attribute('active-currency') }}>
+    <div class="dropdown" id="sylius-currency-selector" {{ sylius_test_html_attribute('currency-selector') }}>
+        <button class="btn btn-sm dropdown-toggle sylius-active-currency" data-bs-toggle="dropdown" {{ sylius_test_html_attribute('active-currency') }}>
+            <i class="fa-solid fa-currency"></i>
             {{ active }}
-        </a>
+        </button>
         <div class="dropdown-menu">
             {% for code in currencies %}
                 {% if code is not same as(active) %}
@@ -14,6 +13,5 @@
                 {% endif %}
             {% endfor %}
         </div>
-    </li>
+    </div>
 {% endif %}
-</ul>

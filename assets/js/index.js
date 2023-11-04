@@ -23,6 +23,7 @@ import SyliusVariantImages from './sylius-variant-images';
 import SyliusProvinceField from './sylius-province-field';
 import SyliusAddressBook from './sylius-address-book';
 import SyliusLoadableForms from './sylius-loadable-forms';
+import 'bootstrap';
 
 // Global axios settings
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';

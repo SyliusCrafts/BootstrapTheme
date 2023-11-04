@@ -1,14 +1,10 @@
-{% if products|length == 4 %}
-    {% set columns = "col-6" %}
-{% endif %}
-{% if products|length == 3 %}
-    {% set columns = "col-4" %}
-{% endif %}
+{% set role = products|length == 5 ? 'grid-item' : '' %}
 
-<div class="card-group row">
+<div class="grid">
     {% for product in products %}
-        <div class="{{ columns|default('col-12') }}">
-        {% include '@SyliusShop/Product/_box.html.twig' %}
+        <div class="{{ columns|default('g-col-12 g-col-md-6 g-col-lg-3') }}"
+        style="{{ loop.first and products|length == 5 ? 'grid-area: 1/1/3/7' : '' }}">
+        {% include '@SyliusShop/Product/_box.html.twig' with { role } %}
         </div>
     {% endfor %}
 </div>
