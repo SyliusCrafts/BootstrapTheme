@@ -50,7 +50,7 @@ yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 glightbox axios @po
 
 ```
 
-For sylius **1.11** and **1.12** change output paths
+~~For sylius **1.11** and **1.12** change output paths~~
     
 ```diff
 # ./webpack.config.js
@@ -78,7 +78,7 @@ framework:
     assets:
         packages:
 +            bootstrapTheme:
-+                json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'
++                json_manifest_path: '%kernel.project_dir%/public/themes/bootstrap-theme/manifest.json'
 ```
 
 ```diff
@@ -87,13 +87,7 @@ framework:
 webpack_encore:
     output_path: '%kernel.project_dir%/public/build'
     builds:
-+        bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
-```
-
-```diff
-# ./config/packages/_sylius.yaml
-sylius_theme:
-+    legacy_mode: true # for sylius 1.9, 1.10, 1.11, 1.12
++        bootstrapTheme: '%kernel.project_dir%/public/themes/bootstrap-theme'
 ```
 
 6. To build the assets, run one of the following commands  
