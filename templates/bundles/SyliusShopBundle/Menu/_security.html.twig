@@ -1,8 +1,9 @@
 <div class="ms-auto d-flex gap-2">
     {% if is_granted('ROLE_USER') %}
         <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <span{{ sylius_test_html_attribute('full-name') }}>{{ app.user.customer.fullName }}</span>
+            <button class="btn btn-outline-info text-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user me-2"></i>
+                <span{{ sylius_test_html_attribute('full-name') }}>{{ app.user.customer.firstName }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>

@@ -1,15 +1,13 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 {% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
 
-<button class="btn btn-light dropdown-toggle"
-   data-bs-toggle="dropdown"
-   id="sylius-cart-total" {{ sylius_test_html_attribute('cart-total') }}>
+<button class="btn btn-outline-info text-secondary dropdown-toggle"  data-bs-toggle="dropdown"  id="sylius-cart-total" {{ sylius_test_html_attribute('cart-total') }}>
     
     {% if cart.items|length > 0 %}
         <span class="pe-3">{{ money.convertAndFormat(cart.itemsTotal) }}</span>
     {% endif %}
     
-    <span>{{ icons.cart('fs-5') }}</span>
+    <span>{{ icons.cart() }}</span>
     
     {% if cart.items|length > 0 %}
         <span class="badge rounded-pill bg-primary" style="transform: translate(-8px, 10px)">{{ cart.items|length }}</span>

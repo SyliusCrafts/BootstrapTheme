@@ -1,0 +1,43 @@
+sylius_ui:
+    events:
+        sylius.shop.layout.topbar:
+            blocks:
+                before_switchers_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 35
+                    context:
+                        event: sylius.shop.layout.before_currency_switcher
+                currency_switcher:
+                    template: "@SyliusShop/Layout/Topbar/_currencySwitcher.html.twig"
+                    priority: 30
+                locale_switcher:
+                    template: "@SyliusShop/Layout/Topbar/_localeSwitcher.html.twig"
+                    priority: 20
+                security_widget:
+                    enabled: false
+
+        sylius.shop.layout.header.grid:
+            blocks:
+                
+                logo:
+                    template: "@SyliusShop/Layout/Header/_logo.html.twig"
+                    priority: 60
+                content:
+                    template: "@SyliusShop/Layout/Header/_content.html.twig"
+                    priority: 50
+                cart:
+                    template: "@SyliusShop/Layout/Header/_cart.html.twig"
+                    priority: 40
+                before_security_widget_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 30
+                    context:
+                        event: sylius.shop.layout.before_security_widget
+                security_widget:
+                    template: "@SyliusShop/Layout/Topbar/_securityWidget.html.twig"
+                    priority: 20
+                after_security_widget_legacy:
+                    template: "@SyliusUi/Block/_legacySonataEvent.html.twig"
+                    priority: 10
+                    context:
+                        event: sylius.shop.layout.after_security_widget
