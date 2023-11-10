@@ -367,6 +367,7 @@ $container-max-widths: (
 $grid-columns:                12 !default;
 $grid-gutter-width:           1.5rem !default;
 $grid-row-columns:            6 !default;
+$grid-rows:                   4 !default; // custom variable for grid-rows mixin
 
 // Container padding
 
@@ -1386,18 +1387,18 @@ $breadcrumb-border-radius:          null !default;
 
 // Carousel
 
-$carousel-control-color:             $white !default;
-$carousel-control-width:             15% !default;
+$carousel-control-color:             $dark !default;
+$carousel-control-width:             3rem !default;
 $carousel-control-opacity:           .5 !default;
 $carousel-control-hover-opacity:     .9 !default;
 $carousel-control-transition:        opacity .15s ease !default;
 
-$carousel-indicator-width:           30px !default;
-$carousel-indicator-height:          3px !default;
+$carousel-indicator-width:           2rem !default;
+$carousel-indicator-height:          5px !default;
 $carousel-indicator-hit-area-height: 10px !default;
 $carousel-indicator-spacer:          3px !default;
 $carousel-indicator-opacity:         .5 !default;
-$carousel-indicator-active-bg:       $white !default;
+$carousel-indicator-active-bg:       $dark !default;
 $carousel-indicator-active-opacity:  1 !default;
 $carousel-indicator-transition:      opacity .6s ease !default;
 

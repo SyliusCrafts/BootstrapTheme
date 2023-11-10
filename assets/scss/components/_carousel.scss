@@ -1,0 +1,26 @@
+.carousel {
+
+  &-control-prev,
+  &-control-next {
+    @include media-breakpoint-up(lg) {
+      bottom: 50%;
+      top: unset;
+      height: auto;
+    }
+  }
+
+  &-control-prev {
+    @include media-breakpoint-up(lg) {
+      left: unset;
+      right: 100%;
+    }
+  }
+
+  &-control-next {
+    @include media-breakpoint-up(lg) {
+      right: unset;
+      left: 100%;
+    }
+  }
+
+}

@@ -5,8 +5,8 @@
             <div class="carousel-item grid {% if loop.index0 == 0 %}active{% endif %}">
                 <div class="grid">
             {% endif %}
-                    <div class="g-col-4">
-                        {% include '@SyliusShop/Product/_box.html.twig' %}
+                    <div class="g-col-12 g-col-md-6 g-col-lg-4">
+                        {% include '@SyliusShop/Product/_box.html.twig' with { role: 'carousel-product' } %}
                     </div>
             {% if loop.index % 3 == 0 or loop.last %}
                 </div>
@@ -15,14 +15,12 @@
         {% endfor %}
     </div>
 
-    <div class="carousel-nav">
-        <a class="carousel-control-prev translate-middle start-0 top-50" href="#sylius-carousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next translate-middle start-100 top-50" href="#sylius-carousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#sylius-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#sylius-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
