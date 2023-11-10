@@ -174,7 +174,7 @@ $info:          $gray-300 !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-100 !default;
-$dark:          $gray-900 !default;
+$dark:          $gray-800 !default;
 
 $theme-colors: (
   "primary":    $primary,
@@ -1373,7 +1373,7 @@ $figure-caption-color:              var(--#{$prefix}secondary-color) !default;
 
 // Breadcrumbs
 
-$breadcrumb-font-size:              null !default;
+$breadcrumb-font-size:              $font-size-sm !default;
 $breadcrumb-padding-y:              0 !default;
 $breadcrumb-padding-x:              0 !default;
 $breadcrumb-item-padding-x:         1rem !default;

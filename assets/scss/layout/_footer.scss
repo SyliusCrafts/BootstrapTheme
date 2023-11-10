@@ -1,0 +1,20 @@
+.pre-footer {
+	transform: translateY(-50%);
+	margin-top: -3rem;
+
+	&-col {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.fa-solid {
+		width: 3rem;
+		text-align: center;
+		color: $teal-200;
+	}
+}
+
+.footer {
+	margin-top: 6rem;
+}
