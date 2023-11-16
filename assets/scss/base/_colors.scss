@@ -1,0 +1,9 @@
+@each $level, $color in $grays {
+	.text-gray-#{$level} {
+		color: $color;
+	}
+
+	.bg-gray-#{$level} {
+		background-color: $color;
+	}
+}

@@ -1,6 +1,13 @@
 {% form_theme form '@SyliusShop/Form/theme.html.twig' %}
 
 {% if form.type is defined %}
-{{ form_row(form.type, {'label': filter.label}) }}
+	{{ form_row(form.type, {'label': filter.label}) }}
 {% endif %}
-{{ form_row(form.value, {'label': form.type is defined ? form.value.vars.label : filter.label}) }}
+
+{% set label =  form.type is defined ? form.value.vars.label : filter.label %}
+
+{% if label %}
+	{{ form_row(form.value, { label }) }}
+{% else %}
+	{{ form_widget(form.value, { label, attr: { class: "bg-light border-light form-control-lg" } }) }}
+{% endif %}

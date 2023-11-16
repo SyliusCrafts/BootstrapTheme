@@ -24,6 +24,7 @@ $black: #000 !default;
 
 // fusv-disable
 $grays: (
+  "50": $gray-50,
   "100": $gray-100,
   "200": $gray-200,
   "300": $gray-300,
@@ -32,7 +33,8 @@ $grays: (
   "600": $gray-600,
   "700": $gray-700,
   "800": $gray-800,
-  "900": $gray-900
+  "900": $gray-900,
+  "950": $gray-950
 ) !default;
 // fusv-enable
 
@@ -168,7 +170,7 @@ $teals: (
 // fusv-enable
 
 $primary:       $teal-500 !default;
-$secondary:     $gray-600 !default;
+$secondary:     $gray-500 !default;
 $success:       $green !default;
 $info:          $gray-300 !default;
 $warning:       $yellow !default;
@@ -304,7 +306,7 @@ $body-emphasis-color:       $black !default;
 //
 // Style anchor elements.
 
-$link-color:                              $primary !default;
+$link-color:                              $dark !default;
 $link-decoration:                         none !default;
 $link-shade-percentage:                   20% !default;
 $link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;
@@ -367,7 +369,7 @@ $container-max-widths: (
 $grid-columns:                12 !default;
 $grid-gutter-width:           1.5rem !default;
 $grid-row-columns:            6 !default;
-$grid-rows:                   4 !default; // custom variable for grid-rows mixin
+$grid-rows:                   5 !default; // custom variable for grid-rows mixin
 
 // Container padding
 
@@ -390,7 +392,7 @@ $border-style:                solid !default;
 $border-color:                $gray-300 !default;
 $border-color-translucent:    rgba($black, .175) !default;
 
-$border-radius:               .25rem !default;
+$border-radius:               .5rem !default;
 $border-radius-sm:            .125rem !default;
 $border-radius-md:            .375rem !default;
 $border-radius-lg:            .5rem !default;
@@ -1063,8 +1065,8 @@ $dropdown-dark-header-color:        $gray-500 !default;
 
 // Pagination
 
-$pagination-padding-y:              .375rem !default;
-$pagination-padding-x:              .75rem !default;
+$pagination-padding-y:              $spacer * .375 !default;
+$pagination-padding-x:              $spacer !default;
 $pagination-padding-y-sm:           .25rem !default;
 $pagination-padding-x-sm:           .5rem !default;
 $pagination-padding-y-lg:           .75rem !default;
@@ -1075,7 +1077,7 @@ $pagination-font-size:              $font-size-base !default;
 $pagination-color:                  var(--#{$prefix}link-color) !default;
 $pagination-bg:                     var(--#{$prefix}body-bg) !default;
 $pagination-border-radius:          var(--#{$prefix}border-radius) !default;
-$pagination-border-width:           var(--#{$prefix}border-width) !default;
+$pagination-border-width:           0px !default;
 $pagination-margin-start:           calc(#{$pagination-border-width} * -1) !default; // stylelint-disable-line function-disallowed-list
 $pagination-border-color:           var(--#{$prefix}border-color) !default;
 
@@ -1092,8 +1094,8 @@ $pagination-active-color:           $component-active-color !default;
 $pagination-active-bg:              $component-active-bg !default;
 $pagination-active-border-color:    $component-active-bg !default;
 
-$pagination-disabled-color:         var(--#{$prefix}secondary-color) !default;
-$pagination-disabled-bg:            var(--#{$prefix}secondary-bg) !default;
+$pagination-disabled-color:         $dark !default;
+$pagination-disabled-bg:            $light !default;
 $pagination-disabled-border-color:  var(--#{$prefix}border-color) !default;
 
 $pagination-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
@@ -1121,7 +1123,7 @@ $card-box-shadow:                   null !default;
 $card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
 $card-cap-padding-y:                $card-spacer-y * .5 !default;
 $card-cap-padding-x:                $card-spacer-x !default;
-$card-cap-bg:                       rgba(var(--#{$prefix}body-color-rgb), .03) !default;
+$card-cap-bg:                       $gray-100 !default;
 $card-cap-color:                    null !default;
 $card-height:                       null !default;
 $card-color:                        null !default;
@@ -1298,12 +1300,12 @@ $modal-scale-transform:             scale(1.02) !default;
 //
 // Define alert colors, border radius, and padding.
 
-$alert-padding-y:               $spacer !default;
-$alert-padding-x:               $spacer !default;
+$alert-padding-y:               $spacer * 1.5 !default;
+$alert-padding-x:               $spacer * 1.5 !default;
 $alert-margin-bottom:           1rem !default;
 $alert-border-radius:           var(--#{$prefix}border-radius) !default;
 $alert-link-font-weight:        $font-weight-bold !default;
-$alert-border-width:            var(--#{$prefix}border-width) !default;
+$alert-border-width:            0 !default;
 $alert-dismissible-padding-r:   $alert-padding-x * 3 !default; // 3x covers width of x plus default padding on either side
 
 // fusv-disable

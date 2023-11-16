@@ -1,17 +1,12 @@
 {% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
 {% import '@SyliusShop/Common/Macro/pagination.html.twig' as pagination %}
 
-<div class="mb-3">
-    {{ sylius_template_event('sylius.shop.product.index.search', _context) }}
-    <div class="clearfix"></div>
-</div>
-
 {{ sylius_template_event('sylius.shop.product.index.before_list', {'products': resources.data}) }}
 
 {% if resources.data|length > 0 %}
-    <div class="row" {{ sylius_test_html_attribute('products') }}>
+    <div class="grid" {{ sylius_test_html_attribute('products') }}>
         {% for product in resources.data %}
-            <div class="col-6 col-md-6 col-lg-4 mb-3">
+            <div class="g-col-12 g-col-sm-6 g-col-lg-4">
                 {% include '@SyliusShop/Product/_box.html.twig' %}
             </div>
         {% endfor %}

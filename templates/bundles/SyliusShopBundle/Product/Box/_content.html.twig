@@ -2,7 +2,7 @@
 
 <div class="card card-product {{ role|default('') }}" {{ sylius_test_html_attribute('product') }}>
     <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
-        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'class': 'card-img-top'} %}
+        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'class': 'card-img-top border border-light bg-light'} %}
     </a>
 
     <div class="card-body" {{ sylius_test_html_attribute('product-content') }}>
