@@ -1,11 +1,7 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+{% import '@SyliusShop/Common/Macro/breadcrumbs.html.twig' as breadcrumbs %}
 
-{% block breadcrumb %}
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('sylius_shop_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a></li>
-            <li class="breadcrumb-item active">{{ 'sylius.ui.address_book'|trans }}</li>
-        </ol>
-    </nav>
-{% endblock %}
+{% block breadcrumb breadcrumbs.standard([
+    { 'link': path('sylius_shop_account_dashboard'), 'label': 'sylius.ui.my_account'|trans },
+    { 'label': 'sylius.ui.address_book'|trans }
+]) %}

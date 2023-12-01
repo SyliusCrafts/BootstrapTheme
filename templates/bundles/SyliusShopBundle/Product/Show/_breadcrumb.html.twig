@@ -1,26 +1,26 @@
-<nav>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+{% import '@SyliusShop/Common/Macro/breadcrumbs.html.twig' as breadcrumbs %}
 
-        {% if product.mainTaxon is not null %}
-            {% set taxon = product.mainTaxon %}
-            {% set ancestors = taxon.ancestors|reverse %}
+{% set breadcrumbItems = [] %}
 
-            {% for ancestor in ancestors %}
-                {% if ancestor.isRoot() %}
-                    <li class="breadcrumb-item">{{ ancestor.name }}</li>
-                {% else %}
-                    <li class="breadcrumb-item">
-                        <a href="{{ path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}) }}">{{ ancestor.name }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
+{% if product.mainTaxon is not null %}
+    {% set taxon = product.mainTaxon %}
+    {% set ancestors = taxon.ancestors|reverse %}
 
-            <li class="breadcrumb-item">
-                <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale}) }}">{{ taxon.name }}</a>
-            </li>
-        {% endif %}
+    {% for ancestor in ancestors %}
+        {% set breadcrumbItems = breadcrumbItems|merge([{
+            label: ancestor.name,
+            link: path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale})
+        }]) %}
+    {% endfor %}
 
-        <li class="breadcrumb-item active">{{ product.name }}</li>
-    </ol>
-</nav>
+    {% set breadcrumbItems = breadcrumbItems|merge([{
+        label: taxon.name,
+        link: path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale})
+    }]) %}
+{% endif %}
+
+{% set breadcrumbItems = breadcrumbItems|merge([{
+    label: product.name,
+}]) %}
+
+{{ breadcrumbs.standard(breadcrumbItems) }}

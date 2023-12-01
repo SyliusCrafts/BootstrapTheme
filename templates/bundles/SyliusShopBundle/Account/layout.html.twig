@@ -1,14 +1,13 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    {% block breadcrumb %}
-    {% endblock %}
+    {% block breadcrumb '' %}
 
-    <div class="row">
-        <div class="col-12 col-md-4 col-lg-3 mb-4">
+    <div class="grid gap-5 my-5">
+        <div class="g-col-12 g-col-md-4 g-col-lg-3 mb-4">
             {{ sylius_template_event('sylius.shop.account.layout.menu') }}
         </div>
-        <div class="col-12 col-md-8 col-lg-9">
+        <div class="g-col-12 g-col-md-8 g-col-lg-9">
             {{ sylius_template_event('sylius.shop.account.layout.before_subcontent') }}
 
             {% block subcontent %}

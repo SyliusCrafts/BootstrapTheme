@@ -1,13 +1,13 @@
 {% set ancestors = taxon.ancestors|reverse %}
+{% import '@SyliusShop/Common/Macro/breadcrumbs.html.twig' as breadcrumbs %}
 
-<nav class="w-100">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+{% set breadcrumbItems = [] %}
 
-        {% for ancestor in ancestors %}
-            <li class="breadcrumb-item"><a href="{{ path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}) }}">{{ ancestor.name }}</a></li>
-        {% endfor %}
+{% for ancestor in ancestors %}
+    {% set breadcrumbItems = breadcrumbItems|merge([{
+        label: ancestor.name,
+        link: path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale})
+    }]) %}
+{% endfor %}
 
-        <li class="breadcrumb-item active">{{ taxon.name }}</li>
-    </ol>
-</nav>
+{{ breadcrumbs.standard(breadcrumbItems, { attr: { class: 'w-100' }}) }}

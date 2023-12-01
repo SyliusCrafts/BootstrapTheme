@@ -1,26 +1,33 @@
 {% extends 'knp_menu.html.twig' %}
 
 {% block root %}
-    <div class="list-group">
-        <div class="list-group-item bg-light">{{ item.label|trans }}</div>
-        {{ block('list') }}
-    </div>
+	<b class="d-block fs-5 text-light-emphasis pb-2 mb-2 border-2 border-bottom border-light">{{ item.label|trans }}</b>
+	<ul class="nav flex-column">
+		{{ block('list') }}
+	</ul>
 {% endblock %}
 
 {% block list %}
-    {% for item in item.children %}
-        {{ block('item') }}
-    {% endfor %}
+	{% for item in item.children %}
+		{{ block('item') }}
+	{% endfor %}
 {% endblock %}
 
 {% block item %}
-    <a class="list-group-item list-group-item-action" href="{{ item.uri }}">
-        {{ block('icon') }}
-        {{ item.label|trans }}
-    </a>
+	{% set isActive = item.uri in app.request.pathInfo %}
+
+	<li class="nav-item">
+		<a class="nav-link {{ isActive ? 'bg-primary-50 text-primary-700 fw-bold' }}" href="{{ item.uri }}">
+			{{ block('icon') }}
+			{{ item.label|trans }}
+		</a>
+	</li>
 {% endblock %}
 
 {% block icon %}
-    {% set icon = item.labelAttribute('icon') %}
-    {% if icon %}<i class="{{ icon }}"></i> {% endif %}
+	{% set icon = item.labelAttribute('icon') %}
+
+	{% if icon %}
+		<i class="fa-solid fa-{{ icon is same as('cart') ? 'shopping-cart' : icon }} me-2 {{ isActive ? 'text-primary-400' : 'text-secondary'}}"></i>
+	{% endif %}
 {% endblock %}

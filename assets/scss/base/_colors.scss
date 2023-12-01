@@ -7,3 +7,13 @@
 		background-color: $color;
 	}
 }
+
+@each $level, $color in $primaries {
+	.text-#{$level} {
+		color: $color;
+	}
+
+	.bg-#{$level} {
+		background-color: $color;
+	}
+}
