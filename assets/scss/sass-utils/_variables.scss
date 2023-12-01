@@ -153,18 +153,18 @@ $greens: (
   "green-950": $green-950,
 ) !default;
 
-$teals: (
-  "teal-50": $teal-50,
-  "teal-100": $teal-100,
-  "teal-200": $teal-200,
-  "teal-300": $teal-300,
-  "teal-400": $teal-400,
-  "teal-500": $teal-500,
-  "teal-600": $teal-600,
-  "teal-700": $teal-700,
-  "teal-800": $teal-800,
-  "teal-900": $teal-900,
-  "teal-950": $teal-950,
+$primaries: (
+  "primary-50": $teal-50,
+  "primary-100": $teal-100,
+  "primary-200": $teal-200,
+  "primary-300": $teal-300,
+  "primary-400": $teal-400,
+  "primary-500": $teal-500,
+  "primary-600": $teal-600,
+  "primary-700": $teal-700,
+  "primary-800": $teal-800,
+  "primary-900": $teal-900,
+  "primary-950": $teal-950,
 ) !default;
 
 // fusv-enable
@@ -1094,7 +1094,7 @@ $pagination-active-color:           $component-active-color !default;
 $pagination-active-bg:              $component-active-bg !default;
 $pagination-active-border-color:    $component-active-bg !default;
 
-$pagination-disabled-color:         $dark !default;
+$pagination-disabled-color:         $gray-100 !default;
 $pagination-disabled-bg:            $light !default;
 $pagination-disabled-border-color:  var(--#{$prefix}border-color) !default;
 
@@ -1247,8 +1247,8 @@ $toast-header-border-color:         $toast-border-color !default;
 $badge-font-size:                   .75em !default;
 $badge-font-weight:                 $font-weight-bold !default;
 $badge-color:                       $white !default;
-$badge-padding-y:                   .35em !default;
-$badge-padding-x:                   .65em !default;
+$badge-padding-y:                   .5rem !default;
+$badge-padding-x:                   .75rem !default;
 $badge-border-radius:               var(--#{$prefix}border-radius) !default;
 
 
