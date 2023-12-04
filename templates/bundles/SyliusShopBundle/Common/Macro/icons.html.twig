@@ -66,3 +66,13 @@
     {% import _self as icons %}
     {{ icons.base('fa-solid fa-plus', extraClass) }}
 {% endmacro %}
+
+{% macro edit(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-pen', extraClass) }}
+{% endmacro %}
+
+{% macro lock(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-lock', extraClass) }}
+{% endmacro %}
