@@ -5,13 +5,11 @@
 {% block content %}
 {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
 
-<div class="row">
-    <div class="col-12 col-md-6 mb-5">
-        <div class="pe-3">
-            {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
-        </div>
+<div class="grid gap-1 gap-lg-5 my-5">
+    <div class="g-col-12 g-col-md-7">
+        {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
     </div>
-    <div class="col-12 col-md-6 mb-5">
+    <div class="g-col-12 g-col-md-5">
         {{ sylius_template_event('sylius.shop.product.show.right_sidebar', _context) }}
     </div>
 </div>

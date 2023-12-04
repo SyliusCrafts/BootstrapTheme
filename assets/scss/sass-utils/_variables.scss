@@ -309,7 +309,7 @@ $body-emphasis-color:       $black !default;
 $link-color:                              $dark !default;
 $link-decoration:                         none !default;
 $link-shade-percentage:                   20% !default;
-$link-hover-color:                        shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-color:                        $primary !default;
 $link-hover-decoration:                   null !default;
 
 $stretched-link-pseudo-element:           after !default;
@@ -392,7 +392,7 @@ $border-style:                solid !default;
 $border-color:                $gray-300 !default;
 $border-color-translucent:    rgba($black, .175) !default;
 
-$border-radius:               .5rem !default;
+$border-radius:               .375rem !default;
 $border-radius-sm:            .125rem !default;
 $border-radius-md:            .375rem !default;
 $border-radius-lg:            .5rem !default;
@@ -828,7 +828,7 @@ $form-select-feedback-icon-size:        $input-height-inner-half $input-height-i
 $form-select-border-width:        $input-border-width !default;
 $form-select-border-color:        $input-border-color !default;
 $form-select-border-radius:       $input-border-radius !default;
-$form-select-box-shadow:          var(--#{$prefix}box-shadow-inset) !default;
+$form-select-box-shadow:          unset !default;
 
 $form-select-focus-border-color:  $input-focus-border-color !default;
 $form-select-focus-width:         $input-focus-width !default;
