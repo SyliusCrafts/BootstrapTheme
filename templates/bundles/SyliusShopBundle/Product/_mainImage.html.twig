@@ -8,5 +8,5 @@
     {% set path = "https://picsum.photos/#{ size }/#{ size }.jpg" %}
 
 <div class="ratio ratio-1x1">
-    <img src="{{ path }}" alt="{{ product.name }}" {% if class is defined %}class="{{ class }} object-fit-cover rounded-3"{% endif %} {{ sylius_test_html_attribute('main-image') }} />
+    <img src="{{ path }}" alt="{{ product.name }}" class="{{ class|default('') }} object-fit-cover rounded-3 border border-light bg-light"{ sylius_test_html_attribute('main-image') }} />
 </div>
