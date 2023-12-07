@@ -3,6 +3,7 @@
 
 {% set variant = item.variant %}
 {% set product = variant.product %}
+{% set original_price_to_display = sylius_order_item_original_price_to_display(item) %}
 
 <li class="list-group-item border-top border-bottom border-light" {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
 	<div class="grid py-2 py-lg-4 gap-2 gap-lg-4" {{ sylius_test_html_attribute('cart-item', loop_index|default(null)) }}>
@@ -30,13 +31,15 @@
 			<div class="text-end">
 				<span class="fs-5 fw-medium sylius-total" title="{{ 'sylius.ui.total'|trans }}" {{ sylius_test_html_attribute('cart-product-subtotal') }}>{{ money.convertAndFormat(item.subtotal) }}</span>
 
-				<div class="hstack gap-2">
+				<div class="hstack align-items-baseline gap-2">
 					<span class="fw-normal text-gray-700">{{ 'sylius.ui.unit_price'|trans }}</span>
-					{% if item.unitPrice != item.discountedUnitPrice %}
-						<small class="sylius-regular-unit-price" {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}>
-							<s>{{ money.convertAndFormat(item.unitPrice) }}</s>
-						</small>
-					{% endif %}
+
+        {% if original_price_to_display is not null %}
+            <span class="small sylius-regular-unit-price" {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}>
+                <s>{{ money.convertAndFormat(original_price_to_display) }}</s>
+            </span>
+        {% endif %}
+
 					<span class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
 				</div>
 			</div>
