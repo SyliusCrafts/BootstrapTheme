@@ -1,5 +1,5 @@
-<div>
-    <h1 class="mb-4">{{ 'sylius.ui.shipment'|trans }} #{{ loop.index }}</h1>
+    <h1 class="h3 mb-4">{{ 'sylius.ui.shipment'|trans }} #{{ loop.index }}</h1>
+
     <div {{ sylius_test_html_attribute('shipments') }}>
         {{ form_errors(form.method) }}
 
@@ -11,4 +11,3 @@
             {% include '@SyliusShop/Checkout/SelectShipping/_unavailable.html.twig' %}
         {% endfor %}
     </div>
-</div>

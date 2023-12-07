@@ -1,29 +1,28 @@
 {% set product = variant.product %}
 
-<div class="d-flex ">
-    <div class="flex-shrink-0">
-        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail'} %}
-    </div>
-    <div class="flex-grow-1 ms-3">
-        <h6 class="mt-0 sylius-product-name" {{ sylius_test_html_attribute('product-name', item.productName) }}>
-            {{ item.productName }}
-        </h6>
-        <small class="sylius-product-variant-code" {{ sylius_test_html_attribute('product-variant-code') }}>
-            {{ variant.code }}
-        </small>
+<div class="vstack">
+	<strong class="h5 mb-0 sylius-product-name" {{ sylius_test_html_attribute('product-name', item.productName) }}>
+		{{ item.productName }}
+	</strong>
 
-        {% if product.hasOptions() %}
-            <div class="sylius-product-options" {{ sylius_test_html_attribute('product-options') }}>
-                {% for option_value in variant.optionValues %}
-                    <div data-sylius-option-name="{{ option_value.name }}" {{ sylius_test_html_attribute('option-name', option_value.name) }}>
-                        <small>{{ option_value.value }}</small>
-                    </div>
-                {% endfor %}
-            </div>
-        {% elseif item.variantName is not null %}
-            <div class="sylius-product-variant-name" {{ sylius_test_html_attribute('product-variant-name') }}>
-                <small>{{ item.variantName }}</small>
-            </div>
-        {% endif %}
-    </div>
+	<small class="sylius-product-variant-code mb-2 text-muted" {{ sylius_test_html_attribute('product-variant-code') }}>
+		{{ variant.code }}
+	</small>
+
+	{% if product.hasOptions() %}
+		<div class="vstack small gap-1 mb-2 sylius-product-options" {{ sylius_test_html_attribute('product-options') }}>
+			{% for option_value in variant.optionValues %}
+				<div>
+					<span>{{ option_value.name }}:</span>
+					<span class="fw-medium" data-sylius-option-name="{{ option_value.name }}" {{ sylius_test_html_attribute('option-name', option_value.name) }}>
+						{{ option_value.value }}
+					</span>
+				</div>
+			{% endfor %}
+		</div>
+	{% elseif item.variantName is not null %}
+		<div class="small mb-2 sylius-product-variant-name" {{ sylius_test_html_attribute('product-variant-name') }}>
+			<small>{{ item.variantName }}</small>
+		</div>
+	{% endif %}
 </div>

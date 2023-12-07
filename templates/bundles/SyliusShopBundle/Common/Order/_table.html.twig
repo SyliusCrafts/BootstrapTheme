@@ -1,11 +1,5 @@
-<table class="table table-bordered" id="sylius-order" {{ sylius_test_html_attribute('order-table') }}>
-    <thead>
-        {% include '@SyliusShop/Common/Order/Table/_headers.html.twig' %}
-    </thead>
-    <tbody>
-        {% include '@SyliusShop/Common/Order/Table/_items.html.twig' %}
-    </tbody>
-    <tfoot class="text-end">
-        {% include '@SyliusShop/Common/Order/Table/_totals.html.twig' %}
-    </tfoot>
-</table>
+<div id="sylius-order" {{ sylius_test_html_attribute('order-table') }}>
+	{% include '@SyliusShop/Common/Order/Table/_headers.html.twig' %}
+	{% include '@SyliusShop/Common/Order/Table/_items.html.twig' %}
+	{% include '@SyliusShop/Common/Order/Table/_totals.html.twig' %}
+</div>

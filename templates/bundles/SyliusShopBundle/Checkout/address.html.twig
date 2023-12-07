@@ -7,8 +7,8 @@
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.address.steps', 'sylius.shop.checkout.steps'], _context) }}
 
-    <div class="row">
-        <div class="col-12 col-lg-8 mb-5">
+    <div class="grid">
+        <div class="g-col-12 g-col-lg-8 mb-5">
             {{ sylius_template_event('sylius.shop.checkout.address.before_form', {'order': order}) }}
 
             {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
@@ -24,7 +24,7 @@
                 {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
         </div>
-        <div class="col-12 col-lg-4">
+        <div class="g-col-12 g-col-lg-4">
             {{ sylius_template_event(['sylius.shop.checkout.address.sidebar', 'sylius.shop.checkout.sidebar'], _context) }}
         </div>
     </div>

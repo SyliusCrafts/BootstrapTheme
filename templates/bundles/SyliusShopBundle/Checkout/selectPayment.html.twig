@@ -7,8 +7,8 @@
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.select_payment.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'select_payment', 'orderTotal': order.total})) }}
 
-    <div class="row">
-        <div class="col-12 col-lg-8 mb-5" id="sylius-payment-methods">
+    <div class="grid">
+        <div class="g-col-12 g-col-lg-8 mb-5" id="sylius-payment-methods">
             {{ sylius_template_event('sylius.shop.checkout.select_payment.before_form', {'order': order}) }}
 
             {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
@@ -23,7 +23,7 @@
                 {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
         </div>
-        <div class="col-12 col-lg-4">
+        <div class="g-col-12 g-col-lg-4">
             {{ sylius_template_event(['sylius.shop.checkout.select_payment.sidebar', 'sylius.shop.checkout.sidebar'], _context) }}
         </div>
     </div>

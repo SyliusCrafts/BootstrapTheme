@@ -59,7 +59,7 @@ $colors: (
   "teal":       $teal,
   "black":      $black,
   "white":      $white,
-  "gray":       $gray-600,
+  "gray":       $gray-500,
   "gray-dark":  $gray-800
 ) !default;
 
@@ -1247,8 +1247,8 @@ $toast-header-border-color:         $toast-border-color !default;
 $badge-font-size:                   .75em !default;
 $badge-font-weight:                 $font-weight-bold !default;
 $badge-color:                       $white !default;
-$badge-padding-y:                   .5rem !default;
-$badge-padding-x:                   .75rem !default;
+$badge-padding-y:                   .25rem !default;
+$badge-padding-x:                   .5rem !default;
 $badge-border-radius:               var(--#{$prefix}border-radius) !default;
 
 
@@ -1355,6 +1355,45 @@ $list-group-action-hover-color:     var(--#{$prefix}emphasis-color) !default;
 
 $list-group-action-active-color:    var(--#{$prefix}body-color) !default;
 $list-group-action-active-bg:       var(--#{$prefix}secondary-bg) !default;
+
+
+// Steps
+
+$steps-padding:                $spacer * 0.75 $spacer * 2 $spacer * 0.75$spacer * 1.5 !default;
+$steps-font-size:              $font-size-base !default;
+
+$steps-color:                  var(--#{$prefix}gray) !default;
+$steps-icon-color:             var(--#{$prefix}gray) !default;
+$steps-bg:                     none !default;
+$steps-border-radius:          var(--#{$prefix}border-radius) !default;
+$steps-border-width:           1px !default;
+$steps-margin-start:           calc(#{$steps-border-width} * -1) !default; // stylelint-disable-line function-disallowed-list
+$steps-border-color:           var(--#{$prefix}border-color) !default;
+
+$steps-subtitle-color:         var(--#{$prefix}gray) !default;
+$steps-subtitle-font-size:     var(--#{$prefix}gray) !default;
+
+$steps-hover-color:            var(--#{$prefix}gray) !default;
+$steps-hover-icon-color:       var(--#{$prefix}gray) !default;
+$steps-hover-border-color:     var(--#{$prefix}light) !default; // Todo in v6: remove this?
+$steps-hover-bg:               none !default;
+
+$steps-active-color:           $component-active-bg !default;
+$steps-active-icon-color:      $component-active-bg !default;
+$steps-active-border-color:    $component-active-bg !default;
+$steps-active-bg:              none !default;
+
+$steps-completed-color:        var(--#{$prefix}gray-dark) !default;
+$steps-completed-icon-color:   var(--#{$prefix}primary) !default;
+$steps-completed-border-color: none !default; // Todo in v6: remove this?
+$steps-completed-bg:           none !default;
+
+$steps-disabled-color:         var(--#{$prefix}gray) !default;
+$steps-disabled-icon-color:    var(--#{$prefix}gray) !default;
+$steps-disabled-border-color:  none !default;
+$steps-disabled-bg:            none !default;
+
+$steps-transition:             border-color .15s ease-in-out !default;
 
 
 // Image thumbnails
