@@ -18,11 +18,11 @@
     {{ sylius_template_event('sylius.shop.layout.head') }}
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100 border-top border-5 border-primary">
 {{ sylius_template_event('sylius.shop.layout.before_body') }}
 
 {% block top %}
-    <nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg border-bottom border-gray-200">
         <div class="container">
             {{ sylius_template_event('sylius.shop.layout.topbar') }}
         </div>

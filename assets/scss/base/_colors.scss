@@ -6,6 +6,11 @@
 	.bg-gray-#{$level} {
 		background-color: $color;
 	}
+
+	.border-gray-#{$level} {
+		border-color: $color;
+		--#{$prefix}border-color: #{$color};
+	}
 }
 
 @each $level, $color in $primaries {

@@ -3,7 +3,7 @@
         <div class="dropdown">
             <button class="btn btn-outline-info text-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-user me-2"></i>
-                <span{{ sylius_test_html_attribute('full-name') }}>{{ app.user.customer.firstName }}</span>
+                <span{{sylius_test_html_attribute('full-name')}}>{{ app.user.customer.firstName }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
@@ -49,12 +49,12 @@
             </ul>
         </div>
     {% else %}
-            <a class="btn btn-light " href="{{ path('sylius_shop_login') }}">
-                {{ 'sylius.ui.login'|trans }}
-            </a>
+        <a class="btn btn-link text-dark fw-bold" href="{{ path('sylius_shop_login') }}">
+            {{ 'sylius.ui.login'|trans }}
+        </a>
 
-            <a class="btn btn-primary " href="{{ path('sylius_shop_register') }}">
-                {{ 'sylius.ui.register'|trans }}
-            </a>
+        <a class="btn btn-primary" href="{{ path('sylius_shop_register') }}">
+            {{ 'sylius.ui.register'|trans }}
+        </a>
     {% endif %}
 </div>
