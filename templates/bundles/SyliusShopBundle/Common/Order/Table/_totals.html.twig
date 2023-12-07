@@ -60,7 +60,7 @@
 	</div>
 
 	{% if order.currencyCode is not same as(sylius.currencyCode) %}
-		<div class="{{ class.row }}" id="base-total" {{ sylius_test_html_attribute('summary-order-total') }}>
+		<div class="{{ class.total_row }} border-top" id="base-total" {{ sylius_test_html_attribute('summary-order-total') }}>
 			<span>{{ 'sylius.ui.total_in_base_currency'|trans }}:</span>
 			<span class="{{ class.highlight }}">{{ money.format(order.total, order.currencyCode) }}</span>
 		</div>

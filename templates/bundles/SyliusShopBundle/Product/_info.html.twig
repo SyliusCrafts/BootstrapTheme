@@ -2,7 +2,7 @@
 
 <div class="vstack">
 	<strong class="h5 mb-0 sylius-product-name" {{ sylius_test_html_attribute('product-name', item.productName) }}>
-		{{ item.productName }}
+		<a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">{{ item.productName }}</a>
 	</strong>
 
 	<small class="sylius-product-variant-code mb-2 text-muted" {{ sylius_test_html_attribute('product-variant-code') }}>

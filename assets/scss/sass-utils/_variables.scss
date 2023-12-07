@@ -1371,7 +1371,7 @@ $steps-margin-start:           calc(#{$steps-border-width} * -1) !default; // st
 $steps-border-color:           var(--#{$prefix}border-color) !default;
 
 $steps-subtitle-color:         var(--#{$prefix}gray) !default;
-$steps-subtitle-font-size:     var(--#{$prefix}gray) !default;
+$steps-subtitle-font-size:     $font-size-sm !default;
 
 $steps-hover-color:            var(--#{$prefix}gray) !default;
 $steps-hover-icon-color:       var(--#{$prefix}gray) !default;
