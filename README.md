@@ -4,6 +4,59 @@
     <p align="center">Sylius Bootstrap theme with build process based on <a target="_blank" href="https://symfony.com/doc/current/frontend.html">Webpack Encore.</a></p>
 </p>
 
+## Preview
+
+<img src="./docs/homepage.png" align="center" height="50%">
+
+### Checkout 
+
+<table>
+    <tr>
+        <td>
+            <a href="./docs/checkout-1.png" target="_blank">
+                <img src="./docs/checkout-1.png" align="center" height="200px" width="auto">
+            </a>
+        </td>
+        <td>
+            <a href="./docs/checkout-2.png" target="_blank">
+                <img src="./docs/checkout-2.png" align="center" height="200px" width="auto">
+            </a>
+        </td>
+        <td>
+            <a href="./docs/checkout-3.png" target="_blank">
+                <img src="./docs/checkout-3.png" align="center" height="50%">
+            </a>
+        </td>
+        <td>
+            <a href="./docs/checkout-4.png" target="_blank">
+                <img src="./docs/checkout-3.png" align="center" height="50%">
+            </a>
+        </td>
+        <td>
+            <a href="./docs/checkout-5.png" target="_blank">
+                <img src="./docs/checkout-3.png" align="center" height="50%">
+            </a>
+        </td>
+    </tr>
+</table>
+
+### Cart
+
+<table>
+    <tr>
+        <td>
+            <a href="./docs/cart.png" target="_blank">
+                <img src="./docs/cart.png" align="center" height="50%">
+            </a>
+        </td>
+        <td>
+            <a href="./docs/cart-dropdown.png" target="_blank">
+                <img src="./docs/cart-dropdown.png" align="center" height="50%">
+            </a>
+        </td>
+    </tr>
+</table>
+
 ## Installation
 
 There are two ways to install a theme. It is possible to copy files in `themes/` or add this package as a composer dependency and create a child theme.
@@ -78,8 +131,9 @@ yarn build
 #### Change theme in the admin panel
 
 1. Go to `Configuration > Channels`
-2. Edit desired channel
-3. Change Theme in `Look & feel > Theme` to `Sylius Bootstrap Theme` 
+2. Edit desired channel from the list
+3. Go to `Look & feel > Theme` section
+4. Change theme to `Sylius Bootstrap Theme` 
 
 Developers
 ----------
