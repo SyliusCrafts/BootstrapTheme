@@ -88,5 +88,4 @@ appAdminConfig.resolve.alias['sylius/bundle'] = syliusBundles;
 appAdminConfig.externals = Object.assign({}, appAdminConfig.externals, { window: 'window', document: 'document' });
 appAdminConfig.name = 'app.admin';
 
-console.log({ isProd: Encore.isProduction()});
 module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig, bootstrapTheme];
