@@ -19,7 +19,7 @@ services:
         - "8080:8080"
 
   mysql:
-    image: percona:5.7
+    image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-nopassword}
       - MYSQL_DATABASE=sylius
@@ -33,7 +33,7 @@ services:
       - "3306:3306"
 
   nodejs:
-    image: node:10
+    image: node:18
     tty: true
     depends_on:
       - php

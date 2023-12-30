@@ -1,7 +1,6 @@
-/public/bootstrap-theme
-/public/build
-
 /public/assets
+/public/themes/*
+/public/build
 /public/css
 /public/js
 /public/media/*

@@ -1,75 +1,48 @@
 <p align="center">
-    <img width="40%" src="https://camo.githubusercontent.com/f1a61f80abc01fe14ab9d8820fd048ad817f92dc2e4fa65d3271d350b9a78749/68747470733a2f2f64656d6f2e73796c6975732e636f6d2f6173736574732f73686f702f696d672f6c6f676f2e706e67" />
+    <img width="40%" src="" />
     <h1 align="center">Sylius Bootstrap Theme</h1>
     <p align="center">Sylius Bootstrap theme with build process based on <a target="_blank" href="https://symfony.com/doc/current/frontend.html">Webpack Encore.</a></p>
-    It allows to swap to Bootstrap-based theme separately in each channel.
 </p>
 
-Installation
-------------
+## Installation
 
 There are two ways to install a theme. It is possible to copy files in `themes/` or add this package as a composer dependency and create a child theme.
 
-The instructions below refer to an installation in the theme folder. Installation as a composer dependency (with child theme) [is also documented](https://docs.sylius.com/en/latest/book/themes/bootstrap-theme.html).
+The instructions below refer to an installation in the theme folder. 
 
-- Sylius 1.6 : `composer require sylius/bootstrap-theme:~0.1.0`
-- Sylius 1.7 : `composer require sylius/bootstrap-theme:~0.2.0`
-- Sylius 1.8 : `composer require sylius/bootstrap-theme:~0.3.0`
-- Sylius 1.8, 1.9 and 1.10 : `composer require sylius/bootstrap-theme:~0.4.0`
-- Sylius 1.11 : `composer require sylius/bootstrap-theme:~0.6.0`
-- Sylius 1.12 : `composer require sylius/bootstrap-theme:~0.7.0`
+### Composer installation
 
-Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with **Node v18**.16.0
+Installation as a composer dependency (with child theme) [is documented here](https://docs.sylius.com/en/latest/book/themes/bootstrap-theme.html). Run:
 
-1. Copy files from repository to `./themes/BootstrapTheme`
+```bash
+composer require sylius/bootstrap-theme:1.12
+```
+
+### Manual installation
+
+#### Copy files from repository to `./themes/BootstrapTheme`
 
 Only `assets` and `SyliusShopBundle` directories and the `webpack.config.js` file are required.
 
-2. Install Encore (Only for sylius **<1.12**)
-
-```bash
-composer require encore
-```
-
-3. Install node dependencies
+#### Install node dependencies
 
 ```bash
 yarn install
 yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 glightbox axios @popperjs/core@^2.11
 ```
 
-4. Import bootstrap-theme config in the main webpack file
+#### Import `bootstrap-theme` config in your `./webpack.config.js`
 
 ```diff
-# ./webpack.config.js
-
 + const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');
+
+// ...
 
 - module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig];
 + module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig, bootstrapTheme];
-
 ```
 
-~~For sylius **1.11** and **1.12** change output paths~~
-    
-```diff
-# ./webpack.config.js
-// Shop config
-Encore
--  .setOutputPath('public/build/shop/')
--  .setPublicPath('/build/shop')
--  .addEntry('shop-entry', './vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private/entry.js')
-+  .setOutputPath('public/bootstrap-theme')
-+  .setPublicPath('/bootstrap-theme')
-+  .addEntry('app', './themes/BootstrapTheme/assets/app.js')
-  .disableSingleRuntimeChunk()
-  .cleanupOutputBeforeBuild()
-  .enableSourceMaps(!Encore.isProduction())
-  .enableVersioning(Encore.isProduction())
-  .enableSassLoader();
-```
-
-5. Edit project config files
+#### Edit project config files
 
 ```diff
 # ./config/packages/assets.yaml
@@ -93,52 +66,20 @@ webpack_encore:
 6. To build the assets, run one of the following commands  
 ```bash
 # compile assets once
-yarn encore dev
-
-# recompile assets automatically when files change
-yarn encore dev --watch
-
-# recompile assets automatically with live reload
-yarn encore dev-server
-
-# create a production build
-yarn encore production
-```
-
-In Sylius 1.12 you can use predefined commands
-
-```bash
-# compile assets once
-yarn build
+yarn dev
 
 # recompile assets automatically when files change
 yarn watch
+
+# create a production build
+yarn build
 ```
 
-7. Change theme in the admin panel by visiting the Edit Channel page
+#### Change theme in the admin panel
 
-Screenshots
------------
-
-#### Homepage
-
-![Homepage](docs/homepage.png)
-
-#### Product show
-
-![Product page](docs/product-page.png)
-
-
-#### Cart
-
-![Cart page](docs/cart.png)
-
-#### Checkout bar
-
-![Checkout bar](docs/checkout-bar.png)
-
-#### Changing the theme
-![Changing the theme](docs/edit-channel-page.png)
+1. Go to `Configuration > Channels`
+2. Edit desired channel
+3. Change Theme in `Look & feel > Theme` to `Sylius Bootstrap Theme` 
 
 Developers
 ----------
