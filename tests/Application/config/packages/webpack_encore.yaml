@@ -3,4 +3,3 @@ webpack_encore:
     builds:
         shop: '%kernel.project_dir%/public/build/shop'
         admin: '%kernel.project_dir%/public/build/admin'
-        bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
