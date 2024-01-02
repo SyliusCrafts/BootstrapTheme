@@ -14,13 +14,13 @@
             {{ sylius_template_event('sylius.shop.register.before_form') }}
 
             {{ form_start(form, {'action': path('sylius_shop_register'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
-                {% include '@SyliusShop/Register/_form.html.twig' %}
+            {% include '@SyliusShop/Register/_form.html.twig' %}
 
-                {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
+            {{ sylius_template_event('sylius.shop.register.form', {'form': form}) }}
 
-                <button type="submit" class="btn btn-primary" {{ sylius_test_html_attribute('register-button') }}>
-                    {{ 'sylius.ui.create_an_account'|trans }}
-                </button>
+            <button type="submit" class="btn btn-primary" {{ sylius_test_html_attribute('register-button') }}>
+                {{ 'sylius.ui.create_an_account'|trans }}
+            </button>
             {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
         </div>

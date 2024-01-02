@@ -8,9 +8,9 @@
         {{ money.calculatePrice(product|sylius_resolve_variant) }}
     </span>
 
-    <span class="mb-0" id="product-original-price" {{ sylius_test_html_attribute('product-original-price', money.calculateOriginalPrice(variant)) }}>
+    <span class="mb-0" id="product-original-price" {{ sylius_test_html_attribute('product-original-price', money.calculate_original_price(variant)) }}>
         {% if has_discount %}
-            <del>{{ money.calculateOriginalPrice(variant) }}</del>
+            <del>{{ money.calculate_original_price(variant) }}</del>
         {% endif %}
     </span>
 </span>

@@ -11,7 +11,7 @@
             {% set product = variant.product %}
 
             <li class="grid gap-3 py-2 border-bottom border-light">
-                <div class="g-col-3">{% include '@SyliusShop/Product/_mainImage.html.twig' with { product, filter: 'sylius_shop_product_tiny_thumbnail'} %}</div>
+                <div class="g-col-3">{% include '@SyliusShop/Product/_mainImage.html.twig' with {product, filter: 'sylius_shop_product_tiny_thumbnail'} %}</div>
                 <div class="g-col-9 d-flex flex-column justify-content-center">
                     <b class="fw-medium small">{{ item.product }}</b>
                     <div class="mt-1 small">

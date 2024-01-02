@@ -3,17 +3,17 @@
 {% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-{% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+    {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
 
-<div class="grid gap-1 gap-lg-5 my-5">
-    <div class="g-col-12 g-col-md-7">
-        {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
+    <div class="grid gap-1 gap-lg-5 my-5">
+        <div class="g-col-12 g-col-md-7">
+            {{ sylius_template_event('sylius.shop.product.show.left_sidebar', _context) }}
+        </div>
+        <div class="g-col-12 g-col-md-5">
+            {{ sylius_template_event('sylius.shop.product.show.right_sidebar', _context) }}
+        </div>
     </div>
-    <div class="g-col-12 g-col-md-5">
-        {{ sylius_template_event('sylius.shop.product.show.right_sidebar', _context) }}
-    </div>
-</div>
 
-{{ sylius_template_event('sylius.shop.product.show.content', _context) }}
+    {{ sylius_template_event('sylius.shop.product.show.content', _context) }}
 
 {% endblock %}

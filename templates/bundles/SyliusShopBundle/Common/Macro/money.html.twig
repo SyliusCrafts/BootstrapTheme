@@ -14,7 +14,7 @@
     {{- convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
 {%- endmacro -%}
 
-{%- macro calculateOriginalPrice(variant) -%}
+{%- macro calculate_original_price(variant) -%}
     {% from _self import convertAndFormat %}
 
     {{- convertAndFormat(variant|sylius_calculate_original_price({'channel': sylius.channel})) }}

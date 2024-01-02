@@ -15,22 +15,22 @@
         {% if not product.enabledVariants.empty() %}
             {% set variant = product|sylius_resolve_variant %}
             {% set price = money.calculatePrice(variant) %}
-            {% set originalPrice = money.calculateOriginalPrice(variant) %}
-            {% set appliedPromotions = variant.getAppliedPromotionsForChannel(sylius.channel) %}
+            {% set original_price = money.calculate_original_price(variant) %}
+            {% set applied_promotions = variant.getappliedPromotionsForChannel(sylius.channel) %}
 
-            {% if appliedPromotions %}
-            <div class="position-absolute top-0 start-0 p-2 ">
-                {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': false} %}
-            </div>
+            {% if applied_promotions %}
+                <div class="position-absolute top-0 start-0 p-2 ">
+                    {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'applied_promotions': applied_promotions, 'withDescription': false} %}
+                </div>
             {% endif %}
 
             <div class="d-flex align-items-baseline flex-wrap gap-2">
 
                 <span class="card-subtitle fw-medium sylius-product-price" {{ sylius_test_html_attribute('product-price') }}>{{ price }}</span>
-                
+
                 {% if variant|sylius_has_discount({'channel': sylius.channel}) %}
                     <span class="small card-subtitle mx-2 sylius-product-original-price" {{ sylius_test_html_attribute('product-original-price') }}>
-                        <del>{{ originalPrice }}</del>
+                        <del>{{ original_price }}</del>
                     </span>
                 {% endif %}
             </div>

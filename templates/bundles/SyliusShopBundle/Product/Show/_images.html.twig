@@ -28,13 +28,13 @@
                 {% if product.isConfigurable() and product.variants|length > 0 %}
                     {% include '@SyliusShop/Product/Show/_imageVariants.html.twig' %}
                 {% endif %}
-                
+
                 <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" class="glightbox">
-                    <img 
-                        class="img-fluid w-100 rounded-3 border border-light" 
-                        src="{{ path }}" 
-                        data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}" 
-                        alt="{{ product.name }}" 
+                    <img
+                        class="img-fluid w-100 rounded-3 border border-light"
+                        src="{{ path }}"
+                        data-large-thumbnail="{{ image.path|imagine_filter('sylius_shop_product_large_thumbnail') }}"
+                        alt="{{ product.name }}"
                     />
                 </a>
             </div>

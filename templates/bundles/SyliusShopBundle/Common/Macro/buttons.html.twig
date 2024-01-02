@@ -57,7 +57,7 @@
         <button class="btn btn-danger" type="submit" data-requires-confirmation>
             <i class="fas fa-times"></i> {{ (message is empty and labeled) ? 'sylius.ui.delete'|trans : message }}
         </button>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}"/>
     </form>
 {% endmacro %}
 
@@ -67,6 +67,6 @@
         <button class="btn btn-danger" type="submit" data-bulk-action-requires-confirmation>
             <i class="fas fa-times"></i> {{ (message is empty and labeled) ? 'sylius.ui.delete'|trans : message }}
         </button>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_delete') }}" />
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_delete') }}"/>
     </form>
 {% endmacro %}

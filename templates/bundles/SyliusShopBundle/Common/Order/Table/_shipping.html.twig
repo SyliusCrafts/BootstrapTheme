@@ -5,9 +5,9 @@
 {% set order_shipping_promotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(order_shipping_promotion_adjustment)) %}
 
 {% if not order_shipping_promotions is empty %}
-	<div class="{{ class.row }}" id="promotion-shipping-discounts" {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
-		<span>{{ 'sylius.ui.shipping_total'|trans }}:</span>
-		<span class="{{ class.highlight }}">
+    <div class="{{ class.row }}" id="promotion-shipping-discounts" {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
+        <span>{{ 'sylius.ui.shipping_total'|trans }}:</span>
+        <span class="{{ class.highlight }}">
 			<small>
 				<s>{{ money.convertAndFormat(order.getAdjustmentsTotal(shipping_adjustment)) }}</s>
 			</small>
@@ -18,12 +18,12 @@
 				</span>
 			</span>
 		</span>
-	</div>
+    </div>
 {% else %}
-	<div class="{{ class.row }}" id="shipping-total">
-		<span>{{ 'sylius.ui.shipping_total'|trans }}:</span>
-		<span class="{{ class.highlight }}" {{ sylius_test_html_attribute('shipping-total') }}>
+    <div class="{{ class.row }}" id="shipping-total">
+        <span>{{ 'sylius.ui.shipping_total'|trans }}:</span>
+        <span class="{{ class.highlight }}" {{ sylius_test_html_attribute('shipping-total') }}>
             {{ money.convertAndFormat(order.shippingTotal) }}
 		</span>
-	</div>
+    </div>
 {% endif %}

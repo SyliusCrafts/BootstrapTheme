@@ -2,15 +2,15 @@
     <div class="carousel-inner">
         {% for product in products %}
             {% if loop.index0 % 3 == 0 %}
-            <div class="carousel-item grid {% if loop.index0 == 0 %}active{% endif %}">
+                <div class="carousel-item grid {% if loop.index0 == 0 %}active{% endif %}">
                 <div class="grid">
             {% endif %}
-                    <div class="g-col-12 g-col-md-6 g-col-lg-4">
-                        {% include '@SyliusShop/Product/_box.html.twig' with { role: 'carousel-product' } %}
-                    </div>
+            <div class="g-col-12 g-col-md-6 g-col-lg-4">
+                {% include '@SyliusShop/Product/_box.html.twig' with {role: 'carousel-product'} %}
+            </div>
             {% if loop.index % 3 == 0 or loop.last %}
                 </div>
-            </div>
+                </div>
             {% endif %}
         {% endfor %}
     </div>

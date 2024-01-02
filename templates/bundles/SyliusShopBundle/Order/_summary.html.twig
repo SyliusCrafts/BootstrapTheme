@@ -4,14 +4,14 @@
 {{ headers.default('sylius.ui.summary_of_your_order'|trans ~ ' #' ~ order.number) }}
 
 <div class="my-4 d-flex gap-2">
-	<div>
-		{{ order.checkoutCompletedAt|date }}
-	</div>
-	<div>
-		{{ money.convertAndFormat(order.total) }}
-	</div>
-	<div>
-		{{ order.totalQuantity }}
-		{{ 'sylius.ui.items'|trans|lower }}
-	</div>
+    <div>
+        {{ order.checkoutCompletedAt|date }}
+    </div>
+    <div>
+        {{ money.convertAndFormat(order.total) }}
+    </div>
+    <div>
+        {{ order.totalQuantity }}
+        {{ 'sylius.ui.items'|trans|lower }}
+    </div>
 </div>

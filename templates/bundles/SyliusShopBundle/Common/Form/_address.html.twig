@@ -1,4 +1,4 @@
-{% set hasProvince = form.provinceCode is defined or form.provinceName is defined %}
+{% set has_province = form.provinceCode is defined or form.provinceName is defined %}
 
 {% if type is defined %}
     {% set type = type ~ '-' %}
@@ -16,7 +16,7 @@
 
 {% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
 
-<div class="province-container {{ hasProvince ? 'mb-3' }}" data-url="{{ path('sylius_shop_ajax_render_province_form') }}" data-parent="{{ form.countryCode.vars.id }}">
+<div class="province-container {{ has_province ? 'mb-3' }}" data-url="{{ path('sylius_shop_ajax_render_province_form') }}" data-parent="{{ form.countryCode.vars.id }}">
     {% if form.provinceCode is defined %}
         {{ form_row(form.provinceCode, sylius_test_form_attribute('province-code')) }}
     {% elseif form.provinceName is defined %}

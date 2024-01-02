@@ -10,7 +10,7 @@
 
         {% if order.paymentState in ['awaiting_payment'] %}
             {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
-            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" name="_method" value="PUT"/>
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
             <button type="submit" class="btn btn-primary" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>

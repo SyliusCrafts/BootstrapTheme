@@ -1,9 +1,9 @@
 {% set variant = product|sylius_resolve_variant %}
 
 {% if variant is not null %}
-    {% set appliedPromotions = variant.getChannelPricingForChannel(sylius.channel).getAppliedPromotions() %}
+    {% set applied_promotions = variant.getChannelPricingForChannel(sylius.channel).getappliedPromotions() %}
     <div class="my-3">
-        {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'appliedPromotions': appliedPromotions, 'withDescription': true} %}
+        {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'applied_promotions': applied_promotions, 'withDescription': true} %}
     </div>
 {% endif %}
 

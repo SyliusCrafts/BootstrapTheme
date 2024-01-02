@@ -12,15 +12,15 @@
             {{ sylius_template_event('sylius.shop.checkout.select_payment.before_form', {'order': order}) }}
 
             {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
-                {{ form_errors(form) }}
-                <input type="hidden" name="_method" value="PUT" />
+            {{ form_errors(form) }}
+            <input type="hidden" name="_method" value="PUT"/>
 
-                {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
+            {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
 
-                {{ sylius_template_event('sylius.shop.checkout.select_payment.before_navigation', {'order': order}) }}
-                {% include '@SyliusShop/Checkout/SelectPayment/_navigation.html.twig' %}
+            {{ sylius_template_event('sylius.shop.checkout.select_payment.before_navigation', {'order': order}) }}
+            {% include '@SyliusShop/Checkout/SelectPayment/_navigation.html.twig' %}
 
-                {{ form_row(form._token) }}
+            {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
         </div>
         <div class="g-col-12 g-col-lg-4">

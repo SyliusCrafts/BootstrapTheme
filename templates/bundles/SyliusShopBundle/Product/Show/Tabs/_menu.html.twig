@@ -2,4 +2,5 @@
 {% if product.attributes|length > 0 %}
     <a class="nav-item nav-link" href="#nav-attributes" data-bs-toggle="tab" {{ sylius_test_html_attribute('tab', 'attributes') }}>{{ 'sylius.ui.attributes'|trans }}</a>
 {% endif %}
-<a class="nav-item nav-link" href="#nav-reviews" data-bs-toggle="tab">{{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})</a>
+<a class="nav-item nav-link" href="#nav-reviews" data-bs-toggle="tab">{{ 'sylius.ui.reviews'|trans }}
+    ({{ product.acceptedReviews|length }})</a>

@@ -15,14 +15,14 @@
         <div>
             <form method="get" action="{{ path }}" class="loadable">
                 <div>
-                {% for filter in definition.enabledFilters|sort_by('position')|filter(filter.enabled) %}
+                    {% for filter in definition.enabledFilters|sort_by('position')|filter(filter.enabled) %}
                     {{ sylius_grid_render_filter(grid, filter) }}
 
                     {% if loop.index0 % 2 %}
-                        </div>
-                        <div>
+                </div>
+                <div>
                     {% endif %}
-                {% endfor %}
+                    {% endfor %}
                 </div>
                 <button class="btn btn-primary" type="submit">
                     {{ 'sylius.ui.filter'|trans }}
@@ -50,16 +50,16 @@
 
 <div>
     {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
-    <div>
-        <div>
-            {{ pagination.simple(data) }}
-        </div>
         <div>
             <div>
-                {{ pagination.perPage(data, definition.limits) }}
+                {{ pagination.simple(data) }}
+            </div>
+            <div>
+                <div>
+                    {{ pagination.perPage(data, definition.limits) }}
+                </div>
             </div>
         </div>
-    </div>
     {% else %}
         {{ pagination.simple(data) }}
     {% endif %}
@@ -67,14 +67,14 @@
     {% if data|length > 0 %}
         <table class="table">
             <thead>
-            <tr>
-                {{ table.headers(grid, definition, app.request.attributes) }}
-            </tr>
+                <tr>
+                    {{ table.headers(grid, definition, app.request.attributes) }}
+                </tr>
             </thead>
             <tbody>
-            {% for row in data %}
-                {{ table.row(grid, definition, row) }}
-            {% endfor %}
+                {% for row in data %}
+                    {{ table.row(grid, definition, row) }}
+                {% endfor %}
             </tbody>
         </table>
     {% else %}

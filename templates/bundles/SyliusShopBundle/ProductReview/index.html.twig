@@ -7,7 +7,7 @@
 {% block content %}
 
     {% if product %}
-        {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' with { crumbs: [{ label: 'sylius.ui.reviews'|trans }] } %}
+        {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' with {crumbs: [{label: 'sylius.ui.reviews'|trans}]} %}
     {% endif %}
 
     {{ headers.default('sylius.ui.reviews'|trans) }}
