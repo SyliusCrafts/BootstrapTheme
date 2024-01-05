@@ -1,0 +1,101 @@
+name: Install & Test
+'on':
+    push:
+        branches:
+            - master
+        paths-ignore:
+            - README.md
+    pull_request:
+        paths-ignore:
+            - README.md
+jobs:
+    sylius:
+        name: 'Sylius ${{ matrix.sylius }} Node ${{ matrix.node }}'
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php:
+                    - 8.2
+                sylius:
+                    - 1.12.0
+                symfony:
+                    - 6.3
+                node:
+                    - 18.x
+        env:
+            APP_ENV: test
+            package-name: sylius/bootstrap-theme
+        steps:
+            -
+                name: 'Setup PHP'
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: '${{ matrix.php }}'
+                    ini-values: date.timezone=UTC
+                    extensions: intl
+                    tools: symfony
+                    coverage: none
+            -
+                name: 'Setup Node'
+                uses: actions/setup-node@v3
+                with:
+                    node-version: '${{ matrix.node }}'
+            -
+                uses: actions/checkout@v3
+            -
+                name: 'Composer - Get Cache Directory'
+                id: composer-cache
+                run: 'echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT'
+            -
+                name: 'Composer - Set cache'
+                uses: actions/cache@v3
+                id: cache-composer
+                with:
+                    path: '${{ steps.composer-cache.outputs.dir }}'
+                    key: 'php-${{ matrix.php }}-sylius-${{ matrix.sylius }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles(''**/composer.json'') }}'
+                    restore-keys: 'php-${{ matrix.php }}-sylius-${{ matrix.sylius }}-symfony-${{ matrix.symfony }}-composer-'
+            -
+                name: 'Composer - Create cache directory'
+                run: 'mkdir -p /home/runner/.composer/cache'
+                if: 'steps.cache-composer.outputs.cache-hit != ''true'''
+            -
+                name: 'Composer - Github Auth'
+                run: 'composer config -g github-oauth.github.com ${{ github.token }}'
+            -
+                name: 'Yarn - Get cache directory'
+                id: yarn-cache
+                run: 'echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT'
+            -
+                name: 'Yarn - Set Cache'
+                uses: actions/cache@v3
+                with:
+                    path: '${{ steps.yarn-cache.outputs.dir }}'
+                    key: 'node-${{ matrix.node }}-yarn-${{ hashFiles(''**/package.json **/yarn.lock'') }}'
+                    restore-keys: "node-${{ matrix.node }}-yarn-\n"
+            -
+                name: 'Install Sylius-Standard and Plugin'
+                run: 'make install -e SYLIUS_VERSION=${{ matrix.sylius }} SYMFONY_VERSION=${{ matrix.symfony }} PHP_VERSION=${{ matrix.php }}'
+            -
+                name: 'Output PHP version for Symfony CLI'
+                working-directory: ./tests/Application
+                run: 'php -v | head -n 1 | awk ''{ print $2 }'' > .php-version'
+            -
+                name: 'Install certificates'
+                working-directory: ./tests/Application
+                run: 'symfony server:ca:install'
+            -
+                name: 'Run webserver'
+                working-directory: ./tests/Application
+                run: 'symfony server:start --port=8080 --dir=public --daemon'
+            -
+                name: 'Run PHPUnit'
+                run: 'make phpunit'
+        services:
+            mariadb:
+                image: 'mariadb:10'
+                ports:
+                    - '3306:3306'
+                env:
+                    MYSQL_ALLOW_EMPTY_PASSWORD: true
+                options: '--health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3'
