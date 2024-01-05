@@ -41,9 +41,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
-        },
-        "classmap": ["tests/Application/Kernel.php"]
+            "Tests\\BootstrapTheme\\": "tests/PHPUnit/"
+        }
     },
     "extra": {
         "sylius-theme": {

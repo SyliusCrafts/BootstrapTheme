@@ -25,6 +25,9 @@ endif
 	rm -rf tests/Application
 .PHONY: reset
 
+phpunit: phpunit-configure phpunit-run ## Run PHPUnit
+.PHONY: phpunit
+
 ###
 ### OTHER
 ### ¯¯¯¯¯¯
@@ -71,6 +74,12 @@ install-sylius:
 	${YARN} add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 lightbox axios @popperjs/core@^2.11 glightbox
 	${YARN} build
 	${CONSOLE} cache:clear
+
+phpunit-configure:
+	cp phpunit.xml.dist ${TEST_DIRECTORY}/phpunit.xml
+
+phpunit-run:
+	cd ${TEST_DIRECTORY} && ./vendor/bin/phpunit --testdox
 
 help: SHELL=/bin/bash
 help: ## Dislay this help
