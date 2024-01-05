@@ -122,7 +122,7 @@ Files/folders to copy:
 
 ```bash
 yarn install
-yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 lightbox axios @popperjs/core@^2.11
+yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 lightbox axios @popperjs/core@^2.11 glightbox
 ```
 
 #### 3. Import `bootstrap-theme` config in your `./webpack.config.js`
