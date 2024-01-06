@@ -13,13 +13,31 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 abstract class AbstractTest extends WebTestCase
 {
+    protected function getChannel(): Channel
+    {
+        /** @var EntityManager $manager */
+        $manager = $this->getContainer()->get('doctrine')->getManager();
+
+        return $manager->getRepository(Channel::class)->findOneBy([]);
+    }
+
     protected function useNoneTheme(): void
+    {
+        $this->switchTheme(null);
+    }
+
+    protected function useBootstrapTheme(): void
+    {
+        $this->switchTheme('sylius/bootstrap-theme');
+    }
+
+    private function switchTheme(?string $theme): void
     {
         /** @var EntityManager $manager */
         $manager = $this->getContainer()->get('doctrine')->getManager();
 
         $channel = $manager->getRepository(Channel::class)->findOneBy([]);
-        $channel->setThemeName(null);
+        $channel->setThemeName($theme);
         $manager->flush();
     }
 }

@@ -41,12 +41,13 @@ final class ChangeThemeInAdminAreaTest extends AbstractTest
     {
         /** @var UrlGeneratorInterface $urlGenerator */
         $urlGenerator = $this->getContainer()->get(UrlGeneratorInterface::class);
+        $channel = $this->getChannel();
 
         $crawler = $this->client->request('GET', '/');
         $semanticBodyClass = $crawler->filter('body')->attr('class');
 
         $this->adminLogin();
-        $url = $urlGenerator->generate('sylius_admin_channel_update', ['id' => 1]);
+        $url = $urlGenerator->generate('sylius_admin_channel_update', ['id' => $channel->getId()]);
         $this->client->request('GET', $url);
         self::assertSelectorTextContains('h1', 'Edit channel');
 
