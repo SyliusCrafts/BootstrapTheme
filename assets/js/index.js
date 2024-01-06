@@ -32,7 +32,7 @@ axios.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Lightbox
-  const glightbox = GLightbox({ selector: '.glightbox' });
+  GLightbox({ selector: '.glightbox' });
 
   // Add to cart
   document.querySelectorAll('[data-js-add-to-cart="form"]')

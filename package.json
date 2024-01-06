@@ -1,0 +1,10 @@
+{
+  "name": "sylius-bootstrap-theme",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint -c .eslintrc.cjs ./assets"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0"
+  }
+}

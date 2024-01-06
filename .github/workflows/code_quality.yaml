@@ -48,5 +48,15 @@ jobs:
             - name: Composer - Update dependencies
               run: composer update --no-progress
 
+            - name: Yarn install
+              uses: borales/actions-yarn@v4
+              with:
+                  cmd: install
+
+            - name: Yarn ESLint
+              uses: borales/actions-yarn@v4
+              with:
+                  cmd: lint
+
             - name: TwigCS - Check
               run: vendor/bin/twigcs templates/ --severity error --display blocking --reporter githubAction

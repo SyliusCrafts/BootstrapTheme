@@ -17,6 +17,7 @@ const SyliusApiToggle = (el) => {
   const toggleableElement = document.querySelector('[data-js-login="form"]');
 
   const debounce = (callback, duration) => {
+    // eslint-disable-next-line
     let timeout = null;
 
     return (...args) => {

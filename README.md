@@ -184,13 +184,19 @@ yarn build
 
 #### Localhost
 
-```bash
-$ (cd tests/Application && yarn install)
-$ (cd tests/Application && yarn build)
-$ (cd tests/Application && APP_ENV=test bin/console assets:install public)
+This command will install the selected version of Sylius and the Bootstrap theme with its configuration.
+You just need to activate the theme in admin panel as described in the point above.
 
-$ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-$ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
+:information_source: To be able to setup the plugin database, remember to configure you database credentials
+in `install/Application/.env.local` and/or `install/Application/.env.test.local`.
+
+```bash
+$ make install -e SYLIUS_VERSION=XX SYMFONY_VERSION=YY PHP_VERSION=ZZ
 ```
 
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+Default values : XX=1.12.0 and YY=6.3 and ZZ=8.2
+
+:information_source: To reset (drop database and delete files) test environment:
+```bash
+$ make reset
+```

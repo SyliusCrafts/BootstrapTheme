@@ -1,5 +1,3 @@
-/vendor/
-/node_modules
 /composer.lock
 
 /etc/build/*
@@ -10,8 +8,6 @@
 
 /.phpunit.result.cache
 /behat.yml
-/phpspec.yml
-/phpunit.xml
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
