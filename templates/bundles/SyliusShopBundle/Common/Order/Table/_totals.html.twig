@@ -1,0 +1,68 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set items_subtotal = sylius_order_items_subtotal(order) %}
+{% set tax_included = sylius_order_tax_included(order) %}
+{% set tax_excluded = sylius_order_tax_excluded(order) %}
+
+{% set order_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set order_promotions = sylius_aggregate_adjustments(order.adjustmentsRecursively(order_promotion_adjustment)) %}
+{% set class = class|default({
+    row: 'd-flex justify-content-between align-items-center py-2 border-bottom',
+    total_row: 'd-flex justify-content-between align-items-center py-2 fs-5 fw-medium',
+    highlight: 'fw-medium',
+}) %}
+
+<div class="card card-body px-2 px-lg-4 bg-light mt-2">
+
+    <div class="{{ class.row }}" id="subtotal" {{ sylius_test_html_attribute('subtotal') }}>
+        <span>{{ 'sylius.ui.items_total'|trans }}:</span>
+        <span class="{{ class.highlight }}">{{ money.convertAndFormat(items_subtotal) }}</span>
+    </div>
+
+    <div class="{{ class.row }} {{- tax_included and not tax_excluded ? " bg-light" }}" id="tax-total" {{ sylius_test_html_attribute('subtotal') }}>
+        <span>{{ 'sylius.ui.taxes_total'|trans }}:</span>
+        <div class="{{ class.highlight }}" data-test="tax-total" {{ sylius_test_html_attribute('tax-total') }}>
+            {% if not tax_included and not tax_excluded %}
+                <div id="sylius-cart-tax-none">{{ money.convertAndFormat(0) }}</div>
+            {% endif %}
+
+            {% if tax_excluded %}
+                <div id="sylius-cart-tax-excluded">{{ money.convertAndFormat(tax_excluded) }}</div>
+            {% endif %}
+
+            {% if tax_included %}
+                <div class="tax-disabled">
+                    <small>({{ 'sylius.ui.included_in_price'|trans }})</small>
+                    <span id="sylius-cart-tax-included">{{ money.convertAndFormat(tax_included) }}</span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="{{ class.row }}" id="promotion-total" {{ sylius_test_html_attribute('promotion-total') }}>
+        <span>{{ 'sylius.ui.discount'|trans }}:</span>
+        <span class="{{ class.highlight }}">
+			{{ money.convertAndFormat(order.orderPromotionTotal) }}
+
+            {% if order.orderPromotionTotal != 0 %}
+                <span id="order-promotions-details" {{ sylius_test_html_attribute('order-promotions-details') }} title="{% for key, value in order_promotions %}<div>{{ key }}: {{ money.convertAndFormat(value) }}</div>{% endfor %}" data-bs-toggle="tooltip" data-placement="top">
+					<i class="fas fa-question-circle"></i>
+				</span>
+            {% endif %}
+		</span>
+    </div>
+
+    {% include '@SyliusShop/Common/Order/Table/_shipping.html.twig' with {order, class} %}
+
+    <div class="{{ class.total_row }}" id="total" {{ sylius_test_html_attribute('order-total') }}>
+        <span>{{ 'sylius.ui.total'|trans }}:</span>
+        <span class="{{ class.highlight }}">{{ money.convertAndFormat(order.total) }}</span>
+    </div>
+
+    {% if order.currencyCode is not same as(sylius.currencyCode) %}
+        <div class="{{ class.total_row }} border-top" id="base-total" {{ sylius_test_html_attribute('summary-order-total') }}>
+            <span>{{ 'sylius.ui.total_in_base_currency'|trans }}:</span>
+            <span class="{{ class.highlight }}">{{ money.format(order.total, order.currencyCode) }}</span>
+        </div>
+    {% endif %}
+</div>

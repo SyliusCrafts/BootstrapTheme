@@ -1,0 +1,19 @@
+{% import '@SyliusShop/Common/Macro/sectionHeaders.html.twig' as headers %}
+
+<section class="newsletter grid bg-light rounded-3 text-center">
+
+    <div class="g-col-12 g-col-lg-6 g-start-lg-4 p-3 py-lg-5">
+        <h2 class="mb-4">{{ 'sylius.homepage.newsletter'|trans }}</h2>
+        <p class="text-secondary mb-5">{{ 'sylius.homepage.newsletter_description'|trans }}</p>
+
+        <form class="d-flex gap-3">
+            <input type="text" class="form-control" placeholder="{{ 'sylius.ui.email'|trans }}">
+
+            <button class="btn btn-outline-secondary">
+                {{ 'sylius.homepage.subscribe'|trans }}
+            </button>
+        </form>
+    </div>
+
+
+</section>

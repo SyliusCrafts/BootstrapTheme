@@ -1,0 +1,14 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+
+    {% include '@SyliusShop/Product/Index/_header.html.twig' %}
+    <div class="grid">
+        <div class="g-col-12 g-col-md-4 g-col-lg-3">
+            {% include '@SyliusShop/Product/Index/_sidebar.html.twig' %}
+        </div>
+        <div class="g-col-12 g-col-md-8 g-col-lg-9">
+            {% include '@SyliusShop/Product/Index/_main.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

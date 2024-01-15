@@ -1,0 +1,84 @@
+{% import '@SyliusShop/Common/Macro/pagination.html.twig' as pagination %}
+{% import '@SyliusShop/Common/Macro/messages.html.twig' as messages %}
+{% import '@SyliusShop/Common/Macro/table.html.twig' as table %}
+
+{% set definition = grid.definition %}
+{% set data = grid.data %}
+
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+{% if definition.enabledFilters|length > 0 %}
+    <div>
+        <div>
+            {{ 'sylius.ui.filters'|trans }}
+        </div>
+        <div>
+            <form method="get" action="{{ path }}" class="loadable">
+                <div>
+                    {% for filter in definition.enabledFilters|sort_by('position')|filter(filter.enabled) %}
+                    {{ sylius_grid_render_filter(grid, filter) }}
+
+                    {% if loop.index0 % 2 %}
+                </div>
+                <div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    {{ 'sylius.ui.filter'|trans }}
+                </button>
+                <a class="btn btn-outline-primary" href="{{ path }}">
+                    {{ 'sylius.ui.clear_filters'|trans }}
+                </a>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+{% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+    <div>
+        <div>
+            {{ 'sylius.ui.bulk_actions'|trans }}
+        </div>
+        <div>
+            {% for action in definition.getEnabledActions('bulk') %}
+                {{ sylius_grid_render_bulk_action(grid, action, null) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<div>
+    {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
+        <div>
+            <div>
+                {{ pagination.simple(data) }}
+            </div>
+            <div>
+                <div>
+                    {{ pagination.perPage(data, definition.limits) }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ pagination.simple(data) }}
+    {% endif %}
+
+    {% if data|length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    {{ table.headers(grid, definition, app.request.attributes) }}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    {{ table.row(grid, definition, row) }}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display') }}
+    {% endif %}
+    {{ pagination.simple(data) }}
+</div>

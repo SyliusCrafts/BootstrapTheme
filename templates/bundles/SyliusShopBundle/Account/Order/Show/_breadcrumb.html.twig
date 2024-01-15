@@ -1,0 +1,9 @@
+{% import '@SyliusShop/Common/Macro/breadcrumbs.html.twig' as breadcrumbs %}
+
+{% set order_label = "sylius.ui.order"|trans ~ ' <span id="number" ' ~ sylius_test_html_attribute("order-number") ~ '>#' ~ order.number ~ '</span>' %}
+
+{% block breadcrumb breadcrumbs.standard([
+    {'link': path('sylius_shop_account_dashboard'), 'label': 'sylius.ui.my_account'|trans},
+    {'link': path('sylius_shop_account_order_index'), 'label': 'sylius.ui.order_history'|trans},
+    {'label': order_label}
+]) %}

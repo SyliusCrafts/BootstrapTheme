@@ -10,14 +10,25 @@
 /* eslint-env browser */
 
 import axios from 'axios';
-import throttle from 'lodash.throttle';
 
 const SyliusApiToggle = (el) => {
   const element = el;
   const url = element.getAttribute('data-js-login-check-email-url');
   const toggleableElement = document.querySelector('[data-js-login="form"]');
 
-  element.addEventListener('input', throttle((e) => {
+  const debounce = (callback, duration) => {
+    // eslint-disable-next-line
+    let timeout = null;
+
+    return (...args) => {
+      timeout = setTimeout(() => {
+        callback.apply(this, args);
+        timeout = null;
+      }, duration);
+    }
+  }
+
+  element.addEventListener('input', debounce((e) => {
     toggleableElement.classList.add('d-none');
 
     if (e.target.value.length > 3) {

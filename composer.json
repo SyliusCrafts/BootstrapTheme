@@ -1,22 +1,22 @@
 {
     "name": "sylius/bootstrap-theme",
     "type": "sylius-plugin",
-    "keywords": ["sylius", "sylius-plugin"],
+    "keywords": ["sylius", "sylius-plugin", "sylius-theme"],
     "description": "Bootstrap Theme for Sylius",
     "license": "MIT",
     "authors": [
         {
-            "name": "Szymon Kulczyński",
-            "email": "szymon.kulczynski@sylius.com"
+            "name": "Community contributions",
+            "homepage": "https://github.com/SyliusCrafts/BootstrapTheme/graphs/contributors"
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0",
-        "sylius/sylius": "~1.8.0 || ~1.9.0 || ~1.10.0 || ~1.11.0 || ~1.12.0",
+        "php": "^8.0",
+        "sylius/sylius": "1.12.*",
         "symfony/webpack-encore-bundle": "^1.12"
     },
     "require-dev": {
-        "behat/behat": "^3.6.1",
+        "behat/behat": "^3.13.0",
         "behat/mink-selenium2-driver": "^1.4",
         "dmore/behat-chrome-extension": "^1.3",
         "dmore/chrome-mink-driver": "^2.7",
@@ -29,8 +29,7 @@
         "friends-of-behat/symfony-extension": "^2.1",
         "friends-of-behat/variadic-extension": "^1.3",
         "friendsofsymfony/oauth-server-bundle": "^1.6 || >2.0.0-alpha.0 ^2.0@dev",
-        "friendsoftwig/twigcs": "^4.0 || ^5.0",
-        "sensiolabs/security-checker": "^6.0",
+        "friendsoftwig/twigcs": "^6.4",
         "sylius-labs/coding-standard": "^4.0",
         "symfony/browser-kit": "^5.4",
         "symfony/debug-bundle": "^5.4",
@@ -41,16 +40,15 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
-        },
-        "classmap": ["tests/Application/Kernel.php"]
+            "Tests\\BootstrapTheme\\": "tests/PHPUnit/"
+        }
     },
     "extra": {
         "sylius-theme": {
             "title": "Sylius Bootstrap Theme"
         },
         "branch-alias": {
-            "dev-master": "0.8-dev"
+            "dev-master": "1.0-dev"
         }
     },
     "config": {
@@ -59,16 +57,5 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "symfony/thanks": true
         }
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-update-cmd": [
-            "php bin/create_node_symlink.php"
-        ],
-        "post-create-project-cmd": [
-            "php bin/create_node_symlink.php"
-        ]
     }
 }

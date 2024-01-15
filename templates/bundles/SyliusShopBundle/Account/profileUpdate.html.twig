@@ -1,0 +1,45 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.your_profile'|trans }} | {{ parent() }}{% endblock %}
+
+{% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+{% import '@SyliusShop/Common/Macro/breadcrumbs.html.twig' as breadcrumbs %}
+
+{% block breadcrumb breadcrumbs.standard([
+    {'link': path('sylius_shop_account_dashboard'), 'label': 'sylius.ui.my_account'|trans},
+    {'label': 'sylius.ui.personal_information'|trans}
+]) %}
+
+{% block subcontent %}
+    <div>
+        {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate'}}) }}
+
+        {{ headers.default('sylius.ui.your_profile'|trans, '', 'sylius.ui.edit_your_personal_information'|trans) }}
+
+        {{ sylius_template_event('sylius.shop.account.profile.update.after_content_header', {'customer': customer, 'form': form}) }}
+
+        <input type="hidden" name="_method" value="PUT"/>
+
+        <div class="row">
+            <div class="col">{{ form_row(form.firstName) }}</div>
+            <div class="col">{{ form_row(form.lastName) }}</div>
+        </div>
+        {{ form_row(form.email, sylius_test_form_attribute('email')) }}
+        <div class="row">
+            <div class="col">{{ form_row(form.birthday) }}</div>
+            <div class="col">{{ form_row(form.gender) }}</div>
+        </div>
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.subscribedToNewsletter, sylius_test_form_attribute('subscribe-newsletter')) }}
+
+        {{ sylius_template_event('sylius.shop.account.profile.update.form', {'customer': customer, 'form': form}) }}
+
+        <button type="submit" class="btn btn-primary mb-3" {{ sylius_test_html_attribute('save-changes') }}>
+            {{ 'sylius.ui.save_changes'|trans }}
+        </button>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

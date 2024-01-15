@@ -1,16 +1,13 @@
-/vendor/
-/node_modules
 /composer.lock
 
 /etc/build/*
 !/etc/build/.gitignore
 
-/tests/Application/yarn.lock
+/tests/Application/
+/install/Application/*.local
 
 /.phpunit.result.cache
 /behat.yml
-/phpspec.yml
-/phpunit.xml
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/

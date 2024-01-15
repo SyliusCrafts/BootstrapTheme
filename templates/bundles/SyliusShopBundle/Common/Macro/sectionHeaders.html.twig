@@ -1,0 +1,6 @@
+{% macro default(header, subheader) %}
+    <h2 class="mt-5 mb-4 text-center fw-bold">{{ header }}</h2>
+    {% if subheader is not empty %}
+        <p class="text-body-secondary mb-4">{{ subheader|raw }}</p>
+    {% endif %}
+{% endmacro %}

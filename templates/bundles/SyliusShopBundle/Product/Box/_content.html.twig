@@ -1,0 +1,41 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<div class="card card-product position-relative {{ role|default('') }}" {{ sylius_test_html_attribute('product') }}>
+    <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
+        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'class': 'card-img-top border border-light bg-light'} %}
+    </a>
+
+    <div class="card-body" {{ sylius_test_html_attribute('product-content') }}>
+        <h5 class="sylius-product-name card-title" {{ sylius_test_html_attribute('product-name', product.name) }}>
+            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">
+                {{ product.name }}
+            </a>
+        </h5>
+
+        {% if not product.enabledVariants.empty() %}
+            {% set variant = product|sylius_resolve_variant %}
+            {% set price = money.calculatePrice(variant) %}
+            {% set original_price = money.calculate_original_price(variant) %}
+            {% set applied_promotions = variant.getappliedPromotionsForChannel(sylius.channel) %}
+
+            {% if applied_promotions %}
+                <div class="position-absolute top-0 start-0 p-2 ">
+                    {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'applied_promotions': applied_promotions, 'withDescription': false} %}
+                </div>
+            {% endif %}
+
+            <div class="d-flex align-items-baseline flex-wrap gap-2">
+
+                <span class="card-subtitle fw-medium sylius-product-price" {{ sylius_test_html_attribute('product-price') }}>{{ price }}</span>
+
+                {% if variant|sylius_has_discount({'channel': sylius.channel}) %}
+                    <span class="small card-subtitle mx-2 sylius-product-original-price" {{ sylius_test_html_attribute('product-original-price') }}>
+                        <del>{{ original_price }}</del>
+                    </span>
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+    </div>
+</div>

@@ -1,0 +1,78 @@
+{% macro base(iconClass, extraClass) %}
+    <i class="{{ iconClass }} {{ extraClass }}"></i>
+{% endmacro %}
+
+{% macro cart(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-shopping-bag', extraClass) }}
+{% endmacro %}
+
+{% macro star(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-star', extraClass) }}
+{% endmacro %}
+
+{% macro success(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-check', extraClass) }}
+{% endmacro %}
+
+{% macro danger(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-exclamation-circle', extraClass) }}
+{% endmacro %}
+
+{% macro info(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-info-circle', extraClass) }}
+{% endmacro %}
+
+{% macro arrowUp(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-chevron-up', extraClass) }}
+{% endmacro %}
+
+{% macro address(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-map-marker-alt', extraClass) }}
+{% endmacro %}
+
+{% macro transport(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-shuttle-van', extraClass) }}
+{% endmacro %}
+
+{% macro creditCard(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-credit-card', extraClass) }}
+{% endmacro %}
+
+{% macro flag(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-flag', extraClass) }}
+{% endmacro %}
+
+{% macro times(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-times', extraClass) }}
+{% endmacro %}
+
+{% macro reload(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-sync-alt', extraClass) }}
+{% endmacro %}
+
+{% macro plus(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-plus', extraClass) }}
+{% endmacro %}
+
+{% macro edit(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-pen', extraClass) }}
+{% endmacro %}
+
+{% macro lock(extraClass) %}
+    {% import _self as icons %}
+    {{ icons.base('fa-solid fa-lock', extraClass) }}
+{% endmacro %}

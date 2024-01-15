@@ -1,0 +1,27 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set order_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set order_promotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(order_promotion_adjustment)) %}
+
+{% set class = class|default({
+    row: 'd-flex justify-content-between align-items-center py-2 border-bottom',
+    highlight: 'fw-medium',
+}) %}
+
+{% if not order_promotions is empty %}
+    <div class="{{ class.row }}" id="promotion-discounts" {{ sylius_test_html_attribute('promotion-discounts') }}>
+        {% for label, amount in order_promotions %}
+            {% if not loop.first %}<br>
+            {% endif %}
+            <span>{{ label }}:</span>
+            <span class="{{ class.highlight }}">{{ money.convertAndFormat(amount) }}</span>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="{{ class.row }}" id="promotion-total" {{ sylius_test_html_attribute('promotion-total') }}>
+    <span>{{ 'sylius.ui.promotion_total'|trans }}:</span>
+    <span class="{{ class.highlight }}" {{ sylius_test_html_attribute('shipping-total') }}>
+		{{ money.format(order.orderPromotionTotal, order.currencyCode) }}
+	</span>
+</div>

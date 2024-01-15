@@ -1,0 +1,34 @@
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% set product = order_item.variant.product %}
+
+{% form_theme form '@SyliusShop/Form/theme.html.twig' %}
+
+<div id="sylius-product-selecting-variant" {{ sylius_test_html_attribute('product-selecting-variant') }}>
+    {{ sylius_template_event('sylius.shop.product.show.before_add_to_cart', {'product': product, 'order_item': order_item}) }}
+
+    {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'data-js-add-to-cart': 'form', 'class': 'loadable', 'novalidate': 'novalidate', 'data-redirect': path(configuration.getRedirectRoute('summary'))}}) }}
+    {{ form_errors(form) }}
+    <div class="alert alert-danger d-none" data-js-add-to-cart="error" id="sylius-cart-validation-error" {{ sylius_test_html_attribute('cart-validation-error') }}></div>
+    {% if not product.simple %}
+        {% if product.variantSelectionMethodChoice %}
+            {% include '@SyliusShop/Product/Show/_variants.html.twig' %}
+        {% else %}
+            <div class="grid gap-3" style="--bs-columns: 2">
+                {% include '@SyliusShop/Product/Show/_options.html.twig' %}
+                {{ form_row(form.cartItem.quantity, {row_attr: {class: 'mb-0'}}|merge(sylius_test_form_attribute('quantity'))) }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {{ sylius_template_event('sylius.shop.product.show.add_to_cart_form', {'product': product, 'order_item': order_item}) }}
+
+    <div class="mt-5">
+        <button type="submit" class="btn btn-lg btn-primary w-100" {{ sylius_test_html_attribute('add-to-cart-button') }}>
+            {{ 'sylius.ui.add_to_cart'|trans }}
+        </button>
+    </div>
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

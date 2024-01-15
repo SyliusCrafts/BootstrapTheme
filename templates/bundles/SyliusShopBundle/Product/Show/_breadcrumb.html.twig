@@ -1,0 +1,35 @@
+{% import '@SyliusShop/Common/Macro/breadcrumbs.html.twig' as breadcrumbs %}
+
+{% set breadcrumb_items = [] %}
+{% set crumbs = crumbs|default([]) %}
+
+{% if product.mainTaxon is not null %}
+    {% set taxon = product.mainTaxon %}
+    {% set ancestors = taxon.ancestors|reverse %}
+
+    {% for ancestor in ancestors %}
+        {% set breadcrumb_items = breadcrumb_items|merge([{
+            label: ancestor.name,
+            link: path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale})
+        }]) %}
+    {% endfor %}
+
+    {% set breadcrumb_items = breadcrumb_items|merge([{
+        label: taxon.name,
+        link: path('sylius_shop_product_index', {'slug': taxon.slug, '_locale': taxon.translation.locale})
+    }]) %}
+{% endif %}
+
+{% set breadcrumb_items = breadcrumb_items|merge([crumbs|length ? {
+    label: product.name,
+    link: path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale})
+} : {
+    label: product.name
+}]) %}
+
+{% if crumbs|length %}
+    {% set breadcrumb_items = breadcrumb_items|merge(crumbs) %}
+{% endif %}
+
+
+{{ breadcrumbs.standard(breadcrumb_items) }}

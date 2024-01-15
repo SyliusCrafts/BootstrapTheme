@@ -1,0 +1,11 @@
+<div class="card mb-3 border border-gray-200" {{ sylius_test_html_attribute('comment', review.comment) }}>
+    <div class="card-body pb-0 d-flex flex-wrap gap-3 align-items-baseline">
+        <b>{{ review.author.firstName|default(review.author.email|split('@')|first) }}</b>
+        <span class="text-secondary">{{ review.title }}</span>
+        {% include '@SyliusShop/Common/_rating.html.twig' with {average: review.rating, viewonly: 'true'} %}
+        <small class="text-muted">{{ review.createdAt|format_date }}</small>
+    </div>
+    <div class="card-body pt-2">
+        {{ review.comment }}
+    </div>
+</div>

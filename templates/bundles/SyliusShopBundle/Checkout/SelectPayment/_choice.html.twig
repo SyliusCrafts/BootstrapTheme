@@ -1,0 +1,21 @@
+<label
+    class="list-group-item list-group-item-action list-group-item-light d-flex align-items-center gap-2 mb-2 p-2 p-lg-4 gap-2 gap-lg-4 rounded border border-light cursor-pointer"
+    {{ sylius_test_html_attribute('payment-item') }}
+>
+    <div class="position-relative" {{ sylius_test_html_attribute('payment-method-checkbox') }}>
+        {{ form_widget(form, {
+            label_attr: {class: 'd-none', 'aria-hidden': true},
+            attr: {class: 'position-absolute top-50 start-50 translate-middle fs-5 m-0'}
+        }|merge(sylius_test_form_attribute('payment-method-select'))) }}
+    </div>
+
+    <div class="vstack gap-2">
+        <p class="h5 mb-1" {{ sylius_test_html_attribute('shipping-method-label') }}>
+            {{ form.vars.label }}
+        </p>
+        {% if method.description is not null %}
+            <p class="mb-1 fw-normal">{{ method.description }}</p>
+        {% endif %}
+    </div>
+
+</label>

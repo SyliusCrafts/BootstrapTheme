@@ -1,0 +1,21 @@
+<div class="card border border-light h-100">
+    <div class="card-body">
+        {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
+    </div>
+
+    <div class="card-footer d-flex justify-content-between align-items-center" id="sylius-default-address" {{ sylius_test_html_attribute('default-address') }}>
+        <span class="badge bg-primary-100 text-primary-700">{{ 'sylius.ui.your_default_address'|trans }}</span>
+
+        <div class="d-flex gap-1">
+            <a href="{{ path('sylius_shop_account_address_book_update', {'id': address.id}) }}" class="btn btn-link text-secondary fw-bold" {{ sylius_test_html_attribute('edit-button') }}>{{ 'sylius.ui.edit'|trans }}</a>
+
+            <form action="{{ path('sylius_shop_account_address_book_delete', {'id': address.id}) }}" method="post" onsubmit="return confirm('{{ " sylius.ui.are_your_sure_you_want_to_perform_this_action"|trans }}');">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-link text-danger fw-bold" type="submit">
+                    {{ 'sylius.ui.delete'|trans }}
+                </button>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token(address.id) }}"/>
+            </form>
+        </div>
+    </div>
+</div>

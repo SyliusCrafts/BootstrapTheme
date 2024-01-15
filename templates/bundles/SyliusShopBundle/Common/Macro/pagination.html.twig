@@ -1,0 +1,9 @@
+{% macro simple(paginator, options) %}
+    {% if paginator.haveToPaginate() %}
+        {{ pagerfanta(paginator, 'twitter_bootstrap5', options|default({
+            'prev_message': 'sylius.ui.previous'|trans,
+            'next_message': 'sylius.ui.next'|trans,
+            'css_disabled_class': 'd-none',
+        })) }}
+    {% endif %}
+{% endmacro %}

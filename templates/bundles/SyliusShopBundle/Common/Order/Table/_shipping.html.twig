@@ -1,0 +1,29 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% set order_shipping_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT') %}
+{% set shipping_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set order_shipping_promotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(order_shipping_promotion_adjustment)) %}
+
+{% if not order_shipping_promotions is empty %}
+    <div class="{{ class.row }}" id="promotion-shipping-discounts" {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
+        <span>{{ 'sylius.ui.shipping_total'|trans }}:</span>
+        <span class="{{ class.highlight }}">
+			<small>
+				<s>{{ money.convertAndFormat(order.getAdjustmentsTotal(shipping_adjustment)) }}</s>
+			</small>
+			<span>
+				<span id="shipping-total" {{ sylius_test_html_attribute('shipping-total') }}>{{ money.convertAndFormat(order.getAdjustmentsTotal(shipping_adjustment) + order.getAdjustmentsTotal(order_shipping_promotion_adjustment)) }}</span>
+				<span id="shipping-promotion-details" {{ sylius_test_html_attribute('shipping-promotion-details') }} title="{% for label, amount in order_shipping_promotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}" data-bs-toggle="tooltip" data-placement="top">
+					<i class="fas fa-question-circle"></i>
+				</span>
+			</span>
+		</span>
+    </div>
+{% else %}
+    <div class="{{ class.row }}" id="shipping-total">
+        <span>{{ 'sylius.ui.shipping_total'|trans }}:</span>
+        <span class="{{ class.highlight }}" {{ sylius_test_html_attribute('shipping-total') }}>
+            {{ money.convertAndFormat(order.shippingTotal) }}
+		</span>
+    </div>
+{% endif %}

@@ -1,0 +1,10 @@
+{% set role = products|length == 5 ? 'grid-item' : '' %}
+
+<div class="grid">
+    {% for product in products %}
+        <div class="{{ columns|default('g-col-12 g-col-md-6 g-col-lg-3') }} {{ loop.first and products|length == 5 ? 'g-row-lg-2 g-col-lg-6' : '' }}">
+            {% include '@SyliusShop/Product/_box.html.twig' with {role} %}
+        </div>
+    {% endfor %}
+</div>
+

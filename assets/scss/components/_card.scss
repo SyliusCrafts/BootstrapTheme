@@ -1,0 +1,52 @@
+.card-product {
+    .card-title a {
+        color: $card-title-color;
+        text-decoration: none;
+        transition: color 75ms;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    &.grid-item {
+        position: relative;
+
+        .card-body {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border-radius: $card-border-radius;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+        }
+
+        .card-title,
+        .card-title a {
+            color: $white;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+
+        .card-subtitle {
+            color: $gray-200;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        &.carousel-product {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+
+            > a {
+                display: inline-block;
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+        }
+    }
+}

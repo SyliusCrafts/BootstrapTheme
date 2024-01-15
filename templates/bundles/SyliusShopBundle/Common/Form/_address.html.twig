@@ -1,0 +1,36 @@
+{% set has_province = form.provinceCode is defined or form.provinceName is defined %}
+
+{% if type is defined %}
+    {% set type = type ~ '-' %}
+{% else %}
+    {% set type = null %}
+{% endif %}
+
+<div class="hstack gap-3">
+    <div class="col">{{ form_row(form.firstName, sylius_test_form_attribute(type ~ 'first-name')) }}</div>
+    <div class="col">{{ form_row(form.lastName, sylius_test_form_attribute(type ~ 'last-name')) }}</div>
+</div>
+
+{{ form_row(form.company, sylius_test_form_attribute(type ~ 'company')) }}
+{{ form_row(form.street, sylius_test_form_attribute(type ~ 'street')) }}
+
+{% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
+
+<div class="province-container {{ has_province ? 'mb-3' }}" data-url="{{ path('sylius_shop_ajax_render_province_form') }}" data-parent="{{ form.countryCode.vars.id }}">
+    {% if form.provinceCode is defined %}
+        {{ form_row(form.provinceCode, sylius_test_form_attribute('province-code')) }}
+    {% elseif form.provinceName is defined %}
+        {{ form_row(form.provinceName, sylius_test_form_attribute('province-name')) }}
+    {% endif %}
+</div>
+
+{% if form.provinceCode is defined %}
+    {{ form_errors(form) }}
+{% endif %}
+
+<div class="hstack gap-3">
+    <div class="col">{{ form_row(form.city, sylius_test_form_attribute(type ~ 'city')) }}</div>
+    <div class="col">{{ form_row(form.postcode, sylius_test_form_attribute(type ~ 'postcode')) }}</div>
+</div>
+
+{{ form_row(form.phoneNumber) }}

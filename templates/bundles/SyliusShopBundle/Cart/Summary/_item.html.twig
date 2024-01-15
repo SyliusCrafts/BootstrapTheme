@@ -1,0 +1,48 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% set variant = item.variant %}
+{% set product = variant.product %}
+{% set original_price_to_display = sylius_order_item_original_price_to_display(item) %}
+
+<li class="list-group-item border-top border-bottom border-light" {{ sylius_test_html_attribute('cart-product-row', item.productName) }}>
+    <div class="grid py-2 py-lg-4 gap-2 gap-lg-4" {{ sylius_test_html_attribute('cart-item', loop_index|default(null)) }}>
+        <div class="g-col-12 g-col-sm-4 g-col-lg-3 g-row-2">
+            {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail'} %}
+        </div>
+
+        <div class="g-col-12 g-col-sm-8 g-col-lg-9 hstack align-items-baseline gap-3">
+            {% include '@SyliusShop/Product/_info.html.twig' with {variant} %}
+
+            <button
+                type="button"
+                data-js-remove-from-cart-button
+                data-js-remove-from-cart-redirect-url="{{ path('sylius_shop_cart_summary') }}"
+                data-js-remove-from-cart-csrf-token="{{ csrf_token(item.id) }}"
+                data-js-remove-from-cart-api-url="{{ path('sylius_shop_ajax_cart_item_remove', {'id': item.id}) }}"
+                class="btn btn-sm btn-link sylius-cart-remove-button"
+                {{ sylius_test_html_attribute('cart-remove-button', item.productName) }}
+            >{{ icons.times() }} {{ 'sylius.ui.delete'|trans }}</button>
+        </div>
+
+        <div class="g-col-12 g-col-sm-8 g-col-lg-9 hstack mb-0 gap-3">
+            <span class="flex-grow-1 sylius-quantity">{{ form_widget(form.quantity, {attr: {class: 'w-25'}}|merge(sylius_test_form_attribute('cart-item-quantity-input', item.productName))) }}</span>
+
+            <div class="text-end">
+                <span class="fs-5 fw-medium sylius-total" title="{{ 'sylius.ui.total'|trans }}" {{ sylius_test_html_attribute('cart-product-subtotal') }}>{{ money.convertAndFormat(item.subtotal) }}</span>
+
+                <div class="hstack align-items-baseline gap-2">
+                    <span class="fw-normal text-gray-700">{{ 'sylius.ui.unit_price'|trans }}</span>
+
+                    {% if original_price_to_display is not null %}
+                        <span class="small sylius-regular-unit-price" {{ sylius_test_html_attribute('cart-product-regular-unit-price') }}>
+                <s>{{ money.convertAndFormat(original_price_to_display) }}</s>
+            </span>
+                    {% endif %}
+
+                    <span class="sylius-unit-price" {{ sylius_test_html_attribute('cart-product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

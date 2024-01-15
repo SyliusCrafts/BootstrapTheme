@@ -1,0 +1,11 @@
+<div class="position-relative">
+
+    {% set src = use_webpack ? asset('build/shop/images/homepage-banner.jpg', 'shop') : asset('assets/shop/img/homepage-banner.jpg') %}
+
+    <img class="img-fluid rounded-3 object-fit-cover " style="min-height: 240px" src="{{ src }}" alt="{{ 'sylius.homepage.banner_content'|trans }}">
+
+    <div class="position-absolute top-50 start-0 translate-middle-y py-2 px-4 p-lg-5 w-100">
+        <h1 class="text-white fw-bold w-lg-50 mb-4 pe-lg-5">{{ 'sylius.homepage.banner_content'|trans }}</h1>
+        <a href="#" class="btn btn-light fw-bold">{{ 'sylius.homepage.banner_button'|trans }}</a>
+    </div>
+</div>

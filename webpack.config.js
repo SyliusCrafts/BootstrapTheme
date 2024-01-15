@@ -1,9 +1,9 @@
 const Encore = require('@symfony/webpack-encore');
 
 Encore
-  .setOutputPath('public/bootstrap-theme')
-  .setPublicPath('/bootstrap-theme')
-  .addEntry('app', './themes/BootstrapTheme/assets/app.js')
+  .setOutputPath('public/themes/bootstrap-theme')
+  .setPublicPath('/themes/bootstrap-theme')
+  .addEntry('app', './themes/BootstrapTheme/assets/index.js')
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enableSassLoader()

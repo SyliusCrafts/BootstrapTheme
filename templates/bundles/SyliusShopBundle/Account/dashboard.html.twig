@@ -1,0 +1,92 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block title %}
+    {{ 'sylius.ui.my_account'|trans }}
+    |
+    {{ parent() }}
+{% endblock %}
+
+{% import '@SyliusShop/Common/Macro/headers.html.twig' as headers %}
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+{% import '@SyliusShop/Common/Macro/breadcrumbs.html.twig' as breadcrumbs %}
+
+{% block breadcrumb breadcrumbs.standard([
+    {link: path('sylius_shop_account_dashboard'), label: 'sylius.ui.my_account'|trans},
+    {label: 'sylius.ui.my_account'|trans}
+]) %}
+
+{% block subcontent %}
+    {{ headers.default('sylius.ui.my_account'|trans, '', 'sylius.ui.manage_your_personal_information_and_preferences'|trans) }}
+
+    {{ sylius_template_event('sylius.shop.account.dashboard.after_content_header', {'customer': customer}) }}
+
+    <div class="card mb-4 border border-light" {{ sylius_test_html_attribute('customer-information') }}>
+
+        <div class="card-body">
+            <strong class="d-block h4 pb-3 border-bottom border-light mb-3">{{ customer.fullName }}</strong>
+
+            <dl class="d-flex flex-wrap gap-2 gap-lg-4">
+                <div class="d-flex flex-column" style="flex: 1">
+                    <dt class="fw-medium mb-2">{{ 'sylius.ui.email'|trans }}</dt>
+                    <dd class="mb-0">
+                        {{ customer.email }}
+                        {% if not customer.user.verified %}
+                            <div class="text-danger fw-bold">
+                                <i class="fa-solid fa-times"></i>
+                                {{ 'sylius.ui.not_verified'|trans }}
+                            </div>
+                        {% endif %}
+                    </dd>
+                </div>
+                <div class="d-flex flex-column" style="flex: 1">
+                    <dt class="fw-medium mb-2">{{ 'sylius.ui.phone_number'|trans }}</dt>
+                    <dd class="mb-0">{{ customer.phoneNumber }}</dd>
+                </div>
+                <div class="d-flex flex-column" style="flex: 1">
+                    <dt class="fw-medium mb-2">{{ 'sylius.ui.password'|trans }}</dt>
+                    <dd class="mb-0">*********</dd>
+                </div>
+            </dl>
+        </div>
+
+        <div class="card-footer d-flex flex-wrap">
+            {% if not customer.user.verified %}
+                <form action="{{ path('sylius_shop_user_request_verification_token') }}" {{ sylius_test_html_attribute('verification-form') }} method="post">
+                    <button type="submit" class="btn btn-outline-primary" {{ sylius_test_html_attribute('verification-button') }}>
+                        {{ icons.success('me-2') }}
+                        {{ 'sylius.ui.verify'|trans }}
+                    </button>
+                </form>
+            {% endif %}
+            <a href="{{ path('sylius_shop_account_profile_update') }}" class="btn btn-link ms-2">
+                {{ icons.edit('me-2') }}
+                {{ 'sylius.ui.edit'|trans }}
+            </a>
+            <a href="{{ path('sylius_shop_account_change_password') }}" class="btn btn-link ms-2">
+                {{ icons.lock('me-2') }}
+                {{ 'sylius.ui.change_password'|trans }}
+            </a>
+        </div>
+
+    </div>
+
+    {% if customer.defaultAddress %}
+        <div class="card mb-4 border border-light">
+            <div class="card-body">
+                <strong class="d-block h4 pb-3 border-bottom border-light mb-3">{{ 'sylius.ui.default_address'|trans }}</strong>
+                {% include '@SyliusShop/Common/_address.html.twig' with {'address': customer.defaultAddress} %}
+            </div>
+
+            <div class="card-footer">
+                <a href="{{ path('sylius_shop_account_address_book_update', {'id': customer.defaultAddress.id}) }}" class="btn btn-link me-2">
+                    {{ icons.edit('me-2') }}
+                    {{ 'sylius.ui.edit'|trans }}
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+    {{ sylius_template_event('sylius.shop.account.dashboard.after_information', {'customer': customer}) }}
+
+
+{% endblock %}

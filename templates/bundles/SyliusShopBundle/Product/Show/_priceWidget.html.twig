@@ -1,0 +1,15 @@
+{% set variant = product|sylius_resolve_variant %}
+
+{% if variant is not null %}
+    {% set applied_promotions = variant.getChannelPricingForChannel(sylius.channel).getappliedPromotions() %}
+    <div class="my-3">
+        {% include '@SyliusShop/Product/Show/_catalogPromotionLabels.html.twig' with {'applied_promotions': applied_promotions, 'withDescription': true} %}
+    </div>
+{% endif %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center my-4">
+    {% if not product.variants.empty() %}
+        {% include '@SyliusShop/Product/Show/_price.html.twig' %}
+    {% endif %}
+    <small class="text-body-secondary">{{ product.code }}</small>
+</div>

@@ -1,0 +1,36 @@
+{% macro default(message, icon, type, header) %}
+    <div class="alert alert-{{ type|default('') }} gap-4 d-flex align-items-center" {{ sylius_test_html_attribute('flash-message', type) }}>
+		<span class="fa-2x">
+			{{ icon }}
+		</span>
+        <div>
+            {% if type is not empty %}
+                <strong class="d-block">
+                    {{ header|default(type)|trans }}
+                </strong>
+            {% endif %}
+            <p class="mb-0">{{ message|trans }}</p>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro info(message) %}
+    {% import _self as messages %}
+    {% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+    {{ messages.default(message, icons.info(), 'info', 'sylius.ui.info') }}
+{% endmacro %}
+
+{% macro success(message) %}
+    {% import _self as messages %}
+    {% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+    {{ messages.default(message, icons.success(), 'success', 'sylius.ui.success') }}
+{% endmacro %}
+
+{% macro error(message) %}
+    {% import _self as messages %}
+    {% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+    {{ messages.default(message, icons.danger(), 'danger', 'sylius.ui.error') }}
+{% endmacro %}

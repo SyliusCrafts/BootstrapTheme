@@ -1,0 +1,326 @@
+// Color system
+
+$white: #fff;
+$gray-50: #f8fafc;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$gray-950: #020617;
+$black: #000;
+
+$grays: (
+  "50": $gray-50,
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900,
+  "950": $gray-950
+);
+
+$blue: #0d6efd;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #198754;
+$teal: #20c997;
+$cyan: #0dcaf0;
+$red: #f43f5e;
+$yellow: #f59e0b;
+$green: #84cc16;
+
+$colors: (
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "black": $black,
+  "white": $white,
+  "gray": $gray-600,
+  "gray-dark": $gray-800
+);
+
+$red-50: #fff1f2;
+$red-100: #ffe4e6;
+$red-200: #fecdd3;
+$red-300: #fda4af;
+$red-400: #fb7185;
+$red-500: #f43f5e;
+$red-600: #e11d48;
+$red-700: #be123c;
+$red-800: #9f1239;
+$red-900: #881337;
+$red-950: #4c0519;
+
+$yellow-50: #fffbeb;
+$yellow-100: #fef3c7;
+$yellow-200: #fde68a;
+$yellow-300: #fcd34d;
+$yellow-400: #fbbf24;
+$yellow-500: #f59e0b;
+$yellow-600: #d97706;
+$yellow-700: #b45309;
+$yellow-800: #92400e;
+$yellow-900: #78350f;
+$yellow-950: #451a03;
+
+$green-50: #f7fee7;
+$green-100: #ecfccb;
+$green-200: #d9f99d;
+$green-300: #bef264;
+$green-400: #a3e635;
+$green-500: #84cc16;
+$green-600: #65a30d;
+$green-700: #4d7c0f;
+$green-800: #3f6212;
+$green-900: #365314;
+$green-950: #1a2e05;
+
+$teal-50: #F1FCF9;
+$teal-100: #CFF8EB;
+$teal-200: #A0EFD8;
+$teal-300: #68E0C2;
+$teal-400: #39C8A8;
+$teal-500: #22B99A;
+$teal-600: #178A75;
+$teal-700: #166F5F;
+$teal-800: #16594E;
+$teal-900: #174A41;
+$teal-950: #072C27;
+
+$reds: (
+  "red-50": $red-50,
+  "red-100": $red-100,
+  "red-200": $red-200,
+  "red-300": $red-300,
+  "red-400": $red-400,
+  "red-500": $red-500,
+  "red-600": $red-600,
+  "red-700": $red-700,
+  "red-800": $red-800,
+  "red-900": $red-900,
+  "red-950": $red-950,
+);
+
+$yellows: (
+  "yellow-50": $yellow-50,
+  "yellow-100": $yellow-100,
+  "yellow-200": $yellow-200,
+  "yellow-300": $yellow-300,
+  "yellow-400": $yellow-400,
+  "yellow-500": $yellow-500,
+  "yellow-600": $yellow-600,
+  "yellow-700": $yellow-700,
+  "yellow-800": $yellow-800,
+  "yellow-900": $yellow-900,
+  "yellow-950": $yellow-950,
+);
+
+$greens: (
+  "green-50": $green-50,
+  "green-100": $green-100,
+  "green-200": $green-200,
+  "green-300": $green-300,
+  "green-400": $green-400,
+  "green-500": $green-500,
+  "green-600": $green-600,
+  "green-700": $green-700,
+  "green-800": $green-800,
+  "green-900": $green-900,
+  "green-950": $green-950,
+);
+
+$primaries: (
+  "primary-50": $teal-50,
+  "primary-100": $teal-100,
+  "primary-200": $teal-200,
+  "primary-300": $teal-300,
+  "primary-400": $teal-400,
+  "primary-500": $teal-500,
+  "primary-600": $teal-600,
+  "primary-700": $teal-700,
+  "primary-800": $teal-800,
+  "primary-900": $teal-900,
+  "primary-950": $teal-950,
+);
+
+$primary: $teal-500;
+$secondary: $gray-500;
+$info: $gray-300;
+$dark: $gray-800;
+$light: $gray-100;
+$component-active-bg: $primary;
+
+$enable-shadows: true;
+$enable-cssgrid: true;
+$enable-dark-mode: false;
+
+$variable-prefix: bs-; // Deprecated in v5.2.0 for the shorter `$prefix`
+$prefix: $variable-prefix;
+
+$link-color: $dark;
+$link-decoration: none;
+
+$grid-rows: 5; // custom variable for grid-rows mixin
+
+$border-radius-sm: .125rem;
+$border-radius-md: .375rem;
+$border-radius-lg: .5rem;
+$border-radius-xl: .75rem;
+$border-radius-xxl: 1rem;
+$border-radius-pill: 9999px;
+
+$box-shadow: 0 1px 3px 0 rgba($black, 0.1), 0 1px 2px -1px rgba($black, 0.1);
+$box-shadow-sm: 0 1px 2px 0 rgba($black, 0.05);
+$box-shadow-md: 0 4px 6px -1px rgba($black, 0.1), 0 2px 4px -2px rgba($black, 0.1);
+$box-shadow-lg: 0 10px 15px -3px rgba($black, 0.1), 0 4px 6px -4px rgba($black, 0.1);
+$box-shadow-xl: 0 20px 25px -5px rgba($black, 0.1), 0 8px 10px -6px rgba($black, 0.1);
+$box-shadow-xxl: 0 25px 50px -12px rgba($black, 0.25);
+$box-shadow-inset: inset 0 2px 4px 0 rgba($black, 0.05);
+$box-shadow-none: 0 0 $black;
+
+$focus-ring-offset: .125rem;
+$focus-ring-offset-color: $white;
+$focus-ring-width: .125rem;
+$focus-ring-opacity: 1;
+$focus-ring-color: rgba($primary, $focus-ring-opacity);
+$focus-ring-blur: 0;
+$focus-ring-box-shadow: 0 0 0 $focus-ring-offset $focus-ring-offset-color, 0 0 $focus-ring-blur add($focus-ring-width, $focus-ring-offset) $focus-ring-color;
+
+$font-family-sans-serif: 'Open Sans', Arial, sans-serif;
+$font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-icons: "Font Awesome 6 Free";
+
+$font-size-base: 1rem;
+$font-size-sm: $font-size-base * .875;
+$h1-font-size: $font-size-base * 3;
+
+$input-btn-padding-y: .5rem;
+$input-btn-padding-x: 1rem;
+$input-btn-padding-y-sm: .375rem;
+$input-btn-padding-x-sm: .625rem;
+$input-btn-padding-y-lg: .750rem;
+$input-btn-padding-x-lg: 1.5rem;
+
+$font-weight-semibold: 600;
+$btn-font-weight: $font-weight-semibold;
+$btn-box-shadow: null;
+$btn-active-box-shadow: null;
+$input-box-shadow: unset;
+$form-select-box-shadow: unset;
+$navbar-nav-link-padding-x: .75rem;
+
+$border-color: $gray-300;
+$navbar-light-color: $gray-900;
+$navbar-light-icon-color: $gray-700;
+$navbar-light-toggler-border-color: $border-color;
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+$dropdown-min-width: 14rem;
+$dropdown-border-color: $gray-100;
+$dropdown-divider-bg: $gray-200;
+$dropdown-divider-margin-y: $spacer * .75;
+$dropdown-box-shadow: $box-shadow-lg;
+$dropdown-item-padding-y: $spacer * .75;
+$dropdown-item-padding-x: $spacer * 1.25;
+
+$pagination-padding-y: $spacer * .375;
+$pagination-padding-x: $spacer;
+
+$pagination-border-width: 0px;
+$pagination-disabled-color: $gray-100;
+$pagination-disabled-bg: $light;
+
+$card-title-color: $gray-900;
+$card-subtitle-color: $gray-700;
+$card-border-width: 0;
+$card-border-radius: $border-radius-lg;
+$card-cap-bg: $gray-100;
+
+$badge-padding-y: .25rem;
+$badge-padding-x: .5rem;
+
+$alert-padding-y: $spacer * 1.5;
+$alert-padding-x: $spacer * 1.5;
+
+$alert-border-width: 0;
+
+// Steps
+
+$steps-padding: $spacer * 0.75 $spacer * 2 $spacer * 0.75 $spacer * 1.5;
+$steps-font-size: $font-size-base;
+
+$steps-color: var(--#{$prefix}gray);
+$steps-icon-color: var(--#{$prefix}gray);
+$steps-bg: none;
+$steps-border-radius: var(--#{$prefix}border-radius);
+$steps-border-width: 1px;
+$steps-margin-start: calc(#{$steps-border-width} * -1); // stylelint-disable-line function-disallowed-list
+$steps-border-color: var(--#{$prefix}border-color);
+
+$steps-subtitle-color: var(--#{$prefix}gray);
+$steps-subtitle-font-size: $font-size-sm;
+
+$steps-hover-color: var(--#{$prefix}gray);
+$steps-hover-icon-color: var(--#{$prefix}gray);
+$steps-hover-border-color: var(--#{$prefix}light); // Todo in v6: remove this?
+$steps-hover-bg: none;
+
+$steps-active-color: $component-active-bg;
+$steps-active-icon-color: $component-active-bg;
+$steps-active-border-color: $component-active-bg;
+$steps-active-bg: none;
+
+$steps-completed-color: var(--#{$prefix}gray-dark);
+$steps-completed-icon-color: var(--#{$prefix}primary);
+$steps-completed-border-color: none; // Todo in v6: remove this?
+$steps-completed-bg: none;
+
+$steps-disabled-color: var(--#{$prefix}gray);
+$steps-disabled-icon-color: var(--#{$prefix}gray);
+$steps-disabled-border-color: none;
+$steps-disabled-bg: none;
+
+$steps-transition: border-color .15s ease-in-out;
+
+$breadcrumb-font-size: $font-size-sm;
+$breadcrumb-item-padding-x: 1rem;
+$breadcrumb-divider-color: $gray-500;
+$breadcrumb-active-color: $gray-700;
+$breadcrumb-divider: quote("");
+
+$carousel-control-color: $dark;
+$carousel-control-width: 3rem;
+$carousel-indicator-width: 2rem;
+$carousel-indicator-height: 5px;
+$carousel-indicator-active-bg: $dark;
+
+$code-color: $yellow;

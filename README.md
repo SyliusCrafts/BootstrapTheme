@@ -1,78 +1,142 @@
 <p align="center">
-    <img width="40%" src="https://camo.githubusercontent.com/f1a61f80abc01fe14ab9d8820fd048ad817f92dc2e4fa65d3271d350b9a78749/68747470733a2f2f64656d6f2e73796c6975732e636f6d2f6173736574732f73686f702f696d672f6c6f676f2e706e67" />
-    <h1 align="center">Sylius Bootstrap Theme</h1>
+    <img width="40%" src="https://camo.githubusercontent.com/33098ce9cd95fea8aedb620d9fbbeaf5c9e89e27ff7965c2166bdd410a43fa63/68747470733a2f2f64656d6f2e73796c6975732e636f6d2f6173736574732f73686f702f696d672f6c6f676f2e706e67" />
+    <h1 align="center">SyliusBootstrapTheme</h1>
     <p align="center">Sylius Bootstrap theme with build process based on <a target="_blank" href="https://symfony.com/doc/current/frontend.html">Webpack Encore.</a></p>
-    It allows to swap to Bootstrap-based theme separately in each channel.
 </p>
 
-Installation
-------------
+## Preview
 
-There are two ways to install a theme. It is possible to copy files in `themes/` or add this package as a composer dependency and create a child theme.
+### Homepage
 
-The instructions below refer to an installation in the theme folder. Installation as a composer dependency (with child theme) [is also documented](https://docs.sylius.com/en/latest/book/themes/bootstrap-theme.html).
+<a href="./docs/homepage-preview.png" target="_blank">
+    <img src="./docs/homepage-preview.png" align="center" height="50%">
+</a>
+&nbsp;
+<details>
+    <summary>Gallery</summary>
+    <hr>
+    <a href="./docs/homepage-sections.png" target="_blank">
+        <img src="./docs/homepage-sections.png" align="center">
+    </a>
+</details>
 
-- Sylius 1.6 : `composer require sylius/bootstrap-theme:~0.1.0`
-- Sylius 1.7 : `composer require sylius/bootstrap-theme:~0.2.0`
-- Sylius 1.8 : `composer require sylius/bootstrap-theme:~0.3.0`
-- Sylius 1.8, 1.9 and 1.10 : `composer require sylius/bootstrap-theme:~0.4.0`
-- Sylius 1.11 : `composer require sylius/bootstrap-theme:~0.6.0`
-- Sylius 1.12 : `composer require sylius/bootstrap-theme:~0.7.0`
+### Checkout
 
-Sylius 1.11 tested with Node v15.14.0, Sylius 1.12 tested with **Node v18**.16.0
+<details>
+    <summary>Gallery</summary>
+    <hr>
+    <a href="./docs/checkout-1.png" target="_blank">
+        <img src="./docs/checkout-1.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/checkout-2.png" target="_blank">
+        <img src="./docs/checkout-2.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/checkout-3.png" target="_blank">
+        <img src="./docs/checkout-3.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/checkout-4.png" target="_blank">
+        <img src="./docs/checkout-4.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/checkout-5.png" target="_blank">
+        <img src="./docs/checkout-5.png" align="center">
+    </a>
+</details>
 
-1. Copy files from repository to `./themes/BootstrapTheme`
+### Products
 
-Only `assets` and `SyliusShopBundle` directories and the `webpack.config.js` file are required.
+<details>
+    <summary>Gallery</summary>
+    <hr>
+    <a href="./docs/category.png" target="_blank">
+        <img src="./docs/category.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/product-options.png" target="_blank">
+        <img src="./docs/product-options.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/product-promotions.png" target="_blank">
+        <img src="./docs/product-promotions.png" align="center">
+    </a>
+</details>
 
-2. Install Encore (Only for sylius **<1.12**)
+### Cart
+
+<details>
+    <summary>Gallery</summary>
+    <hr>
+    <a href="./docs/cart-preview.png" target="_blank">
+        <img src="./docs/cart-preview.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/cart-dropdown.png" target="_blank">
+        <img src="./docs/cart-dropdown.png" align="center" style="height: 400px">
+    </a>
+</details>
+
+### User account
+
+<details>
+    <summary>Gallery</summary>
+    <hr>
+    <a href="./docs/user-dashboard.png" target="_blank">
+        <img src="./docs/user-dashboard.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/user-order-history.png" target="_blank">
+        <img src="./docs/user-order-history.png" align="center">
+    </a>
+    <hr>
+    <a href="./docs/user-dropdown.png" target="_blank">
+        <img src="./docs/user-dropdown.png" align="center" style="height: 400px">
+    </a>
+</details>
+
+## Installation
+
+There are two ways to install a theme. It is possible to copy files in `themes/` or add this package as a composer dependency and create a child theme. The instructions below refer to an installation in the theme folder. 
+
+### Composer installation
+
+Installation as a composer dependency [is documented here](https://docs.sylius.com/en/latest/book/themes/bootstrap-theme.html)
 
 ```bash
-composer require encore
+composer require sylius/bootstrap-theme:1.12
 ```
 
-3. Install node dependencies
+### Manual installation
+
+#### 1. Copy files from the repository to `./themes/BootstrapTheme`
+
+Files/folders to copy:
+* `assets`
+* `templates`
+* `composer.json`
+* `webpack.config.js`
+
+#### 2. Install node dependencies
 
 ```bash
-yarn
-yarn add @symfony/webpack-encore sass-loader@^13.0.0 node-sass -D
-yarn add lodash.throttle -D
-yarn add bootstrap@^4.5.0 bootstrap.native@^3.0.0 glightbox axios form-serialize @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons popper.js
-yarn add @popperjs/core
+yarn install
+yarn add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 lightbox axios @popperjs/core@^2.11 glightbox
 ```
 
-4. Import bootstrap-theme config in the main webpack file
+#### 3. Import `bootstrap-theme` config in your `./webpack.config.js`
 
 ```diff
-# ./webpack.config.js
-
 + const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');
+
+// ...
 
 - module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig];
 + module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig, bootstrapTheme];
-
 ```
 
-For sylius **1.11** and **1.12** change output paths
-    
-```diff
-# ./webpack.config.js
-// Shop config
-Encore
--  .setOutputPath('public/build/shop/')
--  .setPublicPath('/build/shop')
--  .addEntry('shop-entry', './vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/private/entry.js')
-+  .setOutputPath('public/bootstrap-theme')
-+  .setPublicPath('/bootstrap-theme')
-+  .addEntry('app', './themes/BootstrapTheme/assets/app.js')
-  .disableSingleRuntimeChunk()
-  .cleanupOutputBeforeBuild()
-  .enableSourceMaps(!Encore.isProduction())
-  .enableVersioning(Encore.isProduction())
-  .enableSassLoader();
-```
-
-5. Edit project config files
+#### 4. Edit project configuration
 
 ```diff
 # ./config/packages/assets.yaml
@@ -81,7 +145,7 @@ framework:
     assets:
         packages:
 +            bootstrapTheme:
-+                json_manifest_path: '%kernel.project_dir%/public/bootstrap-theme/manifest.json'
++                json_manifest_path: '%kernel.project_dir%/public/themes/bootstrap-theme/manifest.json'
 ```
 
 ```diff
@@ -90,156 +154,49 @@ framework:
 webpack_encore:
     output_path: '%kernel.project_dir%/public/build'
     builds:
-+        bootstrapTheme: '%kernel.project_dir%/public/bootstrap-theme'
++        bootstrapTheme: '%kernel.project_dir%/public/themes/bootstrap-theme'
 ```
 
-```diff
-# ./config/packages/_sylius.yaml
-sylius_theme:
-+    legacy_mode: true # for sylius 1.9, 1.10, 1.11, 1.12
-```
-
-6. To build the assets, run one of the following commands  
-```bash
-# compile assets once
-yarn encore dev
-
-# recompile assets automatically when files change
-yarn encore dev --watch
-
-# recompile assets automatically with live reload
-yarn encore dev-server
-
-# create a production build
-yarn encore production
-```
-
-In Sylius 1.12 you can use predefined commands
+#### 5. Build assets
 
 ```bash
 # compile assets once
-yarn build
+yarn dev
 
 # recompile assets automatically when files change
 yarn watch
+
+# create a production build
+yarn build
 ```
 
-7. Change theme in the admin panel by visiting the Edit Channel page
+#### 6. Change theme in the admin panel
 
-Screenshots
------------
-
-#### Homepage
-
-![Homepage](docs/homepage.png)
-
-#### Product show
-
-![Product page](docs/product-page.png)
+1. Go to `Configuration > Channels`
+2. Edit desired channel from the list
+3. Go to `Look & feel > Theme` section
+4. Change theme to `Sylius Bootstrap Theme` 
 
 
-#### Cart
+## Contribution
 
-![Cart page](docs/cart.png)
+### Quickstart Installation
 
-#### Checkout bar
+#### Localhost
 
-![Checkout bar](docs/checkout-bar.png)
+This command will install the selected version of Sylius and the Bootstrap theme with its configuration.
+You just need to activate the theme in admin panel as described in the point above.
 
-#### Changing the theme
-![Changing the theme](docs/edit-channel-page.png)
-
-Developers
-----------
-
-1. Run `composer create-project sylius/bootstrap-theme ProjectName` or clone this project
-
-### Quickstart Installation (docker)
-
-1. From the plugin skeleton root directory, run the following commands:
+:information_source: To be able to setup the plugin database, remember to configure you database credentials
+in `install/Application/.env.local` and/or `install/Application/.env.test.local`.
 
 ```bash
-sudo chmod -Rf 777 tests/Application/var
-sudo chmod -Rf 777 tests/Application/public/media
-docker-compose exec php php -d memory_limit=-1 /usr/bin/composer install
-docker-compose exec nodejs yarn --cwd tests/Application install
-docker-compose exec php tests/Application/bin/console doctrine:database:create --if-not-exists -vvv
-docker-compose exec php tests/Application/bin/console doctrine:schema:create -vvv
-docker-compose exec php tests/Application/bin/console assets:install tests/Application/public -vvv
-docker-compose exec nodejs yarn --cwd tests/Application build
-docker-compose exec php php -d memory_limit=-1 tests/Application/bin/console cache:warmup -vvv
-docker-compose exec php tests/Application/bin/console sylius:fixtures:load -n
+$ make install -e SYLIUS_VERSION=XX SYMFONY_VERSION=YY PHP_VERSION=ZZ
 ```
 
-#### Quality tools
+Default values : XX=1.12.0 and YY=6.3 and ZZ=8.2
 
+:information_source: To reset (drop database and delete files) test environment:
 ```bash
-docker-compose exec php composer validate --ansi --strict
-docker-compose exec php php -d memory_limit=-1 vendor/bin/behat --profile docker --colors --strict -vvv -f progress --no-interaction --tags="@javascript && ~@todo && ~@cli"
-``` 
-
-__ProTip__ use `Makefile` ;)
-
-### Quickstart Installation (legacy)
-
-1. From the plugin skeleton root directory, run the following commands:
-
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
-    
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
-    ```
-
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
-
-### Usage
-
-#### Running plugin tests
-
-- Behat (non-JS scenarios)
-
-  ```bash
-  vendor/bin/behat --strict --tags="~@javascript"
-  ```
-
-- Behat (JS scenarios)
-
-    1. [Install Symfony CLI command](https://symfony.com/download).
-
-    2. Start Headless Chrome:
-
-    ```bash
-    google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
-    ```
-
-    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
-
-    ```bash
-    symfony server:ca:install
-    APP_ENV=test symfony server:start --port=8080 --dir=tests/Application/public --daemon
-    ```
-
-    4. Run Behat:
-
-    ```bash
-    vendor/bin/behat --strict --tags="@javascript"
-    ```
-
-#### Opening Sylius with your plugin
-
-- Using `test` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=test bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=test bin/console server:run -d public)
-    ```
-
-- Using `dev` environment:
-
-    ```bash
-    (cd tests/Application && APP_ENV=dev bin/console sylius:fixtures:load)
-    (cd tests/Application && APP_ENV=dev bin/console server:run -d public)
-    ```
+$ make reset
+```

@@ -1,0 +1,33 @@
+{% macro standard(items, options) %}
+    {% set attr = options.attr|default({}) %}
+    <nav {{ block('attributes') }}>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('sylius_shop_homepage') }}">{{ 'sylius.ui.home'|trans }}</a>
+            </li>
+
+            {% for item in items %}
+                {% if item.link|default('') and not loop.last %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ item.link }}">{{ item.label }}</a>
+                    </li>
+                {% else %}
+                    <li class="breadcrumb-item active fw-medium">{{ item.label|raw }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+{% endmacro %}
+
+{% block attributes -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ translation_domain is same as(false) or attrvalue is null ? attrvalue : attrvalue|trans(attr_translation_parameters, translation_domain) }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{%- endblock attributes -%}

@@ -1,0 +1,35 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{% if cart.empty %}
+    <div class="card-body text-center">
+        {{ 'sylius.ui.your_cart_is_empty'|trans }}.
+    </div>
+{% else %}
+    <ul class="list-style-none px-3">
+        {% for item in cart.items %}
+            {% set variant = item.variant %}
+            {% set product = variant.product %}
+
+            <li class="grid gap-3 py-2 border-bottom border-light">
+                <div class="g-col-3">{% include '@SyliusShop/Product/_mainImage.html.twig' with {product, filter: 'sylius_shop_product_tiny_thumbnail'} %}</div>
+                <div class="g-col-9 d-flex flex-column justify-content-center">
+                    <b class="fw-medium small">{{ item.product }}</b>
+                    <div class="mt-1 small">
+                        <span class="">{{ item.quantity }} x </span>
+                        <span class="fw-medium">{{ money.convertAndFormat(item.unitPrice) }}</span>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+        <div class="d-flex flex-wrap justify-content-between py-2 fw-medium">
+            <span class="small">{{ 'sylius.ui.subtotal'|trans }}:</span>
+            <strong>{{ money.convertAndFormat(cart.itemsTotal) }}</strong>
+        </div>
+    </ul>
+
+    <div class="px-3">
+        <a href="{{ path('sylius_shop_checkout_start') }}" class="btn btn-primary d-block">{{ 'sylius.ui.checkout'|trans }}</a>
+        <a href="{{ path('sylius_shop_cart_summary') }}" class="btn btn-link d-block">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
+    </div>
+{% endif %}
+

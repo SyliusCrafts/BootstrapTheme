@@ -1,0 +1,14 @@
+{% import "@SyliusShop/Common/Macro/icons.html.twig" as icons %}
+
+{% set additional_classes = ' cursor-pointer ' ~ class|default('') %}
+
+<div data-js-rating
+     data-js-rating-max="5"
+     data-js-rating-average="{{ average }}"
+     data-js-rating-viewonly="{{ viewonly }}"
+    {{ sylius_test_html_attribute('average-rating', average) }}
+>
+
+    <div data-js-rating-btn-on><small>{{ icons.star("text-primary" ~ additional_classes) }}</small></div>
+    <div data-js-rating-btn-off><small>{{ icons.star("text-gray-300" ~ additional_classes) }}</small></div>
+</div>

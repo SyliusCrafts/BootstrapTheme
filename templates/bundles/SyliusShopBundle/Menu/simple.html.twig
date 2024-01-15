@@ -1,0 +1,33 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+    <b class="d-block fs-5 text-light-emphasis pb-2 mb-2 border-2 border-bottom border-light">{{ item.label|trans }}</b>
+    <ul class="nav flex-column">
+        {{ block('list') }}
+    </ul>
+{% endblock %}
+
+{% block list %}
+    {% for item in item.children %}
+        {{ block('item') }}
+    {% endfor %}
+{% endblock %}
+
+{% block item %}
+    {% set is_active = item.uri in app.request.pathInfo %}
+
+    <li class="nav-item">
+        <a class="nav-link {{ is_active ? 'bg-primary-50 text-primary-700 fw-bold' }}" href="{{ item.uri }}">
+            {{ block('icon') }}
+            {{ item.label|trans }}
+        </a>
+    </li>
+{% endblock %}
+
+{% block icon %}
+    {% set icon = item.labelAttribute('icon') %}
+
+    {% if icon %}
+        <i class="fa-solid fa-{{ icon is same as('cart') ? 'shopping-cart' : icon }} me-2 {{ is_active ? 'text-primary-400' : 'text-secondary' }}"></i>
+    {% endif %}
+{% endblock %}

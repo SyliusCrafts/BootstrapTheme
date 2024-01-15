@@ -1,0 +1,10 @@
+.nav {
+	&-link {
+		border-radius: $border-radius;
+
+		&:hover,
+		&.show {
+			background-color: $gray-200;
+		}
+	}
+}

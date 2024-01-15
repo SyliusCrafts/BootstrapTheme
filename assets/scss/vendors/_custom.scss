@@ -1,0 +1,25 @@
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, .7);
+}
+
+.loadable.loading .loading-overlay { display: flex; }
+
+
+label.required {
+    &::after {
+        content: '*';
+        display: inline-block;
+        padding-left: 4px;
+        color: $danger;
+    }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="{{ app.request.locale|slice(0, 2) }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}{{ sylius.channel.name }}{% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block metatags '' %}
+
+    {% block stylesheets %}
+        {{ sylius_template_event('sylius.shop.layout.stylesheets') }}
+    {% endblock %}
+
+    {{ sylius_template_event('sylius.shop.layout.head') }}
+</head>
+
+<body class="d-flex flex-column min-vh-100 border-top border-5 border-primary">
+{{ sylius_template_event('sylius.shop.layout.before_body') }}
+
+{% block top %}
+    <nav class="navbar navbar-expand-lg border-bottom border-gray-200">
+        <div class="container">
+            {{ sylius_template_event('sylius.shop.layout.topbar') }}
+        </div>
+    </nav>
+{% endblock %}
+
+{% block header %}
+    {{ sylius_template_event('sylius.shop.layout.header') }}
+    <div class="mb-4"></div>
+{% endblock %}
+
+<div class="main-content container" style="min-height: 50vh">
+    {% include '@SyliusShop/_flashes.html.twig' %}
+
+    {{ sylius_template_event('sylius.shop.layout.before_content') }}
+
+    {% block content %}
+    {% endblock %}
+
+    {{ sylius_template_event('sylius.shop.layout.after_content') }}
+</div>
+
+{% block footer %}
+    {% include '@SyliusShop/_footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ sylius_template_event('sylius.shop.layout.javascripts') }}
+{% endblock %}
+
+{{ sylius_template_event('sylius.shop.layout.after_body') }}
+
+<div class="loading-overlay" data-js-loading-overlay>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+</body>
+</html>

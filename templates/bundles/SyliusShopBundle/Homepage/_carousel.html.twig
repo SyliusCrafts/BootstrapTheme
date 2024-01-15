@@ -1,0 +1,26 @@
+<div id="sylius-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        {% for product in products %}
+            {% if loop.index0 % 3 == 0 %}
+                <div class="carousel-item grid {% if loop.index0 == 0 %}active{% endif %}">
+                <div class="grid">
+            {% endif %}
+            <div class="g-col-12 g-col-md-6 g-col-lg-4">
+                {% include '@SyliusShop/Product/_box.html.twig' with {role: 'carousel-product'} %}
+            </div>
+            {% if loop.index % 3 == 0 or loop.last %}
+                </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#sylius-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">{{ 'sylius.ui.previous'|trans }}</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#sylius-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">{{ 'sylius.ui.next'|trans }}</span>
+    </button>
+</div>

@@ -11,7 +11,7 @@
 
 import GLightbox from 'glightbox';
 import axios from 'axios';
-import 'bootstrap.native/dist/bootstrap-native';
+import 'bootstrap';
 
 import SyliusRating from './sylius-rating';
 import SyliusToggle from './sylius-toggle';
@@ -32,7 +32,7 @@ axios.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Lightbox
-  const glightbox = GLightbox({ selector: '.glightbox' });
+  GLightbox({ selector: '.glightbox' });
 
   // Add to cart
   document.querySelectorAll('[data-js-add-to-cart="form"]')

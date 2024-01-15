@@ -1,0 +1,19 @@
+<div class="mb-3 p-2 p-lg-4 border border-light rounded">
+    <h2 class="h4">{{ 'sylius.ui.personal_information'|trans }}</h2>
+
+    <div class="row">
+        <div class="col">{{ form_row(form.firstName) }}</div>
+        <div class="col">{{ form_row(form.lastName) }}</div>
+    </div>
+
+    {{ form_row(form.email) }}
+    {{ form_row(form.phoneNumber) }}
+    {{ form_row(form.subscribedToNewsletter) }}
+</div>
+
+<div class="mb-3 p-2 p-lg-4 border border-light rounded">
+    <h2 class="h4" class="mt-5">{{ 'sylius.ui.account_credentials'|trans }}</h2>
+
+    {{ form_row(form.user.plainPassword.first) }}
+    {{ form_row(form.user.plainPassword.second) }}
+</div>

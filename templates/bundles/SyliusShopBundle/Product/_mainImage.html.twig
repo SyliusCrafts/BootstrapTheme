@@ -1,0 +1,12 @@
+{% if product.imagesByType('thumbnail') is not empty %}
+    {% set path = product.imagesByType('thumbnail').first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+{% elseif product.images.first %}
+    {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+{% else %}
+{% endif %}
+    {% set size = random(5) * 200 %}
+    {% set path = "https://picsum.photos/#{ size }/#{ size }.jpg" %}
+
+<div class="ratio ratio-1x1">
+    <img src="{{ path }}" alt="{{ product.name }}" class="{{ class|default('') }} object-fit-cover rounded-3 border border-light bg-light" {{ sylius_test_html_attribute('main-image') }} />
+</div>

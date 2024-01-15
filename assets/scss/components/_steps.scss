@@ -1,0 +1,102 @@
+.steps {
+    $this: &;
+    display: flex;
+    flex-direction: column;
+    border-width: $steps-border-width;
+    border-color: $steps-border-color;
+    border-style: solid;
+    border-radius: $steps-border-radius;
+    font-size: $steps-font-size;
+
+    @include media-breakpoint-up(lg) {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    &-item {
+        display: flex;
+        flex: 1;
+        gap: $spacer * 1.5;
+        padding: $steps-padding;
+        border-bottom: 4px solid transparent;
+        position: relative;
+        background-color: $steps-bg;
+        transition: $steps-transition;
+
+        &.completed {
+            border-color: $steps-completed-border-color;
+            background: $steps-completed-bg;
+
+            #{$this}-icon {
+                color: $steps-completed-icon-color;
+            }
+            #{$this}-title {
+                color: $steps-completed-color;
+            }
+        }
+
+        &:hover {
+            text-decoration: none;
+            background: $steps-hover-bg;
+            border-color: $steps-hover-border-color;
+
+            #{$this}-icon {
+                color: $steps-hover-icon-color;
+            }
+
+            #{$this}-title {
+                color: $steps-hover-color;
+            }
+        }
+        
+        &.active {
+            border-color: $steps-active-border-color;
+            background: $steps-active-bg;
+
+            #{$this}-icon {
+                color: $steps-active-icon-color;
+            }
+            #{$this}-title {
+                color: $steps-active-color;
+            }
+        }
+
+        &.disabled {
+            cursor: auto;
+            pointer-events: none;
+            border-color: $steps-disabled-border-color;
+            background: $steps-disabled-bg;
+
+            #{$this}-icon {
+                color: $steps-disabled-icon-color;
+            }
+            #{$this}-title {
+                color: $steps-disabled-color;
+            }
+        }
+    }
+
+    &-title {
+        color: $steps-color;
+    }
+
+    &-icon {
+        font-size: 2rem;
+        color: $steps-icon-color;
+    }
+
+    &-text {
+        color: $steps-subtitle-color;
+        font-size: $steps-subtitle-font-size;
+        line-height: 1.5;
+    }
+
+    &-divider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 1rem;
+        color: $steps-border-color;
+    }
+}

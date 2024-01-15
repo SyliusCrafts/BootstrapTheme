@@ -1,0 +1,17 @@
+<form method="get" action="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="loadable grid mb-5 w-100">
+    <div class="g-col-12 g-col-md-8 g-start-md-3 input-group bg-light rounded">
+        {% for filter in products.definition.enabledFilters %}
+            {{ sylius_grid_render_filter(products, filter) }}
+        {% endfor %}
+
+        <button type="submit" class="btn" {{ sylius_test_html_attribute('search') }}>
+            <i class="fa-solid fa-search"></i>
+            <span class="sr-only">{{ 'sylius.ui.search'|trans }}</span>
+        </button>
+
+        <a href="{{ path('sylius_shop_product_index', {'slug': app.request.attributes.get('slug')}) }}" class="btn d-inline-grid place-content-center" {{ sylius_test_html_attribute('clear') }}>
+            <i class="fa-solid fa-times"></i>
+            <span class="sr-only">{{ 'sylius.ui.clear'|trans }}</span>
+        </a>
+    </div>
+</form>

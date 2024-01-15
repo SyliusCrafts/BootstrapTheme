@@ -1,0 +1,19 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <div class="p-2 py-lg-5 rounded-3 bg-light my-5">
+
+        <h2 class="text-center fw-bold">
+            {% block title '' %}
+        </h2>
+
+        {% block details '' %}
+
+        <div class="mt-5 text-center">
+            <a href="{{ path('sylius_shop_homepage') }}" class="btn btn-primary">
+                {{ 'sylius.ui.back_to_store'|trans }}
+            </a>
+        </div>
+
+    </div>
+{% endblock %}

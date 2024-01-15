@@ -1,0 +1,62 @@
+<div class="ms-auto d-flex gap-2">
+    {% if is_granted('ROLE_USER') %}
+        <div class="dropdown">
+            <button class="btn btn-outline-light text-gray-700 rounded border-gray-300 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user me-2"></i>
+                <span{{ sylius_test_html_attribute('full-name') }}>{{ app.user.customer.firstName }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <h6 class="dropdown-header">{{ 'sylius.menu.shop.account.header'|trans }}</h6>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('sylius_shop_account_dashboard') }}">
+                        <i class="fa-solid fa-user"></i>
+                        {{ 'sylius.ui.my_account'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('sylius_shop_account_profile_update') }}">
+                        <i class="fa-solid fa-user-gear"></i>
+                        {{ 'sylius.menu.shop.account.personal_information'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('sylius_shop_account_change_password') }}">
+                        <i class="fa-solid fa-key"></i>
+                        {{ 'sylius.menu.shop.account.change_password'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('sylius_shop_account_order_index') }}">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                        {{ 'sylius.menu.shop.account.order_history'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('sylius_shop_account_address_book_index') }}">
+                        <i class="fa-solid fa-address-book"></i>
+                        {{ 'sylius.menu.shop.account.address_book'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ path('sylius_shop_logout') }}" {{ sylius_test_html_attribute('logout-button') }}>
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        {{ 'sylius.ui.logout'|trans }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+        <a class="btn btn-link text-dark fw-bold" href="{{ path('sylius_shop_login') }}">
+            {{ 'sylius.ui.login'|trans }}
+        </a>
+
+        <a class="btn btn-primary" href="{{ path('sylius_shop_register') }}">
+            {{ 'sylius.ui.register'|trans }}
+        </a>
+    {% endif %}
+</div>

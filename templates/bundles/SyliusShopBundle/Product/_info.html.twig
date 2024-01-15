@@ -1,0 +1,28 @@
+{% set product = variant.product %}
+
+<div class="vstack">
+    <strong class="h5 mb-0 sylius-product-name" {{ sylius_test_html_attribute('product-name', item.productName) }}>
+        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug, '_locale': product.translation.locale}) }}">{{ item.productName }}</a>
+    </strong>
+
+    <small class="sylius-product-variant-code mb-2 text-muted" {{ sylius_test_html_attribute('product-variant-code') }}>
+        {{ variant.code }}
+    </small>
+
+    {% if product.hasOptions() %}
+        <div class="vstack small gap-1 mb-2 sylius-product-options" {{ sylius_test_html_attribute('product-options') }}>
+            {% for option_value in variant.optionValues %}
+                <div>
+                    <span>{{ option_value.name }}:</span>
+                    <span class="fw-medium" data-sylius-option-name="{{ option_value.name }}" {{ sylius_test_html_attribute('option-name', option_value.name) }}>
+						{{ option_value.value }}
+					</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% elseif item.variantName is not null %}
+        <div class="small mb-2 sylius-product-variant-name" {{ sylius_test_html_attribute('product-variant-name') }}>
+            <small>{{ item.variantName }}</small>
+        </div>
+    {% endif %}
+</div>

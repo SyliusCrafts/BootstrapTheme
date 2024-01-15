@@ -1,0 +1,17 @@
+<div class="mb-5">
+    {% include '@SyliusShop/Common/Order/_addresses.html.twig' %}
+</div>
+
+<div class="grid gap-3 gap-lg-5">
+    <div class="g-col-12 g-col-lg-8 mb-5">
+        {% include '@SyliusShop/Common/Order/_table.html.twig' %}
+    </div>
+    <div class="g-col-12 g-col-lg-4">
+        <div class="mb-4" id="sylius-payments">
+            {% include '@SyliusShop/Common/Order/_payments.html.twig' %}
+        </div>
+        <div class="mb-4" id="sylius-shipments">
+            {% include '@SyliusShop/Common/Order/_shipments.html.twig' %}
+        </div>
+    </div>
+</div>

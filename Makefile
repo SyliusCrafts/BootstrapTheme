@@ -1,63 +1,90 @@
 .DEFAULT_GOAL := help
+SHELL=/bin/bash
+COMPOSER_ROOT=composer
+TEST_DIRECTORY=tests/Application
+CONSOLE=cd tests/Application && php bin/console -e test
+COMPOSER=cd tests/Application && composer
+YARN=cd tests/Application && yarn
 
-##
-## Project setup
-##---------------------------------------------------------------------------
-.PHONY: install start stop clean
+SYLIUS_VERSION=1.12.0
+SYMFONY_VERSION=6.3
+PHP_VERSION=8.2
+PLUGIN_NAME=sylius/bootstrap-theme
 
-install: start ## Install requirements for tests
-	sudo chmod -Rf 777 tests/Application/var
-	sudo chmod -Rf 777 tests/Application/public/media
-	docker-compose exec php php -d memory_limit=-1 /usr/bin/composer install
-	docker-compose exec nodejs yarn --cwd tests/Application install
-	docker-compose exec php tests/Application/bin/console doctrine:database:create --if-not-exists -vvv
-	docker-compose exec php tests/Application/bin/console doctrine:schema:create -vvv
-	docker-compose exec php tests/Application/bin/console assets:install tests/Application/public -vvv
-	docker-compose exec nodejs yarn --cwd tests/Application build
-	docker-compose exec php php -d memory_limit=-1 tests/Application/bin/console cache:warmup -vvv
-	docker-compose exec php tests/Application/bin/console sylius:fixtures:load -n
+###
+### DEVELOPMENT
+### ¯¯¯¯¯¯¯¯¯¯¯
 
-start: ## Start the project
-	docker-compose up -d
+install: sylius ## Install Plugin on Sylius [SYLIUS_VERSION=1.12.0] [SYMFONY_VERSION=6.3] [PHP_VERSION=8.2]
+.PHONY: install
 
-stop: ## Stop and clean
-	docker-compose kill
-	docker-compose rm -v --force
+reset: ## Remove dependencies
+ifneq ("$(wildcard tests/Application/bin/console)","")
+	${CONSOLE} doctrine:database:drop --force --if-exists || true
+endif
+	rm -rf tests/Application
+.PHONY: reset
 
-clean: stop ## Clean plugin
-	docker-compose down -v
-	sudo rm -Rf node_modules vendor .phpunit.result.cache composer.lock
+phpunit: phpunit-configure phpunit-run ## Run PHPUnit
+.PHONY: phpunit
 
-##
-## Assets
-##---------------------------------------------------------------------------
-.PHONY: assets assets-watch
+###
+### OTHER
+### ¯¯¯¯¯¯
 
-assets: ## Build assets for dev environment
-	docker-compose exec nodejs yarn --cwd tests/Application dev
+sylius: sylius-standard update-dependencies install-plugin install-theme install-sylius
+.PHONY: sylius
 
-assets-watch: ## Watch asset during development
-	docker-compose exec nodejs yarn --cwd tests/Application watch
+sylius-standard:
+	${COMPOSER_ROOT} create-project sylius/sylius-standard ${TEST_DIRECTORY} "~${SYLIUS_VERSION}" --no-install --no-scripts
+	${COMPOSER} config allow-plugins true
+	${COMPOSER} require sylius/sylius:"~${SYLIUS_VERSION}"
 
-##
-## QA
-##---------------------------------------------------------------------------
-.PHONY: validate behat ci
+update-dependencies:
+	${COMPOSER} config extra.symfony.require "~${SYMFONY_VERSION}"
+	${COMPOSER} update --no-progress -n
 
-validate: ## Validate composer.json
-	docker-compose exec php composer validate --ansi --strict
+install-plugin:
+	${COMPOSER} config repositories.plugin '{"type": "path", "url": "../../"}'
+	${COMPOSER} config extra.symfony.allow-contrib true
+	${COMPOSER} config minimum-stability "dev"
+	${COMPOSER} config prefer-stable true
+	${COMPOSER} req ${PLUGIN_NAME}:* --prefer-source --no-scripts
 
-behat: ## Run behat
-	docker-compose exec php php -d memory_limit=-1 vendor/bin/behat --profile docker --colors --strict -vvv -f progress --no-interaction --tags="@javascript && ~@todo && ~@cli"
+install-theme:
+ifneq ("$(wildcard install/Application)","")
+	cp -r install/Application tests
+endif
+	mkdir ${TEST_DIRECTORY}/themes/BootstrapTheme
+	cp -r assets ${TEST_DIRECTORY}/themes/BootstrapTheme
+	cp -r templates ${TEST_DIRECTORY}/themes/BootstrapTheme
+	cp composer.json ${TEST_DIRECTORY}/themes/BootstrapTheme
+	cp webpack.config.js ${TEST_DIRECTORY}/themes/BootstrapTheme
+	echo "const bootstrapTheme = require('./themes/BootstrapTheme/webpack.config');" >> ${TEST_DIRECTORY}/webpack.config.js
+	echo "module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig, bootstrapTheme];" >> ${TEST_DIRECTORY}/webpack.config.js
+	echo "            bootstrapTheme:" >> ${TEST_DIRECTORY}/config/packages/assets.yaml
+	echo "                json_manifest_path: '%kernel.project_dir%/public/themes/bootstrap-theme/manifest.json'" >> ${TEST_DIRECTORY}/config/packages/assets.yaml
+	echo "        bootstrapTheme: '%kernel.project_dir%/public/themes/bootstrap-theme'" >> ${TEST_DIRECTORY}/config/packages/webpack_encore.yaml
 
-ci: validate behat ## Execute github actions tasks
+install-sylius:
+	${CONSOLE} doctrine:database:create --if-not-exists
+	${CONSOLE} doctrine:migrations:migrate -n
+	${CONSOLE} sylius:fixtures:load default -n
+	${YARN} install
+	${YARN} add bootstrap@^5.3 @fortawesome/fontawesome-free@^6.4.2 lightbox axios @popperjs/core@^2.11 glightbox
+	${YARN} build
+	${CONSOLE} cache:clear
 
-##
-## Utilities
-##---------------------------------------------------------------------------
+phpunit-configure:
+	cp phpunit.xml.dist ${TEST_DIRECTORY}/phpunit.xml
+
+phpunit-run:
+	cd ${TEST_DIRECTORY} && ./vendor/bin/phpunit --testdox
+
+help: SHELL=/bin/bash
+help: ## Dislay this help
+	@IFS=$$'\n'; for line in `grep -h -E '^[a-zA-Z_#-]+:?.*?##.*$$' $(MAKEFILE_LIST)`; do if [ "$${line:0:2}" = "##" ]; then \
+	echo $$line | awk 'BEGIN {FS = "## "}; {printf "\033[33m    %s\033[0m\n", $$2}'; else \
+	echo $$line | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m%s\n", $$1, $$2}'; fi; \
+	done; unset IFS;
 .PHONY: help
-
-help: ## Show all make tasks (default)
-	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
-
--include Makefile.local

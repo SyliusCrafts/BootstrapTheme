@@ -1,0 +1,27 @@
+<div class="card">
+    {{ form_start(form, {'action': path('sylius_shop_cart_save'), 'attr': {'class': 'loadable', 'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+    {{ form_errors(form) }}
+    <input type="hidden" name="_method" value="PATCH"/>
+
+    {{ sylius_template_event('sylius.shop.cart.summary.items', {'cart': cart, 'form': form}) }}
+
+    <ul class="list-style-none p-0 m-0" id="sylius-cart-items" {{ sylius_test_html_attribute('cart-items') }}>
+        {% for key, item in cart.items %}
+            {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[key], 'main_form': form.vars.id} %}
+        {% endfor %}
+    </ul>
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center my-4">
+        <div>
+            {% if form.promotionCoupon is defined %}
+                {{ sylius_template_event('sylius.shop.cart.coupon', {'cart': cart, 'form': form, 'main_form': form.vars.id}) }}
+            {% endif %}
+        </div>
+        <div class="flex-grow-1 text-end">
+            {% include '@SyliusShop/Cart/Summary/_update.html.twig' with {'main_form': form.vars.id} %}
+        </div>
+    </div>
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>
