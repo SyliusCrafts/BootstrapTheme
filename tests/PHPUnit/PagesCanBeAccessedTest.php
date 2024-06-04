@@ -10,7 +10,6 @@ use App\Entity\User\ShopUser;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Tests\BootstrapTheme\AbstractTest;
 
 /**
  * @internal
