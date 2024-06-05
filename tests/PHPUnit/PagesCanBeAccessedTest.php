@@ -9,13 +9,16 @@ use App\Entity\Order\Order;
 use App\Entity\User\ShopUser;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @internal
  */
-final class PagesCanBeAccessedTest extends AbstractTest
+final class PagesCanBeAccessedTest extends WebTestCase
 {
+    use SetupTrait;
+
     private KernelBrowser $client;
 
     protected function setUp(): void
@@ -64,7 +67,7 @@ final class PagesCanBeAccessedTest extends AbstractTest
         self::assertPageTitleContains('Fashion Web Store');
     }
 
-    public function guestPagesProvider(): \Generator
+    public static function guestPagesProvider(): \Generator
     {
         yield 'sylius_shop_homepage' => ['sylius_shop_homepage', []];
         yield 'sylius_shop_contact_request' => ['sylius_shop_contact_request', []];
@@ -81,7 +84,7 @@ final class PagesCanBeAccessedTest extends AbstractTest
         yield 'sylius_shop_cart_summary' => ['sylius_shop_cart_summary', []];
     }
 
-    public function accountPagesProvider(): \Generator
+    public static function accountPagesProvider(): \Generator
     {
         yield 'sylius_shop_account_dashboard' => ['sylius_shop_account_dashboard', []];
         yield 'sylius_shop_account_profile_update' => ['sylius_shop_account_profile_update', []];
@@ -100,8 +103,18 @@ final class PagesCanBeAccessedTest extends AbstractTest
     {
         /** @var EntityManager $manager */
         $manager = $this->getContainer()->get('doctrine')->getManager();
+        $customerId = 1;
 
-        $user = $manager->getRepository(ShopUser::class)->findOneBy([]);
+        do{
+            $user = $manager->getRepository(ShopUser::class)->find($customerId);
+            $orders = $manager->getRepository(Order::class)->findByCustomer($user->getCustomer());
+            $customerId++;
+
+            if (20 <= $customerId) {
+                throw new \Exception('No order found for user');
+            }
+        } while (0 === count($orders));
+
         $this->client->loginUser($user, 'shop');
 
         return $user;

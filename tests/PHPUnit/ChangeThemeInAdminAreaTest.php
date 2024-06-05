@@ -7,13 +7,15 @@ namespace Tests\BootstrapTheme;
 use App\Entity\User\AdminUser;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @internal
  */
-final class ChangeThemeInAdminAreaTest extends AbstractTest
+final class ChangeThemeInAdminAreaTest extends WebTestCase
 {
+    use SetupTrait;
     private KernelBrowser $client;
 
     protected function setUp(): void

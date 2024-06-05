@@ -6,14 +6,13 @@ namespace Tests\BootstrapTheme;
 
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Core\Model\Channel;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
  */
-abstract class AbstractTest extends WebTestCase
+trait SetupTrait
 {
-    protected function getChannel(): Channel
+    public function getChannel(): Channel
     {
         /** @var EntityManager $manager */
         $manager = $this->getContainer()->get('doctrine')->getManager();
@@ -21,12 +20,12 @@ abstract class AbstractTest extends WebTestCase
         return $manager->getRepository(Channel::class)->findOneBy([]);
     }
 
-    protected function useNoneTheme(): void
+    public function useNoneTheme(): void
     {
         $this->switchTheme(null);
     }
 
-    protected function useBootstrapTheme(): void
+    public function useBootstrapTheme(): void
     {
         $this->switchTheme('sylius/bootstrap-theme');
     }

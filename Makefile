@@ -6,8 +6,8 @@ CONSOLE=cd tests/Application && php bin/console -e test
 COMPOSER=cd tests/Application && composer
 YARN=cd tests/Application && yarn
 
-SYLIUS_VERSION=1.12.0
-SYMFONY_VERSION=6.3
+SYLIUS_VERSION=1.13.0
+SYMFONY_VERSION=6.4
 PHP_VERSION=8.2
 PLUGIN_NAME=sylius/bootstrap-theme
 
@@ -65,6 +65,9 @@ endif
 	echo "            bootstrapTheme:" >> ${TEST_DIRECTORY}/config/packages/assets.yaml
 	echo "                json_manifest_path: '%kernel.project_dir%/public/themes/bootstrap-theme/manifest.json'" >> ${TEST_DIRECTORY}/config/packages/assets.yaml
 	echo "        bootstrapTheme: '%kernel.project_dir%/public/themes/bootstrap-theme'" >> ${TEST_DIRECTORY}/config/packages/webpack_encore.yaml
+	# Thanks PHPUnit v10
+	cd ${TEST_DIRECTORY} && php -r '$$json = json_decode(file_get_contents ("composer.json"), true); $$json["autoload-dev"]["psr-4"]["Tests\\BootstrapTheme\\"] = "vendor/sylius/bootstrap-theme/tests/PHPUnit/"; file_put_contents("composer.json", json_encode($$json, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));'
+	${COMPOSER} install
 
 install-sylius:
 	${CONSOLE} doctrine:database:create --if-not-exists
